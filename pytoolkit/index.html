@@ -7,52 +7,363 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    header { background: #161b22; border-bottom: 1px solid #30363d; padding: 20px 40px; display: flex; align-items: center; gap: 16px; }
-    header a { color: #58a6ff; text-decoration: none; font-size: 14px; }
-    header a:hover { text-decoration: underline; }
-    header span { color: #484f58; }
-    main { max-width: 800px; margin: 48px auto; padding: 0 20px; }
+
+    /* Header */
+    header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+    .breadcrumb a { color: #58a6ff; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: #484f58; }
+
+    /* Language switcher */
+    .lang-switcher { display: flex; gap: 4px; }
+    .lang-btn { background: none; border: 1px solid #30363d; color: #8b949e; padding: 4px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.15s; }
+    .lang-btn.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+    .lang-btn:hover:not(.active) { border-color: #58a6ff; color: #58a6ff; }
+
+    /* Hero */
+    main { max-width: 860px; margin: 0 auto; padding: 48px 20px 80px; }
     .hero-name { font-size: 32px; font-weight: 700; color: #e6edf3; }
-    .hero-meta { display: flex; gap: 12px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
+    .hero-meta { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
     .badge { font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 500; }
     .badge-type { background: #1f2937; border: 1px solid #374151; color: #9ca3af; }
     .badge-version { background: #0d2b12; border: 1px solid #238636; color: #3fb950; font-family: monospace; }
-    .description { margin-top: 28px; color: #8b949e; font-size: 15px; line-height: 1.7; }
-    .actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
-    .btn { padding: 10px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-block; }
+    .hero-desc { margin-top: 20px; color: #8b949e; font-size: 15px; line-height: 1.75; max-width: 640px; }
+    .hero-desc a { color: #58a6ff; }
+    .actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+    .btn { padding: 9px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-block; transition: all 0.15s; }
     .btn-primary { background: #238636; color: #fff; border: 1px solid #2ea043; }
     .btn-primary:hover { background: #2ea043; }
     .btn-secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
     .btn-secondary:hover { border-color: #58a6ff; color: #58a6ff; }
-    .file-info { margin-top: 8px; font-size: 12px; color: #484f58; }
-    hr { border: none; border-top: 1px solid #30363d; margin: 40px 0; }
+
+    /* Sections */
+    .section { margin-top: 48px; }
+    .section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #8b949e; border-bottom: 1px solid #30363d; padding-bottom: 10px; margin-bottom: 20px; }
+
+    /* Accordion */
+    .accordion { border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
+    .accordion-item { border-bottom: 1px solid #30363d; }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-header { width: 100%; background: #161b22; border: none; color: #e6edf3; text-align: left; padding: 16px 20px; font-size: 15px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.15s; }
+    .accordion-header:hover { background: #1c2128; }
+    .accordion-header .chevron { color: #484f58; font-size: 12px; transition: transform 0.2s; }
+    .accordion-header.open .chevron { transform: rotate(90deg); }
+    .accordion-body { display: none; padding: 20px 24px; background: #0d1117; font-size: 14px; line-height: 1.8; color: #8b949e; }
+    .accordion-body.open { display: block; }
+
+    /* Content styles inside accordion */
+    .accordion-body ol, .accordion-body ul { padding-left: 20px; }
+    .accordion-body li { margin-bottom: 6px; }
+    .accordion-body ul ul { margin-top: 4px; }
+    .accordion-body h6 { color: #e6edf3; font-size: 13px; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .accordion-body h6:first-child { margin-top: 0; }
+    .accordion-body strong { color: #c9d1d9; }
+    .accordion-body code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 12px; color: #79c0ff; font-family: monospace; }
+    .accordion-body hr { border: none; border-top: 1px solid #30363d; margin: 16px 0; }
+
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
+    footer a { color: #484f58; }
+
+    /* i18n */
+    [data-lang] { display: none; }
   </style>
 </head>
 <body>
   <header>
-    <a href="../">Adenex</a>
-    <span>/</span>
-    <span style="color:#e6edf3">PyToolkit</span>
+    <div class="breadcrumb">
+      <a href="../">Adenex</a>
+      <span>/</span>
+      <span style="color:#e6edf3">PyToolkit</span>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
   </header>
+
   <main>
     <div class="hero-name">PyToolkit</div>
     <div class="hero-meta">
-      <span class="badge badge-type">Unreal Engine Plugin</span>
+      <span class="badge badge-type" data-lang="en">Unreal Engine Plugin</span>
+      <span class="badge badge-type" data-lang="ru">Плагин Unreal Engine</span>
       <span class="badge badge-version">v2.1</span>
     </div>
-    <div class="description">
-      Unreal Engine plugin providing automation tools for tasks, material workflows, and parameter management through Blueprint and Python interfaces. An active fork of Unreal-PyToolkit maintained since 2021 — serves as a prerequisite for most widgets in the ecosystem.
-      <br><br>
-      Includes editor utilities, asset management, Sequencer API, mesh tools, Blueprint functions, and runtime property access by name (float, vector, texture, string, and more).
+
+    <div class="hero-desc" data-lang="en">
+      A plugin for Unreal Engine that adds a robust set of tools for task automation, material workflows, and parameter management via Blueprint and Python.<br><br>
+      This plugin is a fork of the <a href="https://github.com/FXTD-ODYSSEY/Unreal-PyToolkit">Unreal-PyToolkit project</a> (FXTD-ODYSSEY) and has been actively developed as an independent branch since 2021. Required for most widgets to function properly.
     </div>
+    <div class="hero-desc" data-lang="ru">
+      Плагин для Unreal Engine, который добавляет удобные инструменты для автоматизации задач, работы с материалами и управления параметрами через Blueprint и Python.<br><br>
+      Плагин является форком <a href="https://github.com/FXTD-ODYSSEY/Unreal-PyToolkit">проекта Unreal-PyToolkit</a> (FXTD-ODYSSEY) и активно развивается как самостоятельная ветка с 2021 года. Необходим для работы большинства виджетов.
+    </div>
+
     <div class="actions">
-      <a class="btn btn-primary" href="">Download</a>
-      <a class="btn btn-secondary" href="changelog.html">Changelog</a>
+      <a class="btn btn-primary" href="" data-lang="en">Download</a>
+      <a class="btn btn-primary" href="" data-lang="ru">Скачать</a>
+      <a class="btn btn-secondary" href="changelog.html" data-lang="en">Changelog</a>
+      <a class="btn btn-secondary" href="changelog.html" data-lang="ru">Changelog</a>
     </div>
-    <div class="file-info"><!-- file size will go here --></div>
-    <hr>
+
+    <!-- Installation -->
+    <div class="section">
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Installation</span>
+            <span data-lang="ru">Установка</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <ol>
+                <li>Download the plugin version that matches your setup and extract the archive.<br>
+                Make sure the plugin version matches your Unreal Engine version (a plugin built for UE 5.7 will not work with UE 5.6).</li>
+                <li>Close Unreal Engine if it is currently running.</li>
+                <li>Open your Unreal Engine installation folder and navigate to: <code>...\UE_FOLDER\Engine\Plugins</code></li>
+                <li>Copy the <code>PyToolkit</code> folder into the <code>Plugins</code> directory.</li>
+                <li>Launch Unreal Engine and open your target project.</li>
+                <li>Go to Edit → Plugins, search for "PyToolkit," and enable the plugin.</li>
+                <li>Restart the project to apply the changes.</li>
+              </ol>
+            </div>
+            <div data-lang="ru">
+              <ol>
+                <li>Скачайте плагин подходящей версии и распакуйте архив.<br>
+                Версия плагина должна соответствовать версии Unreal Engine (например, для UE 5.6 не подходит плагин, собранный под 5.7).</li>
+                <li>Закройте Unreal Engine, если он в данный момент запущен.</li>
+                <li>Откройте папку установки Unreal Engine и перейдите по пути: <code>...\UE_FOLDER\Engine\Plugins</code></li>
+                <li>Скопируйте папку <code>PyToolkit</code> в каталог <code>Plugins</code>.</li>
+                <li>Запустите Unreal Engine и откройте нужный проект.</li>
+                <li>Перейдите в меню Edit → Plugins, введите в строке поиска PyToolkit и включите плагин.</li>
+                <li>Перезапустите проект, чтобы изменения вступили в силу.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Functions -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Plugin Overview</span>
+            <span data-lang="ru">Обзор плагина</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <h6>1. PyToolkitBPLibrary — core library</h6>
+              <ul>
+                <li><strong>PyToolkit|Lib — general editor utilities</strong>
+                  <ul>
+                    <li>GetAllObjects — iterates over all loaded UObject instances in editor memory</li>
+                    <li>GetAllProperties — returns a list of editable class properties via reflection</li>
+                    <li>GetSelectedFolders / SetSelectedFolders — get and set folder selection in the Content Browser</li>
+                    <li>SetSelectedAssets — programmatically select assets in the Content Browser</li>
+                    <li>CloseEditorForAssets / GetAssetsOpenedInEditor — manage open asset editors</li>
+                    <li>SetFolderColor — set folder color in the Content Browser</li>
+                    <li>SetViewportLocationAndRotation / GetActiveViewportIndex — viewport control utilities</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|AssetRegistry</strong>
+                  <ul>
+                    <li>GetAssetDependencies(Asset, DependencyType, bRecursive) — retrieve asset dependencies (Hard / Soft / Manage)</li>
+                    <li>GetAssetReferencers(Asset, bRecursive) — find which assets reference a given asset</li>
+                    <li>FixupRedirectors(FolderPaths) — fix redirectors in specified folders</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|SequencerAPI</strong>
+                  <ul>
+                    <li>GetSequencerSequence — get the Level Sequence currently opened in Sequencer</li>
+                    <li>GetSequencerSelectedID — GUIDs of selected objects in Sequencer</li>
+                    <li>AddParticleTriggerKey / AddParticleKey / AddParticleActivateKey / AddParticleDeactivateKey — add keys to particle sections with sub-frame precision</li>
+                    <li>DisplayFrameToTick / DisplayFloatToTick / TickToDisplayFrame — convert time between DisplayRate and TickResolution</li>
+                    <li>GetActorByBindingID — find an actor by Binding GUID</li>
+                    <li>SetAnimationSectionWeight — set animation section weight</li>
+                    <li>GetDirectorBlueprint / ForceRecompileDirectorBlueprint — manage Director Blueprint</li>
+                    <li>CreateTriggerEvent / CreateRepeaterEvent — create Event Section events bound to actor functions</li>
+                    <li>MakeLocalBindingID — create a LOCAL binding ID</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|Socket</strong>
+                  <ul>
+                    <li>AddSkeletalMeshSocket — add a socket to a skeletal bone</li>
+                    <li>DeleteSkeletalMeshSocket — remove sockets from a skeleton</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|Skeleton</strong>
+                  <ul>
+                    <li>GetSkeletonBoneNum / GetSkeletonBoneName / GetSkeletonBoneIndex — basic bone queries</li>
+                    <li>GetSkeletonBoneChildren / GetSkeletonBoneParent — bone hierarchy traversal</li>
+                    <li>GetBoneChainToRoot — get bone chain from a given bone to the root</li>
+                    <li>GetBoneRefPoseTransform — get ref-pose transform (local or world space)</li>
+                    <li>BoneExistInSkeletalMesh / GetAllSkeletalMeshBones / GetAllSkeletonBones</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|StaticMesh</strong>
+                  <ul>
+                    <li>GetStaticMeshLODCount / GetLODTriangleCount — LOD information</li>
+                    <li>SetMaterialSlotName — rename a material slot by index</li>
+                    <li>RecomputeStaticMeshBounds — recompute bounds after programmatic changes</li>
+                    <li>ContentPathToFilesystemPath — convert /Game/... paths to absolute disk paths</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|WorldLevel</strong>
+                  <ul>
+                    <li>GetActorsOfClassInAllSublevels — get all actors of a class across loaded sublevels</li>
+                    <li>MoveActorToLevel — move an actor to another level with undo support</li>
+                    <li>GetAllLoadedSublevels — list all loaded ULevelStreaming instances</li>
+                    <li>SetSublevelVisibilityInEditor — toggle sublevel visibility without triggering streaming</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|Blueprint</strong>
+                  <ul>
+                    <li>GetAllBlueprintFunctions / HasBlueprintCompileErrors / CompileBlueprints</li>
+                    <li>AddBlueprintVariable — add a variable with category, tooltip, and Advanced flag in one call</li>
+                    <li>FindUnusedBlueprintVariables — find variables not referenced in graphs</li>
+                    <li>GetBlueprintVariableTooltip / SetBlueprintVariableTooltip</li>
+                  </ul>
+                </li>
+              </ul>
+              <hr>
+              <h6>2. VarByName — property access by name</h6>
+              <ul>
+                <li>Set/Get by name: float, double, int32, bool, FVector, FLinearColor, UTexture, UTexture2D, UTexture2DArray, UObject, FString, FName</li>
+                <li>GetPropertyTypeByName — return the C++ property type as a string</li>
+                <li>GetPropertyName — wildcard node: plug in a variable directly to retrieve its FName at runtime</li>
+                <li>ResetDirtyProperties — reset only modified properties to CDO defaults</li>
+              </ul>
+              <hr>
+              <h6>3. TimingBPLibrary — section profiler</h6>
+              <ul>
+                <li>StartTimedSection — start timing a code section</li>
+                <li>FinishTimedSection — stop timing and return elapsed time</li>
+                <li>LogTimedStats — output a summary report to the log</li>
+                <li>ResetTimedStats — clear all collected stats</li>
+              </ul>
+            </div>
+
+            <div data-lang="ru">
+              <h6>1. PyToolkitBPLibrary — основная библиотека</h6>
+              <ul>
+                <li><strong>PyToolkit|Lib — общие утилиты редактора</strong>
+                  <ul>
+                    <li>GetAllObjects — итерирует все загруженные UObject в памяти редактора</li>
+                    <li>GetAllProperties — возвращает список редактируемых свойств класса через рефлексию</li>
+                    <li>GetSelectedFolders / SetSelectedFolders — чтение и запись выделения папок в Content Browser</li>
+                    <li>SetSelectedAssets — программно выбрать ассеты в Content Browser</li>
+                    <li>CloseEditorForAssets / GetAssetsOpenedInEditor — управление открытыми окнами редактора</li>
+                    <li>SetFolderColor — цвет папки в Content Browser</li>
+                    <li>SetViewportLocationAndRotation / GetActiveViewportIndex — управление вьюпортами</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|AssetRegistry — работа с Asset Registry</strong>
+                  <ul>
+                    <li>GetAssetDependencies(Asset, DependencyType, bRecursive) — зависимости ассета (Hard/Soft/Manage)</li>
+                    <li>GetAssetReferencers(Asset, bRecursive) — кто ссылается на ассет</li>
+                    <li>FixupRedirectors(FolderPaths) — починить редиректоры в папках</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|SequencerAPI — Sequencer</strong>
+                  <ul>
+                    <li>GetSequencerSequence — получить LevelSequence, открытую в Sequencer</li>
+                    <li>GetSequencerSelectedID — GUID выделенных объектов в Sequencer</li>
+                    <li>AddParticleTriggerKey / AddParticleKey / AddParticleActivateKey / AddParticleDeactivateKey — добавить ключи в particle-секцию с поддержкой субфреймов</li>
+                    <li>DisplayFrameToTick / DisplayFloatToTick / TickToDisplayFrame — конвертация времени между DisplayRate и TickResolution</li>
+                    <li>GetActorByBindingID — найти актора по Binding GUID</li>
+                    <li>SetAnimationSectionWeight — вес анимационной секции</li>
+                    <li>GetDirectorBlueprint / ForceRecompileDirectorBlueprint — управление Director Blueprint</li>
+                    <li>CreateTriggerEvent / CreateRepeaterEvent — создать событие в EventSection, привязав к функции актора</li>
+                    <li>MakeLocalBindingID — создать LOCAL binding ID</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|Socket</strong>
+                  <ul>
+                    <li>AddSkeletalMeshSocket — добавить сокет к кости скелета</li>
+                    <li>DeleteSkeletalMeshSocket — удалить список сокетов из скелета</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|Skeleton</strong>
+                  <ul>
+                    <li>GetSkeletonBoneNum / GetSkeletonBoneName / GetSkeletonBoneIndex — базовые запросы по костям</li>
+                    <li>GetSkeletonBoneChildren / GetSkeletonBoneParent — обход иерархии костей</li>
+                    <li>GetBoneChainToRoot — цепочка костей от указанной до корня</li>
+                    <li>GetBoneRefPoseTransform — ref-pose трансформ кости (local или world-space)</li>
+                    <li>BoneExistInSkeletalMesh / GetAllSkeletalMeshBones / GetAllSkeletonBones</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|StaticMesh</strong>
+                  <ul>
+                    <li>GetStaticMeshLODCount / GetLODTriangleCount — информация о LOD</li>
+                    <li>SetMaterialSlotName — переименовать материальный слот по индексу</li>
+                    <li>RecomputeStaticMeshBounds — пересчитать bounds после программных изменений</li>
+                    <li>ContentPathToFilesystemPath — конвертировать /Game/... путь в абсолютный путь на диске</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|WorldLevel</strong>
+                  <ul>
+                    <li>GetActorsOfClassInAllSublevels — все акторы указанного класса из всех загруженных сублевелов</li>
+                    <li>MoveActorToLevel — переместить актора в другой уровень с созданием undo-транзакции</li>
+                    <li>GetAllLoadedSublevels — список всех загруженных ULevelStreaming в мире</li>
+                    <li>SetSublevelVisibilityInEditor — показать/скрыть сублевел в редакторе</li>
+                  </ul>
+                </li>
+                <li><strong>PyToolkit|Blueprint</strong>
+                  <ul>
+                    <li>GetAllBlueprintFunctions / HasBlueprintCompileErrors / CompileBlueprints</li>
+                    <li>AddBlueprintVariable — добавить переменную с категорией, tooltip и Advanced-флагом за один вызов</li>
+                    <li>FindUnusedBlueprintVariables — поиск переменных без ссылок в графах</li>
+                    <li>GetBlueprintVariableTooltip / SetBlueprintVariableTooltip</li>
+                  </ul>
+                </li>
+              </ul>
+              <hr>
+              <h6>2. VarByName — доступ к свойствам по имени</h6>
+              <ul>
+                <li>Set/Get по имени: float, double, int32, bool, FVector, FLinearColor, UTexture, UTexture2D, UTexture2DArray, UObject, FString, FName</li>
+                <li>GetPropertyTypeByName — получить C++-тип свойства как строку</li>
+                <li>GetPropertyName — wildcard-нода: подключи переменную напрямую, получи её FName в рантайме</li>
+                <li>ResetDirtyProperties — сбросить только изменённые свойства к CDO</li>
+              </ul>
+              <hr>
+              <h6>3. TimingBPLibrary — профилировщик секций</h6>
+              <ul>
+                <li>StartTimedSection — начать замер времени для выбранного участка кода</li>
+                <li>FinishTimedSection — закончить замер и получить затраченное время</li>
+                <li>LogTimedStats — вывести в лог общий отчёт по всем замерам</li>
+                <li>ResetTimedStats — очистить все собранные данные перед новым тестом</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
-  <footer>adenexvfx &mdash; <a href="../" style="color:#484f58">adenexvfx.github.io/adenex-releases</a></footer>
+
+  <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
+
+  <script>
+    let currentLang = 'en';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = el.dataset.lang === lang ? '' : 'none';
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+      });
+    }
+
+    function toggleAccordion(btn) {
+      const body = btn.nextElementSibling;
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      btn.classList.toggle('open', !isOpen);
+    }
+
+    // Init
+    setLang('en');
+  </script>
 </body>
 </html>
