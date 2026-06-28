@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>S2 Maps Importer — Adenex</title>
+  <title>S2 Maps Importer &#8212; Adenex</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
@@ -23,13 +23,15 @@
     .badge-type { background: #1f2937; border: 1px solid #374151; color: #9ca3af; }
     .badge-version { background: #0d2b12; border: 1px solid #238636; color: #3fb950; font-family: monospace; }
     .hero-desc { margin-top: 20px; color: #8b949e; font-size: 15px; line-height: 1.75; max-width: 640px; }
-    .hero-desc code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 13px; color: #79c0ff; font-family: monospace; }
+    .hero-desc a { color: #58a6ff; }
     .actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
     .btn { padding: 9px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-block; transition: all 0.15s; }
     .btn-primary { background: #238636; color: #fff; border: 1px solid #2ea043; }
     .btn-primary:hover { background: #2ea043; }
     .btn-secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
     .btn-secondary:hover { border-color: #58a6ff; color: #58a6ff; }
+    .hero-img { margin-top: 28px; border-radius: 8px; overflow: hidden; border: 1px solid #21262d; }
+    .hero-img img { width: 100%; display: block; }
     .section { margin-top: 48px; }
     .accordion { border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
     .accordion-item { border-bottom: 1px solid #30363d; }
@@ -42,20 +44,17 @@
     .accordion-body.open { display: block; }
     .accordion-body ol, .accordion-body ul { padding-left: 20px; }
     .accordion-body li { margin-bottom: 6px; }
-    .accordion-body ul ul { margin-top: 4px; }
-    .accordion-body h6 { color: #e6edf3; font-size: 13px; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .accordion-body h6:first-child { margin-top: 0; }
+    .accordion-body ul ul, .accordion-body ol ol { margin-top: 4px; }
+    .accordion-body p { margin-bottom: 10px; }
+    .accordion-body p:last-child { margin-bottom: 0; }
     .accordion-body strong { color: #c9d1d9; }
+    .accordion-body a { color: #58a6ff; }
     .accordion-body code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 12px; color: #79c0ff; font-family: monospace; }
     .accordion-body hr { border: none; border-top: 1px solid #30363d; margin: 16px 0; }
-    footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
-    footer a { color: #484f58; }
-    body.lang-en [data-lang="ru"] { display: none; }
-    body.lang-ru [data-lang="en"] { display: none; }
-    .hero-img { margin-top: 28px; border-radius: 8px; overflow: hidden; border: 1px solid #21262d; }
-    .hero-img img { width: 100%; display: block; }
     .section-img { margin: 0 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid #21262d; }
     .section-img img { width: 100%; display: block; }
+    footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
+    footer a { color: #484f58; }
   </style>
 </head>
 <body>
@@ -66,155 +65,178 @@
       <span style="color:#e6edf3">S2 Maps Importer</span>
     </div>
     <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('ru')">RU</button>
     </div>
   </header>
   <main>
     <div class="hero-name">S2 Maps Importer</div>
     <div class="hero-meta">
-      <span class="badge badge-type" data-lang="en">Unreal Engine Plugin</span>
-      <span class="badge badge-type" data-lang="ru">Unreal Engine Plugin</span>
+      <span class="badge badge-type">Unreal Engine Plugin</span>
       <span class="badge badge-version">v2.21.2</span>
     </div>
-    <div class="hero-desc" data-lang="en">
-      Native C++ Unreal Engine plugin for importing CS2 maps directly from decompiled <code>.vmdl_c</code> files. Supports static meshes, skeletal meshes, animations, material import, and full map placement via a built-in Slate UI.
-    </div>
-    <div class="hero-desc" data-lang="ru">
-      Нативный C++ плагин для Unreal Engine, импортирующий карты CS2 напрямую из декомпилированных <code>.vmdl_c</code> файлов. Поддерживает статические меши, скелетные меши, анимации, импорт материалов и полное размещение карты через встроенный Slate UI.
+    <div class="hero-desc">
+      Нативный C++ плагин для Unreal Engine, импортирующий карты CS2 напрямую из декомпилированных .vmdl_c файлов.
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="" data-lang="en">Download</a>
-      <a class="btn btn-primary" href="" data-lang="ru">Скачать</a>
+      <a class="btn btn-primary" href="">&#x21E9; Скачать</a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
     <div class="hero-img">
-      <img src="img/hero.png" alt="S2 Maps Importer">
+      <img src="img/image-1.png" alt="S2 Maps Importer">
     </div>
     <div class="section">
       <div class="accordion">
-
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Installation</span>
-            <span data-lang="ru">Установка</span>
-            <span class="chevron">▶</span>
+            Основные возможности
+            <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div data-lang="en">
-              <ol>
-                <li>Download and extract the plugin archive.</li>
-                <li>Place the <code>S2MapsImporter</code> folder into the <code>Plugins</code> folder of your UE5 project (create it if it doesn't exist): <code>YourProject/Plugins/S2MapsImporter</code>.</li>
-                <li>Open the project in Unreal Engine. The plugin will compile automatically on first launch.</li>
-                <li>Enable the plugin in <strong>Edit &gt; Plugins</strong> if it isn't already active, then restart the engine.</li>
-                <li>The importer panel will appear in the editor toolbar or under <strong>Window &gt; S2 Maps Importer</strong>.</li>
-              </ol>
-              <hr>
-              <strong>Requirements:</strong>
-              <ul>
-                <li>Unreal Engine 5.4 or newer</li>
-                <li>Source2Viewer CLI for decompiling CS2 files</li>
-                <li>Counter-Strike 2 installed</li>
-              </ul>
-            </div>
-            <div data-lang="ru">
-              <ol>
-                <li>Скачайте и распакуйте архив с плагином.</li>
-                <li>Поместите папку <code>S2MapsImporter</code> в папку <code>Plugins</code> вашего UE5 проекта (создайте её, если не существует): <code>YourProject/Plugins/S2MapsImporter</code>.</li>
-                <li>Откройте проект в Unreal Engine. Плагин скомпилируется автоматически при первом запуске.</li>
-                <li>Включите плагин в <strong>Edit &gt; Plugins</strong> (если ещё не активен) и перезапустите движок.</li>
-                <li>Панель импортера появится на тулбаре редактора или в меню <strong>Window &gt; S2 Maps Importer</strong>.</li>
-              </ol>
-              <hr>
-              <strong>Требования:</strong>
-              <ul>
-                <li>Unreal Engine 5.4 или новее</li>
-                <li>Source2Viewer CLI для декомпиляции файлов CS2</li>
-                <li>Установленная Counter-Strike 2</li>
-              </ul>
-            </div>
+            <ul>
+             	<li>
+            <p>Декомпиляция уровней вместе со всеми связанными ассетами: мешами, текстурами, материалами и вспомогательными данными.</p>
+            </li>
+             	<li>
+            <p>Конвертация мешей в формат FBX с использованием Blender для последующего импорта.</p>
+            </li>
+             	<li>
+            <p>Импорт необходимых ассетов в Unreal Engine.</p>
+            </li>
+             	<li>
+            <p>Автоматическое создание материалов на основе импортированных текстур и данных из исходной игры.</p>
+            </li>
+             	<li>
+            <p>Импорт карт из игр на движке Source 2, включая Dota 2, Half-Life: Alyx и Counter-Strike 2.</p>
+            </li>
+             	<li>
+            <p>Автоматическая расстановка источников света, а также проводов и анимированных объектов на уровне.</p>
+            </li>
+            </ul>
           </div>
         </div>
-
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Core Features</span>
-            <span data-lang="ru">Основные возможности</span>
-            <span class="chevron">▶</span>
+            Требования
+            <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div data-lang="en">
-              <ul>
-                <li>Direct binary parsing of CS2 <code>.vmdl_c</code> files — no FBX intermediate required</li>
-                <li>Import static meshes with all LODs</li>
-                <li>Import skeletal meshes and animations (ANIM/ASEQ) for animated props</li>
-                <li>Automatic material creation with tint color grouping</li>
-                <li>Full map placement from <code>.vmap_c</code> worldnode data</li>
-                <li>Batch import of entire maps</li>
-                <li>Support for multi-mesh worldnodes and embedded mesh references</li>
-                <li>Built-in Slate UI panel with Map and Settings tabs</li>
-              </ul>
-            </div>
-            <div data-lang="ru">
-              <ul>
-                <li>Прямой бинарный парсинг CS2 <code>.vmdl_c</code> файлов — без промежуточного FBX</li>
-                <li>Импорт статических мешей со всеми LOD</li>
-                <li>Импорт скелетных мешей и анимаций (ANIM/ASEQ) для анимированных пропсов</li>
-                <li>Автоматическое создание материалов с группировкой по цвету</li>
-                <li>Полное размещение карты из данных <code>.vmap_c</code> worldnode</li>
-                <li>Пакетный импорт целых карт</li>
-                <li>Поддержка multi-mesh worldnode и встроенных ссылок на меши</li>
-                <li>Встроенная Slate UI панель с вкладками Map и Settings</li>
-              </ul>
-            </div>
+            <ul>
+             	<li>Unreal Engine 5.6 или новее</li>
+             	<li>PyToolkit plugin (версии 1.8 и выше)</li>
+             	<li>
+            <p>Установленная <strong>Counter-Strike 2</strong></p>
+            </li>
+             	<li>Blender <strong>4.0</strong> (более новые версии могут вызывать сбои)</li>
+             	<li>Утилита <strong>Source2Viewer CLI</strong> для декомпиляции моделей и текстур</li>
+             	<li>
+            <p>Свободное место на диске (первый запуск может импортировать несколько тысяч текстур)</p>
+            </li>
+            </ul>
           </div>
         </div>
-
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Usage</span>
-            <span data-lang="ru">Использование</span>
-            <span class="chevron">▶</span>
+            Установка
+            <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div class="section-img">
-              <img src="img/import-map.png" alt="S2 Maps Importer interface">
-            </div>
-            <div data-lang="en">
-              <h6>Importing a Map</h6>
-              <ol>
-                <li>Decompile the CS2 map using Source2Viewer CLI. The output will contain <code>.vmdl_c</code> and <code>.vmap_c</code> files.</li>
-                <li>Open the S2 Maps Importer panel in Unreal Engine.</li>
-                <li>In the <strong>Map</strong> tab, select the decompiled map folder.</li>
-                <li>Click <strong>Import</strong>. The plugin will parse all props, create materials, and place everything in the level.</li>
-              </ol>
-              <hr>
-              <h6>Importing a Single Model</h6>
-              <ol>
-                <li>In the Content Browser, right-click and select <strong>Import</strong>.</li>
-                <li>Select a <code>.vmdl_c</code> file.</li>
-                <li>The plugin will create a StaticMesh or SkeletalMesh asset automatically.</li>
-              </ol>
-            </div>
-            <div data-lang="ru">
-              <h6>Импорт карты</h6>
-              <ol>
-                <li>Декомпилируйте карту CS2 с помощью Source2Viewer CLI. Результат содержит файлы <code>.vmdl_c</code> и <code>.vmap_c</code>.</li>
-                <li>Откройте панель S2 Maps Importer в Unreal Engine.</li>
-                <li>На вкладке <strong>Map</strong> выберите папку с декомпилированной картой.</li>
-                <li>Нажмите <strong>Import</strong>. Плагин разберёт все пропсы, создаст материалы и расставит их на уровне.</li>
-              </ol>
-              <hr>
-              <h6>Импорт одной модели</h6>
-              <ol>
-                <li>В Content Browser нажмите правой кнопкой мыши и выберите <strong>Import</strong>.</li>
-                <li>Выберите файл <code>.vmdl_c</code>.</li>
-                <li>Плагин автоматически создаст ассет StaticMesh или SkeletalMesh.</li>
-              </ol>
-            </div>
+            <div class="section-img"><img src="img/image-27.png" alt=""></div>
+            <a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Скачайте</strong> </a>и распакуйте плагин <strong>PyToolkit </strong>(минимум 1.8 версии) в папку <strong>Plugins</strong> в корневой директории Unreal Engine <code>(C:Program FilesEpic GamesUE_5.6EnginePlugins)</code>.
+
+            Запустите Unreal Engine и включите следующие плагины (в меню <strong>Edit &gt; Plugins</strong>):
+            <ul>
+             	<li>Editor Scripting Utilities</li>
+             	<li>Python Editor Script Plugin</li>
+             	<li>Sequencer Scripting</li>
+             	<li>Http Blueprint</li>
+             	<li>PyToolkit</li>
+            </ul>
+            Затем перезапустите движок.
+            <div class="section-img"><img src="img/image-9.png" alt=""></div>
+            Распакуйте архив с виджетом. Перейдите в папку <code>Content</code> вашего Unreal-проекта (например, <code>D:YourUE5ProjectContent</code>). Скопируйте все подпапки из архива в папку <code>Content</code> проекта.
+            <div class="section-img"><img src="img/image.png" alt=""></div>
+            Удалите старую версию аддона <strong>SourceIO</strong> из <code>%appdata%Blender FoundationBlender4.0scriptsaddons</code>. Откройте Blender и установите кастомную версию SourceIO из архива S2 Maps Tool.
+            <div class="section-img"><img src="img/image-10.png" alt=""></div>
+            Запустите Unreal Engine. В <strong>Content Browser</strong> найдите папку <strong>Widgets</strong>. Кликните по виджету <strong>S2 Maps Tool</strong> правой кнопкой мыши и выберите <strong>Run Editor Utility Widget</strong>.
           </div>
         </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Распространённые проблемы
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            Если возникают ошибки, проверьте следующее:
+            <ul>
+             	<li>Виджет установлен по правильному пути внутри проекта Unreal Engine;</li>
+             	<li>Все необходимые плагины включены в настройках проекта;</li>
+             	<li>Используется Unreal Engine версии 5.6 или новее;</li>
+             	<li>Декомпилер обновлён до последней версии.<br />Если стандартная версия не работает, рекомендуется попробовать DEV-версию;</li>
+             	<li>Используется Blender версии 4.0 для конвертации мешей.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Настройка
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-2.png" alt=""></div>
+            <ul>
+             	<li><strong>Game</strong> — выбор игры, файлы которой будут использоваться при импорте.</li>
+             	<li><strong>Blender Executable</strong> — путь к исполняемому файлу blender.exe.</li>
+             	<li><strong>Decompiler Executable</strong> — путь к исполняемому файлу декомпилера. <strong><a href="https://github.com/ValveResourceFormat/ValveResourceFormat/releases">Скачайте</a> cli-windows-x64.zip</strong>, распакуйте и укажите путь к <code>.exe</code>.</li>
+             	<li><strong>Game Folder</strong> — корневая папка установленной игры (например <code>D:SteamLibrarysteamappscommonCounter-Strike Global Offensive</code>).</li>
+             	<li><strong>Game Decompiled Folder</strong> — папка, куда будут сохраняться декомпилированные файлы карты. Можно выбрать любое удобное место.</li>
+             	<li><strong>Extended Log</strong> — включить расширенный вывод логов (нужно при отладке проблем).</li>
+             	<li><strong>Buttons Color</strong> — цвет кнопок интерфейса виджета.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Импорт карты
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-1.png" alt=""></div>
+            <ul>
+             	<li><strong>Map VPK File</strong> — путь к VPK-файлу карты (например, <code>.../csgo/maps/de_dust2.vpk</code>). Нажмите <code>...</code> чтобы выбрать файл.</li>
+             	<li><strong>Map Name</strong> — внутреннее имя карты. Обычно подставляется автоматически из названия уровня внутри VPK-файла.</li>
+             	<li><strong>Map Scale</strong> — масштаб импортируемой карты.</li>
+             	<li><strong>Spawn Cables</strong> — создавать ли кабели/провода на карте.</li>
+             	<li><strong>Spawn Environment Light</strong> — создавать ли источник окружающего освещения.</li>
+             	<li><strong>Spawn Light Entities</strong> — создавать ли точечные источники света.</li>
+             	<li><strong>Save The Level During Import</strong> — автоматически сохранять уровень после импорта.</li>
+             	<li><strong>Max Texture Size</strong> — максимальное разрешение текстур при импорте.</li>
+            </ul>
 
+            <hr />
+
+            <strong>Процесс импорта карты:</strong>
+            <ol>
+             	<li>Выберите VPK-файл через кнопку<span> </span><code>...</code><span> </span>рядом с<span> </span><strong>Map VPK File</strong></li>
+             	<li>Проверьте<span> </span><strong>Map Name</strong><span> </span>— не должно быть пустым полем</li>
+             	<li>Нажмите<span> </span><strong>Decompile map</strong><span> </span>— декомпилирует геометрию и ассеты</li>
+             	<li>Нажмите<span> </span><strong>Convert map and props</strong><span> </span>— конвертирует модели с помощью Blender в формат FBX</li>
+             	<li>Нажмите<span> </span><strong>Import map</strong><span> </span>— импортирует карту в проект</li>
+            </ol>
+            Если источники света перекрываются геометрией или расположены неправильно: перейдите во вкладку <strong>Misc → Light</strong> и нажмите <strong>Fix stuck light</strong>.
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Редактирование карт
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-5.png" alt=""></div>
+            <div class="section-img"><img src="img/image-6.png" alt=""></div>
+            В движке Source2 большинство мешей сгруппированы вместе для оптимизации. Например, этот ящик на de_vertigo. Было сгруппировано в один меш около 6 ящиков. Чтобы подвинуть только один объект, необходимо включить режим <strong>Modelling</strong>, перейти на вкладку <strong>Model</strong> → <strong>PolyGroup Edit</strong>. Далее выбрать режим вертексов, выделить все точки объекта и подвинуть его с помощью пивота. После редактирования меша, необходимо нажать <strong>Accept</strong> по центру экрана, чтобы сохранить его позицию.
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -232,7 +254,6 @@
       body.classList.toggle('open', !isOpen);
       btn.classList.toggle('open', !isOpen);
     }
-    setLang('en');
   </script>
 </body>
 </html>

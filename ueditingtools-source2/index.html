@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UEditingTools for Source2 — Adenex</title>
+  <title>UEditingTools for Source2 &#8212; Adenex</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
@@ -30,6 +30,8 @@
     .btn-primary:hover { background: #2ea043; }
     .btn-secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
     .btn-secondary:hover { border-color: #58a6ff; color: #58a6ff; }
+    .hero-img { margin-top: 28px; border-radius: 8px; overflow: hidden; border: 1px solid #21262d; }
+    .hero-img img { width: 100%; display: block; }
     .section { margin-top: 48px; }
     .accordion { border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
     .accordion-item { border-bottom: 1px solid #30363d; }
@@ -42,20 +44,17 @@
     .accordion-body.open { display: block; }
     .accordion-body ol, .accordion-body ul { padding-left: 20px; }
     .accordion-body li { margin-bottom: 6px; }
-    .accordion-body ul ul { margin-top: 4px; }
-    .accordion-body h6 { color: #e6edf3; font-size: 13px; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .accordion-body h6:first-child { margin-top: 0; }
+    .accordion-body ul ul, .accordion-body ol ol { margin-top: 4px; }
+    .accordion-body p { margin-bottom: 10px; }
+    .accordion-body p:last-child { margin-bottom: 0; }
     .accordion-body strong { color: #c9d1d9; }
+    .accordion-body a { color: #58a6ff; }
     .accordion-body code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 12px; color: #79c0ff; font-family: monospace; }
     .accordion-body hr { border: none; border-top: 1px solid #30363d; margin: 16px 0; }
-    footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
-    footer a { color: #484f58; }
-    body.lang-en [data-lang="ru"] { display: none; }
-    body.lang-ru [data-lang="en"] { display: none; }
-    .hero-img { margin-top: 28px; border-radius: 8px; overflow: hidden; border: 1px solid #21262d; }
-    .hero-img img { width: 100%; display: block; }
     .section-img { margin: 0 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid #21262d; }
     .section-img img { width: 100%; display: block; }
+    footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
+    footer a { color: #484f58; }
   </style>
 </head>
 <body>
@@ -66,198 +65,241 @@
       <span style="color:#e6edf3">UEditingTools for Source2</span>
     </div>
     <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('ru')">RU</button>
     </div>
   </header>
   <main>
     <div class="hero-name">UEditingTools for Source2</div>
     <div class="hero-meta">
-      <span class="badge badge-type" data-lang="en">Widget</span>
-      <span class="badge badge-type" data-lang="ru">Виджет</span>
+      <span class="badge badge-type">Виджет</span>
       <span class="badge badge-version">v4.5</span>
     </div>
-    <div class="hero-desc" data-lang="en">
-      Unreal Engine 5.6+ widget for creating cinematic content from Counter-Strike 2 demos. Parses DMX files exported from Source Filmmaker and automatically generates complete Level Sequences with animated characters, cameras, weapons, grenades, and effects.
-    </div>
-    <div class="hero-desc" data-lang="ru">
+    <div class="hero-desc">
       Виджет для Unreal Engine 5.6+ для создания кинематографического контента из CS2-демок. Читает DMX-файлы из Source Filmmaker и автоматически создаёт Level Sequence с камерами, анимированными персонажами, оружием, гранатами и эффектами.
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="" data-lang="en">Download</a>
-      <a class="btn btn-primary" href="" data-lang="ru">Скачать</a>
+      <a class="btn btn-primary" href="">&#x21E9; Скачать</a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
     <div class="hero-img">
-      <img src="img/hero.png" alt="UEditingTools for Source2 interface">
+      <img src="img/image-5.png" alt="UEditingTools for Source2">
     </div>
     <div class="section">
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Installation</span>
-            <span data-lang="ru">Установка</span>
-            <span class="chevron">▶</span>
+            Основные возможности
+            <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div data-lang="en">
-              <strong>Requirements:</strong>
-              <ul>
-                <li>Unreal Engine 5.6 or newer</li>
-                <li>PyToolkit plugin (1.8+)</li>
-                <li>Counter-Strike 2</li>
-                <li>CS2 demo parser executable</li>
-              </ul>
-              <hr>
-              <ol>
-                <li>Launch Unreal Engine and enable the following plugins via <strong>Edit → Plugins</strong>:
-                  <ul>
-                    <li>Editor Scripting Utilities</li>
-                    <li>Python Editor Script Plugin</li>
-                    <li>Sequencer Scripting</li>
-                    <li>Http Blueprint</li>
-                    <li>PyToolkit</li>
-                  </ul>
-                </li>
-                <li>Download the widget archive. Open your project's <code>Content</code> folder and copy all subfolders from the archive into it.</li>
-                <li>In the Content Browser, find the <strong>Widgets</strong> folder, right-click <strong>UET_Main</strong>, and select <strong>Run Editor Utility Widget</strong>.</li>
-              </ol>
-            </div>
-            <div data-lang="ru">
-              <strong>Требования:</strong>
-              <ul>
-                <li>Unreal Engine 5.6 или новее</li>
-                <li>Плагин PyToolkit (1.8+)</li>
-                <li>Counter-Strike 2</li>
-                <li>Парсер демок CS2</li>
-              </ul>
-              <hr>
-              <ol>
-                <li>Запустите Unreal Engine, включите плагины (<em>Edit → Plugins</em>):
-                  <ul>
-                    <li>Editor Scripting Utilities</li>
-                    <li>Python Editor Script Plugin</li>
-                    <li>Sequencer Scripting</li>
-                    <li>Http Blueprint</li>
-                    <li>PyToolkit</li>
-                  </ul>
-                </li>
-                <li>Скачайте архив с виджетом. Откройте папку <code>Content</code> вашего проекта и скопируйте все подпапки из архива в неё.</li>
-                <li>В Content Browser найдите папку <strong>Widgets</strong>, кликните правой кнопкой по <strong>UET_Main</strong> и выберите <strong>Run Editor Utility Widget</strong>.</li>
-              </ol>
-            </div>
+            <ul>
+             	<li><strong>Парсинг и загрузка демо
+            </strong>Читает DMX-файлы (экспорт из Source Filmmaker (SFM)) с данными CS2-демок: позиции игроков, кости скелета, тики, события. Конвертирует всё в структуры, понятные UE5.</li>
+             	<li><strong>Полный импорт сцены
+            </strong>Автоматически создаёт Level Sequence с камерами, анимированными персонажами, оружием, гранатами, статичными моделями и Niagara/Cascade эффектами — по данным из демки.</li>
+             	<li><strong>POV-режим (от первого лица)</strong>
+            Генерирует камеру и рукава/перчатки и оружие конкретного игрока.</li>
+            </ul>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Core Functions</span>
-            <span data-lang="ru">Функции</span>
-            <span class="chevron">▶</span>
+            Требования
+            <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div class="section-img">
-              <img src="img/camera-editor.png" alt="Camera editor and settings">
-            </div>
-            <div data-lang="en">
-              <h6>General Settings</h6>
-              <ul>
-                <li><strong>Working Directory</strong> — folder inside the UE project where demo data will be imported.</li>
-                <li><strong>CS2 Demo Parser Path</strong> — path to the demo parser <code>.exe</code>.</li>
-                <li><strong>Save Level</strong> — automatically save the level after import.</li>
-                <li><strong>Verbose Logging</strong> — enable extended log output.</li>
-              </ul>
-              <hr>
-              <h6>Models Settings</h6>
-              <ul>
-                <li><strong>Receives Decals</strong> — allow decals on imported models.</li>
-                <li><strong>Bounds Scale</strong> — collision bounds scale. Increase if models disappear at certain camera angles.</li>
-                <li><strong>Models Scale</strong> — scale of imported models.</li>
-              </ul>
-              <hr>
-              <h6>Misc Settings</h6>
-              <ul>
-                <li><strong>Use Weapon System</strong> — use the WeaponSystem blueprint (if present) to generate shot, blood and decal effects.</li>
-                <li><strong>Import Particles For Grenades</strong> — import particle effects for grenades.</li>
-                <li><strong>Grenades Particles Style</strong> — Niagara or Cascade.</li>
-              </ul>
-              <hr>
-              <h6>Import Settings</h6>
-              <ul>
-                <li><strong>Import Cameras</strong> — import camera data from the demo.</li>
-                <li><strong>Import Players</strong> — import player animations.</li>
-                <li><strong>Import Weapons</strong> — import weapon animations.</li>
-                <li><strong>Import Nades</strong> — import grenades.</li>
-                <li><strong>Import Static Models</strong> — import static models.</li>
-              </ul>
-              <hr>
-              <h6>POV Mode</h6>
-              <ul>
-                <li><strong>Auto</strong> — uses parsed demo data to automatically determine the selected player's equipment (sleeves, gloves, weapons). Import camera and create POV with one click.</li>
-                <li><strong>Manual</strong> — Step 1: select camera, bounds scale, and animation style. Step 2: select sleeves, gloves, and weapon from a list. Spawn Idle, Draw, Fire, Reload, or Look at animations directly into the sequencer.</li>
-              </ul>
-              <hr>
-              <h6>Camera Editor</h6>
-              <ul>
-                <li><strong>Rotation / Location Offset</strong> — offset added to all camera keys in the sequencer.</li>
-                <li><strong>Normal FOV / Zoom FOV</strong> — camera field of view in normal and scoped modes.</li>
-              </ul>
-              <hr>
-              <h6>Time Remap</h6>
-              Creates a helper Level Sequence for controlling playback speed via a Time Remap blueprint.
-              <hr>
-              <h6>BPM Helper</h6>
-              Places markers in the sequencer based on music rhythm. Accepts BPM and time signature, places green markers for main beats and white markers for secondary beats.
-            </div>
-            <div data-lang="ru">
-              <h6>General Settings</h6>
-              <ul>
-                <li><strong>Working Directory</strong> — папка внутри UE проекта, куда будут импортироваться данные демо.</li>
-                <li><strong>CS2 Demo Parser Path</strong> — путь к <code>.exe</code> файлу парсера демок.</li>
-                <li><strong>Save Level</strong> — автоматически сохранять уровень после импорта.</li>
-                <li><strong>Verbose Logging</strong> — включить расширенный вывод логов.</li>
-              </ul>
-              <hr>
-              <h6>Models Settings</h6>
-              <ul>
-                <li><strong>Receives Decals</strong> — разрешить отображение декалей на импортированных моделях.</li>
-                <li><strong>Bounds Scale</strong> — масштаб границ коллизии. Увеличьте, если модели пропадают при определённых углах камеры.</li>
-                <li><strong>Models Scale</strong> — масштаб импортируемых моделей.</li>
-              </ul>
-              <hr>
-              <h6>Misc Settings</h6>
-              <ul>
-                <li><strong>Use Weapon System</strong> — использовать WeaponSystem блюпринт для эффектов выстрелов, крови и декалей.</li>
-                <li><strong>Import Particles For Grenades</strong> — импортировать эффекты частиц для гранат.</li>
-                <li><strong>Grenades Particles Style</strong> — Niagara или Cascade.</li>
-              </ul>
-              <hr>
-              <h6>Import Settings</h6>
-              <ul>
-                <li><strong>Import Cameras</strong> — импортировать данные камер из демо.</li>
-                <li><strong>Import Players</strong> — импортировать анимацию игроков.</li>
-                <li><strong>Import Weapons</strong> — импортировать анимацию оружия.</li>
-                <li><strong>Import Nades</strong> — импортировать гранаты.</li>
-                <li><strong>Import Static Models</strong> — импортировать статичные модели.</li>
-              </ul>
-              <hr>
-              <h6>POV-режим</h6>
-              <ul>
-                <li><strong>Auto</strong> — автоматически определяет снаряжение игрока из демки. Одной кнопкой импортируется камера и создаётся POV в сиквенсере.</li>
-                <li><strong>Manual</strong> — Шаг 1: выбор камеры, масштаба bounds и стиля анимации. Шаг 2: выбор рукавов, перчаток и оружия. Кнопки спавнят анимации Idle, Draw, Fire, Reload, Look at прямо в сиквенсер.</li>
-              </ul>
-              <hr>
-              <h6>Редактор камеры</h6>
-              <ul>
-                <li><strong>Rotation / Location Offset</strong> — смещение, добавляемое ко всем ключам камеры в сиквенсере.</li>
-                <li><strong>Normal FOV / Zoom FOV</strong> — угол обзора в обычном и прицельном режимах.</li>
-              </ul>
-              <hr>
-              <h6>Time Remap</h6>
-              Создаёт вспомогательный Level Sequence для управления скоростью воспроизведения через Time Remap блюпринт.
-              <hr>
-              <h6>BPM Helper</h6>
-              Расставляет маркеры в сиквенсере по ритму музыки. Принимает BPM и тактовый размер. Зелёные маркеры — главные биты, белые — второстепенные.
-            </div>
+            <ul>
+             	<li>Unreal Engine 5.6 или новее</li>
+             	<li>Плагин <a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw">PyToolkit</a></li>
+             	<li>Установленная Counter-Strike 2</li>
+             	<li><a href="https://disk.yandex.ru/d/Sq43Ee_XhHsFFg">Парсер демок</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Установка
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-27.png" alt=""></div>
+            <a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Скачайте</strong> </a>и распакуйте плагин <strong>PyToolkit </strong>(минимум 1.8 версии) в папку <strong>Plugins</strong> в корневой директории Unreal Engine <code>(C:\Program Files\Epic Games\UE_5.6\Engine\Plugins)</code>.
+
+            Запустите Unreal Engine, включите плагины (<em>Edit &gt; Plugins</em>):
+            <ul>
+             	<li>Editor Scripting Utilities</li>
+             	<li>Python Editor Script Plugin</li>
+             	<li>Sequencer Scripting</li>
+             	<li>Http Blueprint</li>
+             	<li>PyToolkit</li>
+            </ul>
+            Перезапустите движок
+            <div class="section-img"><img src="img/image1.png" alt=""></div>
+            Скачать архив<span> с виджетом. </span><span>Открыть папку с проектом и  <span class="EzKURWReUAB5oZgtQNkl" data-src-align="33:8">перейти</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="42:2">в</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="53:9">подпапку</span> "<span class="EzKURWReUAB5oZgtQNkl" data-src-align="45:7">Content" </span><em>(например: <span class="EzKURWReUAB5oZgtQNkl" data-src-align="69:39">D:\YourUE5Project\Content</span><span class="EzKURWReUAB5oZgtQNkl" data-src-align="108:1">\</span>)</em>. <span class="EzKURWReUAB5oZgtQNkl" data-src-align="113:4">Скопировать</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="118:3">все</span> под<span class="EzKURWReUAB5oZgtQNkl" data-src-align="126:7">папки</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="134:4">из</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="139:3:151:6">папки</span> "<span class="EzKURWReUAB5oZgtQNkl" data-src-align="143:7">Content"</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="158:2">в</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="161:7">архиве</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="169:3">и</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="173:5">вставить</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="179:4">их</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="184:2">в</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="187:3:199:6">папку</span> "<span class="EzKURWReUAB5oZgtQNkl" data-src-align="191:7">Content"</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="206:2">в</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="214:7">проекте</span></span>
+            <div class="section-img"><img src="img/image3.png" alt=""></div>
+            Запустить Unreal Engine. Найти папку "Widgets" в <span>Content Browser, нажать правой кнопкой по виджету "UET_Main" и выбрать <em>Run Editor Utility Widget</em></span>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Настройка
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-5.png" alt=""></div>
+            <h6><strong>General Settings</strong></h6>
+            <ul>
+             	<li><strong>Working Directory</strong> — папка внутри UE проекта, куда будут импортироваться все данные демо.</li>
+             	<li><strong>CS2 Demo Parser Path</strong> — путь к <code>.exe</code> файлу демо парсера CS2. <strong><a href="https://disk.yandex.ru/d/Sq43Ee_XhHsFFg">Скачать можно тут</a></strong>.</li>
+             	<li><strong>Save Level</strong> — автоматически сохранять уровень после импорта.</li>
+             	<li><strong>Verbose Logging</strong> — включить расширенный вывод логов.</li>
+            </ul>
+
+            <hr />
+
+            <h6><strong>Models Settings</strong></h6>
+            <ul>
+             	<li><strong>Receives Decals</strong> — разрешить отображение декалей на импортированных моделях.</li>
+             	<li><strong>Bounds Scale</strong> — масштаб границ коллизии моделей. Если значение слишком маленькое, модели могут внезапно исчезать при определённых углах камеры, потому что движок считает их вне кадра. Увеличение этого значения решает проблему, но незначительно снижает производительность.</li>
+             	<li><strong>Models Scale</strong> — масштаб импортируемых моделей.</li>
+            </ul>
+
+            <hr />
+
+            <h6><strong>Misc Settings</strong></h6>
+            <ul>
+             	<li><strong>Use Weapon System (If Available)</strong> — использовать WeaponSystem блюпринт (если присутствует в проекте) для генерации эффектов выстрелов, крови и декалей от них на стенах.</li>
+             	<li><strong>Import Particles For Grenades</strong> — импортировать эффекты частиц для гранат.</li>
+             	<li><strong>Grenades Particles Style</strong> — тип системы частиц для гранат: Niagara или Cascade (устаревший).</li>
+            </ul>
+
+            <hr />
+
+            <h6><strong>Import Settings</strong></h6>
+            <ul>
+             	<li><strong>Import Cameras</strong> — импортировать данные камер из демо.</li>
+             	<li><strong>Import Players</strong> — импортировать анимацию игроков.</li>
+             	<li><strong>Import Weapons</strong> — импортировать анимацию оружия.</li>
+             	<li><strong>Import Nades</strong> — импортировать гранаты.</li>
+             	<li><strong>Import Static Models</strong> — импортировать статичные модели.</li>
+            </ul>
+
+            <hr />
+
+            <strong>Buttons Color</strong> — цвет кнопок интерфейса виджета.
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Custom POV
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-11.png" alt=""></div>
+            <div class="section-img"><img src="img/image-12.png" alt=""></div>
+            Вкладка для создания POV (вид от первого лица) в сиквенсере. При открытии предлагает выбрать один из двух режимов работы.
+            <h6>Auto (from parsed demo)</h6>
+            <ul>
+             	<li>Автоматический режим. Использует данные из предварительно загруженного демо: скрипт самостоятельно определяет снаряжение выбранного игрока — рукава, перчатки и все оружия, которые тот использовал. Пользователь может скорректировать замены через таблицу, после чего одной кнопкой <strong>Import Camera and create POV</strong> импортируется камера и создаётся полноценная POV в сиквенсере. Результат можно сохранить кнопкой <strong>Save POV files</strong> для повторного использования.</li>
+            </ul>
+
+            <hr />
+
+            <h6>Manual</h6>
+            Ручной режим, разбитый на два шага.
+            <ol>
+             	<li><strong>Шаг 1 — Spawn viewmodel</strong> (вкладка слева):
+            Пользователь выбирает камеру из сцены, задаёт масштаб bounds и стиль анимации (Classic или AnimGraph2). После нажатия <strong>Next</strong> можно будет выбрать нужную модель игрока, перчатки и оружие.</li>
+             	<li><strong>Шаг 2 — Animations</strong> (вкладка справа):
+            Пользователь выбирает рукава, перчатки и оружие из списка. Кнопки внизу спавнят нужную анимацию для всех выбранных ассетов прямо в сиквенсер на текущий кадр:
+            <ul>
+             	<li><strong>Idle</strong><span> </span>— анимация покоя</li>
+             	<li><strong>Draw</strong><span> </span>— вытаскивание оружия</li>
+             	<li><strong>Fire</strong><span> </span>— выстрел (с настройкой количества патронов)</li>
+             	<li><strong>Reload</strong><span> </span>— перезарядка</li>
+             	<li><strong>Look at</strong><span> </span>— осмотр оружия</li>
+            </ul>
+            </li>
+            </ol>
+            <ul>
+             	<li style="list-style-type: none;"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Редактирование камер
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-8.png" alt=""></div>
+            <ul>
+             	<li><strong>Camera</strong> — выбор камеры из уровня, к которой будут применяться настройки.</li>
+            </ul>
+
+            <hr />
+
+            <h6><strong>Offset</strong></h6>
+            <ul>
+             	<li><strong>Rotation</strong> — смещение поворота, которое будет добавлено ко всем ключам камеры в секвенсере (X / Y / Z в градусах).</li>
+             	<li><strong>Location</strong> — смещение позиции, которое будет добавлено ко всем ключам камеры в секвенсере (X / Y / Z).</li>
+            </ul>
+
+            <hr />
+
+            <h6><strong>Change FOV</strong></h6>
+            <ul>
+             	<li><strong>Normal FOV</strong> — угол обзора камеры в обычном режиме (без прицеливания).</li>
+             	<li><strong>Zoom FOV</strong> — угол обзора камеры в режиме прицеливания.</li>
+            </ul>
+
+            <hr />
+
+            <h6><strong>FOV Info</strong></h6>
+            информационный блок, отображающий итоговые значения после применения настроек FOV. Поля доступны только для чтения.
+            <ul>
+             	<li><strong>New Horizontal FOV</strong> — итоговый горизонтальный угол обзора.</li>
+             	<li><strong>New Vertical FOV</strong> — итоговый вертикальный угол обзора.</li>
+             	<li><strong>Sensor Width</strong> — ширина сенсора камеры.</li>
+             	<li><strong>Sensor Height</strong> — высота сенсора камеры.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Sequencer
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-9.png" alt=""></div>
+            Вкладка с инструментами для работы с сиквенсером. Содержит два подраздела.
+
+            <hr />
+
+            <h6>Time Remap</h6>
+            Создаёт вспомогательную Level Sequence для управления скоростью воспроизведения основного сиквенса через Time Remap блюпринт.
+
+            Настройки:
+            <ul>
+             	<li><strong>TR Object</strong><span> </span>— Blueprint актор с логикой тайм-ремапа</li>
+             	<li><strong>TR Time Controller</strong><span> </span>— объект, управляющий временем (например,<span> </span><code>24fps_TimeController</code>)</li>
+             	<li><strong>TR Sequencer Path</strong><span> </span>— путь, по которому будет создан TR-сиквенс</li>
+             	<li><strong>TR Sequence Prefix</strong><span> </span>— префикс имени для TR-сиквенса</li>
+            </ul>
+            Кнопка <strong>Create sequence</strong> создаёт новый сиквенс (или открывает существующий), настраивает Event Track, трек <code>Playback Time</code> — и открывает результат в редакторе.
+
+            <hr />
+
+            <h6>BPM Helper</h6>
+            Расставляет маркеры в сиквенсере по ритму музыки.
+
+            Принимает BPM и тактовый размер, вычисляет интервал между битами и расставляет цветные маркеры по всей длине сиквенса:
+            <ul>
+             	<li><strong>Зелёные</strong><span> </span>— главные биты (каждый N-й удар по тактовому размеру, подписаны номером такта)</li>
+             	<li><strong>Белые</strong><span> </span>— второстепенные биты (опционально)</li>
+            </ul>
+            Удобно для синхронизации time-remap секвенсера с музыкой.
           </div>
         </div>
       </div>
@@ -277,7 +319,6 @@
       body.classList.toggle('open', !isOpen);
       btn.classList.toggle('open', !isOpen);
     }
-    setLang('en');
   </script>
 </body>
 </html>

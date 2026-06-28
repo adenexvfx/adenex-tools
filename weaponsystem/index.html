@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weapon System — Adenex</title>
+  <title>Weapon System &#8212; Adenex</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
@@ -23,12 +23,15 @@
     .badge-type { background: #1f2937; border: 1px solid #374151; color: #9ca3af; }
     .badge-version { background: #0d2b12; border: 1px solid #238636; color: #3fb950; font-family: monospace; }
     .hero-desc { margin-top: 20px; color: #8b949e; font-size: 15px; line-height: 1.75; max-width: 640px; }
+    .hero-desc a { color: #58a6ff; }
     .actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
     .btn { padding: 9px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-block; transition: all 0.15s; }
     .btn-primary { background: #238636; color: #fff; border: 1px solid #2ea043; }
     .btn-primary:hover { background: #2ea043; }
     .btn-secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
     .btn-secondary:hover { border-color: #58a6ff; color: #58a6ff; }
+    .hero-img { margin-top: 28px; border-radius: 8px; overflow: hidden; border: 1px solid #21262d; }
+    .hero-img img { width: 100%; display: block; }
     .section { margin-top: 48px; }
     .accordion { border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
     .accordion-item { border-bottom: 1px solid #30363d; }
@@ -41,20 +44,17 @@
     .accordion-body.open { display: block; }
     .accordion-body ol, .accordion-body ul { padding-left: 20px; }
     .accordion-body li { margin-bottom: 6px; }
-    .accordion-body ul ul { margin-top: 4px; }
-    .accordion-body h6 { color: #e6edf3; font-size: 13px; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .accordion-body h6:first-child { margin-top: 0; }
+    .accordion-body ul ul, .accordion-body ol ol { margin-top: 4px; }
+    .accordion-body p { margin-bottom: 10px; }
+    .accordion-body p:last-child { margin-bottom: 0; }
     .accordion-body strong { color: #c9d1d9; }
+    .accordion-body a { color: #58a6ff; }
     .accordion-body code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 12px; color: #79c0ff; font-family: monospace; }
     .accordion-body hr { border: none; border-top: 1px solid #30363d; margin: 16px 0; }
-    footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
-    footer a { color: #484f58; }
-    body.lang-en [data-lang="ru"] { display: none; }
-    body.lang-ru [data-lang="en"] { display: none; }
-    .hero-img { margin-top: 28px; border-radius: 8px; overflow: hidden; border: 1px solid #21262d; }
-    .hero-img img { width: 100%; display: block; }
     .section-img { margin: 0 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid #21262d; }
     .section-img img { width: 100%; display: block; }
+    footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
+    footer a { color: #484f58; }
   </style>
 </head>
 <body>
@@ -65,300 +65,341 @@
       <span style="color:#e6edf3">Weapon System</span>
     </div>
     <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('ru')">RU</button>
     </div>
   </header>
   <main>
     <div class="hero-name">Weapon System</div>
     <div class="hero-meta">
-      <span class="badge badge-type" data-lang="en">Unreal Engine Blueprint</span>
-      <span class="badge badge-type" data-lang="ru">Unreal Engine Blueprint</span>
+      <span class="badge badge-type">Unreal Engine Blueprint</span>
       <span class="badge badge-version">v1.6</span>
     </div>
-    <div class="hero-desc" data-lang="en">
-      Fully procedural weapon system for cinematic renders and games. Automatically detects skeleton bones, spawns muzzle flashes, shells, decals, impacts, and sounds. Supports baking into Level Sequence via a built-in Editor Utility Widget.
-    </div>
-    <div class="hero-desc" data-lang="ru">
+    <div class="hero-desc">
       Полностью процедурная система оружия для кинематографических рендеров и игр. Автоматически определяет кости скелета, спавнит вспышки, гильзы, декали, импакты и звуки. Поддерживает запечку через встроенный виджет.
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="" data-lang="en">Download</a>
-      <a class="btn btn-primary" href="" data-lang="ru">Скачать</a>
+      <a class="btn btn-primary" href="">&#x21E9; Скачать</a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
     <div class="hero-img">
-      <img src="img/hero.png" alt="Weapon System blueprint">
+      <img src="img/image-26.png" alt="Weapon System">
     </div>
     <div class="section">
       <div class="accordion">
-
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Installation</span>
-            <span data-lang="ru">Установка</span>
-            <span class="chevron">▶</span>
+            Общая структура интерфейса
+            <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div data-lang="en">
-              <ol>
-                <li>Download and extract the <strong>PyToolkit</strong> plugin (v1.8+) into the <code>Plugins</code> folder of your Unreal Engine installation: <code>C:\Program Files\Epic Games\UE_5.6\Engine\Plugins</code>.</li>
-                <li>Launch Unreal Engine and enable the following plugins (<strong>Edit &gt; Plugins</strong>):
-                  <ul>
-                    <li>Editor Scripting Utilities</li>
-                    <li>Python Editor Script Plugin</li>
-                    <li>Python Foundation Packages</li>
-                    <li>Http Blueprint</li>
-                    <li>PyToolkit</li>
-                  </ul>
-                  Restart the engine.
-                </li>
-                <li>Two versions are available:
-                  <ul>
-                    <li>A ready-to-use project with WeaponSystem preconfigured (recommended for exploring the blueprint).</li>
-                    <li>A standalone blueprint for integration into an existing project.</li>
-                  </ul>
-                </li>
-                <li>To install the standalone blueprint: copy the <code>Blueprints</code> and <code>PhysicalMaterials</code> folders from the archive into your project's <code>Content</code> folder.</li>
-                <li>Add physical surface definitions to <code>DefaultEngine.ini</code> under <code>[/Script/Engine.PhysicsSettings]</code> (a ready-made file is included in the archive).</li>
-                <li>Launch the project and verify all physical surfaces appear in <strong>Project Settings &rarr; Physics &rarr; Physical Surface</strong>.</li>
-              </ol>
-              <hr>
-              <strong>Requirements:</strong>
-              <ul>
-                <li>Unreal Engine 5.6 or newer</li>
-                <li>PyToolkit plugin v1.8+</li>
-              </ul>
-            </div>
-            <div data-lang="ru">
-              <ol>
-                <li>Скачайте и распакуйте плагин <strong>PyToolkit</strong> (минимум 1.8 версии) в папку <code>Plugins</code> в корневой директории Unreal Engine: <code>C:\Program Files\Epic Games\UE_5.6\Engine\Plugins</code>.</li>
-                <li>Запустите Unreal Engine и включите плагины (<strong>Edit &gt; Plugins</strong>):
-                  <ul>
-                    <li>Editor Scripting Utilities</li>
-                    <li>Python Editor Script Plugin</li>
-                    <li>Python Foundation Packages</li>
-                    <li>Http Blueprint</li>
-                    <li>PyToolkit</li>
-                  </ul>
-                  Перезапустите движок.
-                </li>
-                <li>Для загрузки доступны 2 версии:
-                  <ul>
-                    <li>Готовый проект с уже настроенной WeaponSystem.</li>
-                    <li>Отдельный блюпринт для интеграции в существующий проект.</li>
-                  </ul>
-                </li>
-                <li>Для установки отдельного блюпринта: скопируйте папки <code>Blueprints</code> и <code>PhysicalMaterials</code> из архива в папку <code>Content</code> вашего проекта.</li>
-                <li>Добавьте определения физических поверхностей в <code>DefaultEngine.ini</code> в раздел <code>[/Script/Engine.PhysicsSettings]</code> (готовый файл есть в архиве).</li>
-                <li>Запустите проект и убедитесь, что все поверхности появились в <strong>Project Settings &rarr; Physics &rarr; Physical Surface</strong>.</li>
-              </ol>
-              <hr>
-              <strong>Требования:</strong>
-              <ul>
-                <li>Unreal Engine 5.6 или новее</li>
-                <li>PyToolkit plugin версии 1.8 и выше</li>
-              </ul>
-            </div>
+            <div class="section-img"><img src="img/main-glove-1.png" alt=""></div>
+            <ol>
+             	<li><strong>Кнопка возврата (Back)</strong> — возвращает пользователя к списку скинов.</li>
+             	<li><strong>Падающее меню</strong> —  переключатель режима отображения (Lit, Roughness, Metallic и др.).</li>
+             	<li><strong>Окно предпросмотра</strong> — реалтайм-отображение материала и всех изменений. Поддержка вращения, зума и смены угла обзора</li>
+             	<li><strong>Основные настройки материала</strong></li>
+             	<li><strong>Параметры отображения материала</strong> — настройка Roughness / Metalness</li>
+             	<li><strong>Настройка UV паттернов и потертостей</strong></li>
+             	<li><strong>Текстуры</strong>.</li>
+             	<li><strong>Запекание материала.</strong></li>
+             	<li><strong>Панель управления камерой</strong>.</li>
+             	<li><strong>Change Seed</strong> — генерация случайного UV для паттерна.</li>
+             	<li><b>Bake </b>— сохранение финального Material Instance для дальнейшего использования.</li>
+            </ol>
           </div>
         </div>
-
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Core Features</span>
-            <span data-lang="ru">Основные возможности</span>
-            <span class="chevron">▶</span>
+            Общая структура интерфейса
+            <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div data-lang="en">
-              <ul>
-                <li>Procedural spawning of all effects with Level Sequence baking support</li>
-                <li>Automatic detection of weapon skeleton bones and sockets</li>
-                <li>Two camera modes: <strong>POV (first-person)</strong> and <strong>3rd person</strong></li>
-                <li>Ricochet system with particles and sound</li>
-                <li>Burst fire mode — useful for shotguns and Glock</li>
-                <li>Bullet tracers with configurable color, width, scale, and lifetime</li>
-                <li>Physically simulated bullets</li>
-                <li>Impacts and decals based on <strong>physical material</strong> (blood, metal, concrete, wood, dirt, etc.)</li>
-                <li>Blood splatter decals on walls behind characters (CS2 decals included)</li>
-                <li>Weapon, impact, and shell sounds with reverb support in MRQ renders</li>
-                <li>Two particle systems: <strong>Cascade</strong> and <strong>Niagara</strong></li>
-                <li>Dual Berettas mode — alternates flashes and shells between two bones</li>
-                <li>Built-in <strong>Editor Utility Widget</strong> for analysis and baking</li>
-              </ul>
-            </div>
-            <div data-lang="ru">
-              <ul>
-                <li>Процедурный спавн всех эффектов с возможностью запечки в Level Sequence</li>
-                <li>Автоматическое определение нужных костей скелета оружия</li>
-                <li>Поддержка двух режимов камеры: <strong>POV (от первого лица)</strong> и <strong>3rd person</strong></li>
-                <li>Система рикошетов с частицами и звуком</li>
-                <li>Система очередей (Burst fire) — полезно для дробовиков и Glock</li>
-                <li>Трассеры пуль с настройкой цвета, ширины, масштаба и времени жизни</li>
-                <li>Физически корректные пули — поддержка симуляции физики</li>
-                <li>Импакты и декали на основе <strong>физического материала</strong> (кровь, металл, бетон, дерево, грязь и др.)</li>
-                <li>Брызги крови на стенах позади персонажей (декали CS2 включены в пакет)</li>
-                <li>Звуки оружия, импактов и гильз с поддержкой реверберации в MRQ рендере</li>
-                <li>Поддержка двух вариантов частиц: <strong>Cascade</strong> и <strong>Niagara</strong></li>
-                <li>Дуальный режим (Dual Berettas) — чередование вспышек и гильз между двумя костями</li>
-                <li>Встроенный <strong>Editor Utility Widget</strong> для анализа и запечки</li>
-              </ul>
-            </div>
+            <div class="section-img"><img src="img/main-glove-1.png" alt=""></div>
+            <ol>
+             	<li><strong>Кнопка возврата (Back)</strong> — возвращает пользователя к списку скинов.</li>
+             	<li><strong>Падающее меню</strong> —  переключатель режима отображения (Lit, Roughness, Metallic и др.).</li>
+             	<li><strong>Окно предпросмотра</strong> — реалтайм-отображение материала и всех изменений. Поддержка вращения, зума и смены угла обзора</li>
+             	<li><strong>Основные настройки материала</strong></li>
+             	<li><strong>Параметры отображения материала</strong> — настройка Roughness / Metalness</li>
+             	<li><strong>Настройка UV паттернов и потертостей</strong></li>
+             	<li><strong>Текстуры</strong>.</li>
+             	<li><strong>Запекание материала.</strong></li>
+             	<li><strong>Панель управления камерой</strong>.</li>
+             	<li><strong>Change Seed</strong> — генерация случайного UV для паттерна.</li>
+             	<li><b>Bake </b>— сохранение финального Material Instance для дальнейшего использования.</li>
+            </ol>
+            <div class="section-img"><img src="img/image-26.png" alt=""></div>
+            <span>Полностью процедурная система оружия для кинематографических рендеров и игр. Автоматически определяет кости, спавнит вспышки, гильзы, декали, импакты и звуки. Поддерживает запечку через встроенный виджет.</span>
           </div>
         </div>
-
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Blueprint Settings</span>
-            <span data-lang="ru">Настройки блюпринта</span>
-            <span class="chevron">▶</span>
+            Основные возможности
+            <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div class="section-img">
-              <img src="img/bp-settings.png" alt="Blueprint settings">
-            </div>
-            <div data-lang="en">
-              <h6>Setup</h6>
-              <ul>
-                <li><strong>Init System</strong> — Test button. Fires one test shot triggering all spawn systems.</li>
-                <li><strong>Reset Bones</strong> — Re-scans and identifies bones/sockets on the weapon skeleton.</li>
-                <li><strong>Reset Spray</strong> — Resets bullet counter and spray pattern.</li>
-                <li><strong>Reset System</strong> — Clears all decals from the map.</li>
-                <li><strong>Bake Mode</strong> — Switches between runtime and baking mode. Managed by EUW — do not enable manually.</li>
-                <li><strong>Is Active</strong> — Master switch. Disables all firing and effect logic when off.</li>
-                <li><strong>Is 3rd Person Weapon</strong> — 3rd person mode. Offsets taken from the weapon actor directly.</li>
-                <li><strong>Is Dual Berettas Mode</strong> — Dual weapon mode. Alternates flashes and shells between two bones.</li>
-                <li><strong>POV Camera</strong> — Camera for first-person ray tracing.</li>
-                <li><strong>Weapon</strong> — Weapon actor (SkeletalMeshActor).</li>
-                <li><strong>Is Spray</strong> — Enables spray pattern logic.</li>
-                <li><strong>Is Burst Fire</strong> — Burst fire mode.</li>
-                <li><strong>Burst Fire Count</strong> — Number of shots in a burst.</li>
-                <li><strong>Enable Wallbangs</strong> — Enable wall penetration.</li>
-              </ul>
-              <hr>
-              <h6>Muzzle Flash</h6>
-              <ul>
-                <li><strong>Muzzle Flash Enable</strong> — Enables muzzle flash spawning.</li>
-                <li><strong>Muzzle Flash Bone / Bone 2</strong> — Primary and optional secondary socket.</li>
-                <li><strong>Muzzle Flash</strong> — Flash particle system.</li>
-                <li><strong>Muzzle Flash Scale</strong> — Flash scale.</li>
-              </ul>
-              <hr>
-              <h6>Shells</h6>
-              <ul>
-                <li><strong>Shells Enable</strong> — Enables shell ejection. Visible <strong>only in simulation/play mode</strong>.</li>
-                <li><strong>Shell Bone / Bone 2</strong> — Primary and optional secondary bone.</li>
-                <li><strong>Shell Speed Min / Max</strong> — Random speed range for shells.</li>
-                <li><strong>Shell Mesh</strong> — Shell mesh (StaticMesh).</li>
-                <li><strong>Shells Mass</strong> — Shell mass in grams.</li>
-              </ul>
-              <hr>
-              <h6>Decals &amp; Sound</h6>
-              <ul>
-                <li><strong>Decals Enable</strong> — Enable decal spawning on surfaces.</li>
-                <li><strong>Blood Decals Enable</strong> — Enable blood decals on walls behind characters.</li>
-                <li><strong>Weapon Sound Enable</strong> — Enable firing sound.</li>
-                <li><strong>Impact Sound Enable</strong> — Enable impact sounds.</li>
-                <li><strong>Shells Sound Enable</strong> — Enable shell sounds.</li>
-              </ul>
-              <hr>
-              <h6>Time Dilation</h6>
-              <ul>
-                <li><strong>Muzzle Flash Time Dilation</strong> — Slows/speeds flash effects.</li>
-                <li><strong>Impact Time Dilation</strong> — Slows/speeds impact effects.</li>
-                <li><strong>Sound Time Dilation (Pitch)</strong> — Adjusts pitch based on time dilation.</li>
-                <li><strong>TR Time Dilation Multiplier</strong> — Global time dilation from TimeRemapping asset.</li>
-              </ul>
-            </div>
-            <div data-lang="ru">
-              <h6>Setup</h6>
-              <ul>
-                <li><strong>Init System</strong> — Тестовая кнопка. Производит один тестовый выстрел.</li>
-                <li><strong>Reset Bones</strong> — Повторно сканирует кости/сокеты скелета оружия.</li>
-                <li><strong>Reset Spray</strong> — Сбрасывает счётчик пуль и паттерн спрея.</li>
-                <li><strong>Reset System</strong> — Очищает все декали с карты.</li>
-                <li><strong>Bake Mode</strong> — Переключает между runtime и режимом запечки. Управляется через EUW — не включать вручную.</li>
-                <li><strong>Is Active</strong> — Мастер-переключатель. Если выключен — вся логика отключается.</li>
-                <li><strong>Is 3rd Person Weapon</strong> — Режим от третьего лица.</li>
-                <li><strong>Is Dual Berettas Mode</strong> — Дуальный режим. Вспышки и гильзы чередуются между двумя костями.</li>
-                <li><strong>POV Camera</strong> — Камера для трассировки от первого лица.</li>
-                <li><strong>Weapon</strong> — Актор оружия (SkeletalMeshActor).</li>
-                <li><strong>Is Spray</strong> — Включает логику паттерна спрея.</li>
-                <li><strong>Is Burst Fire</strong> — Режим очереди.</li>
-                <li><strong>Burst Fire Count</strong> — Количество выстрелов в очереди.</li>
-                <li><strong>Enable Wallbangs</strong> — Включить пробитие стен.</li>
-              </ul>
-              <hr>
-              <h6>Muzzle Flash</h6>
-              <ul>
-                <li><strong>Muzzle Flash Enable</strong> — Включает спавн вспышки дула.</li>
-                <li><strong>Muzzle Flash Bone / Bone 2</strong> — Основная и дополнительная кость/сокет.</li>
-                <li><strong>Muzzle Flash</strong> — Система частиц вспышки.</li>
-                <li><strong>Muzzle Flash Scale</strong> — Масштаб вспышки.</li>
-              </ul>
-              <hr>
-              <h6>Shells</h6>
-              <ul>
-                <li><strong>Shells Enable</strong> — Включает спавн гильз. Видны <strong>только в режиме симуляции/плея</strong>.</li>
-                <li><strong>Shell Bone / Bone 2</strong> — Основная и дополнительная кость.</li>
-                <li><strong>Shell Speed Min / Max</strong> — Диапазон скорости гильзы.</li>
-                <li><strong>Shell Mesh</strong> — Меш гильзы (StaticMesh).</li>
-                <li><strong>Shells Mass</strong> — Масса гильзы в граммах.</li>
-              </ul>
-              <hr>
-              <h6>Декали и звук</h6>
-              <ul>
-                <li><strong>Decals Enable</strong> — Включить спавн декалей.</li>
-                <li><strong>Blood Decals Enable</strong> — Включает декали крови на стенах позади персонажей.</li>
-                <li><strong>Weapon Sound Enable</strong> — Включить звук выстрела.</li>
-                <li><strong>Impact Sound Enable</strong> — Включить звуки попадания.</li>
-                <li><strong>Shells Sound Enable</strong> — Включить звуки гильз.</li>
-              </ul>
-              <hr>
-              <h6>Time Dilation</h6>
-              <ul>
-                <li><strong>Muzzle Flash Time Dilation</strong> — Замедление/ускорение эффектов вспышки.</li>
-                <li><strong>Impact Time Dilation</strong> — Замедление/ускорение эффектов импакта.</li>
-                <li><strong>Sound Time Dilation (Pitch)</strong> — Питч звуков в зависимости от time dilation.</li>
-                <li><strong>TR Time Dilation Multiplier</strong> — Глобальный time dilation из TimeRemapping.</li>
-              </ul>
-            </div>
+            <ul>
+             	<li>Процедурный спавн всех эффектов с возможностью запечки в Level Sequence</li>
+             	<li>Автоматическое определение нужных костей скелета оружия</li>
+             	<li>Поддержка двух режимов камеры:<span> </span><strong>POV (от первого лица)</strong><span> </span>и<span> </span><strong>3rd person</strong></li>
+             	<li>Система рикошетов с частицами и звуком</li>
+             	<li>Система очередей (Burst fire) — полезно для дробовиков и Glock</li>
+             	<li>Трассеры пуль с настройкой цвета, ширины, масштаба и времени жизни</li>
+             	<li>Физически корректные пули — поддержка симуляции физики</li>
+             	<li>Импакты и декали на месте попадания с привязкой к<span> </span><strong>физическому материалу</strong><span> </span>(кровь, металл, бетон, дерево, грязь и др.)</li>
+             	<li>Брызги крови позади персонажей (декали CS2 включены в пакет)</li>
+             	<li>Звуки оружия, импактов и гильз с поддержкой реверберации в MRQ рендере</li>
+             	<li>Поддержка двух вариантов частиц:<span> </span><strong>Cascade</strong><span> </span>и<span> </span><strong>Niagara</strong></li>
+             	<li>Дуальный режим (Dual Berettas) — чередование вспышек и гильз между двумя костями</li>
+             	<li>Встроенный<span> </span><strong>Editor Utility Widget</strong><span> </span>для анализа и запечки</li>
+            </ul>
           </div>
         </div>
-
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Baking Effects</span>
-            <span data-lang="ru">Запечка эффектов</span>
-            <span class="chevron">▶</span>
+            Требования
+            <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div class="section-img">
-              <img src="img/bake-effects.png" alt="Baking effects widget">
-            </div>
-            <div data-lang="en">
-              The <strong>Editor Utility Widget</strong> included with the blueprint records all WeaponSystem effects into a Level Sequence frame by frame. Baking is optional — the system works without it. However, if you need identical results on every render (WeaponSystem randomizes effects each playback), baking is required.
-              <ul style="margin-top:12px">
-                <li><strong>Weapon Systems</strong> — List of WeaponSystem actors to bake.</li>
-                <li><strong>Analyze</strong> — Analyzes all Sequencer frames and collects data on particles, decals, and sounds.</li>
-                <li><strong>Bake</strong> — Bakes the collected data into the Level Sequence.</li>
-                <li><strong>Load Active Sequence</strong> — Loads data from the open Sequencer and finds all WeaponSystem actors.</li>
-                <li><strong>Reset</strong> — Resets the widget data.</li>
-              </ul>
-            </div>
-            <div data-lang="ru">
-              <strong>Editor Utility Widget</strong>, включённый в пакет, записывает все эффекты системы в Level Sequence покадрово. Запечка необязательна — система работает и без неё. Но если нужен одинаковый результат при каждом рендере (WeaponSystem рандомизирует эффекты при каждом воспроизведении) — без запечки не обойтись.
-              <ul style="margin-top:12px">
-                <li><strong>Weapon Systems</strong> — Список акторов WeaponSystem для запечки.</li>
-                <li><strong>Analyze</strong> — Анализирует кадры секвенсера и собирает данные о частицах, декалях и звуках.</li>
-                <li><strong>Bake</strong> — Запекает данные в Level Sequence.</li>
-                <li><strong>Load Active Sequence</strong> — Загружает данные из открытого секвенсера.</li>
-                <li><strong>Reset</strong> — Сбрасывает данные виджета.</li>
-              </ul>
-            </div>
+            <ul>
+             	<li>Unreal Engine 5.6 или новее</li>
+             	<li>PyToolkit plugin (версии 1.8 и выше)</li>
+            </ul>
           </div>
         </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Установка
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-27.png" alt=""></div>
+            <a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Скачайте</strong> </a>и распакуйте плагин <strong>PyToolkit </strong>(минимум 1.8 версии) в папку <strong>Plugins</strong> в корневой директории Unreal Engine <code>(C:\Program Files\Epic Games\UE_5.6\Engine\Plugins)</code>.
 
+            Запустите Unreal Engine и включите следующие плагины (в меню <strong>Edit &gt; Plugins</strong>):
+            <ul>
+             	<li>Editor Scripting Utilities</li>
+             	<li>Python Editor Script Plugin</li>
+             	<li><span>Python Foundation Packages</span></li>
+             	<li>Http Blueprint</li>
+             	<li>PyToolkit</li>
+            </ul>
+            Затем перезапустите движок.
+            <div class="section-img"><img src="img/image-23.png" alt=""></div>
+            Для загрузки доступны 2 версии:
+            <ul>
+             	<li>готовый проект с уже настроенной WeaponSystem (рекомендуется для ознакомления с использованием блюпринта)</li>
+             	<li>отдельный блюпринт для интеграции в существующий проект.</li>
+            </ul>
+            Готовый проект достаточно разархивировать и запустить.<br />Ниже приведена инструкция по установке отдельного блюпринта.
+            <ol>
+             	<li data-section-id="ugr0dr">Откройте архив с блюпринтом (например, через WinRAR или 7-Zip).</li>
+             	<li data-section-id="1sdwd5t">Внутри архива перейдите по пути: <code>PATH_TO_YOUR_PROJECT/Content</code></li>
+             	<li data-section-id="1td72re">Скопируйте папки:
+            <ul>
+             	<li data-section-id="1ia36vo">Blueprints</li>
+             	<li data-section-id="6w1wa9">PhysicalMaterials</li>
+            </ul>
+            </li>
+             	<li data-section-id="16i64qh">
+            <p>Вставьте их в папку <strong>Content</strong> вашего проекта: <code>MyProject/Content</code></p>
+            </li>
+             	<li data-section-id="eubh4d">Если появится запрос на замену файлов — нажмите <strong>«Да / Заменить»</strong>.</li>
+            </ol>
+            <p>⚠️ <strong>Важно</strong>: вставляйте папки именно <em>внутрь Content</em>, как показано на изображении.</p>
+            <div class="section-img"><img src="img/image-24.png" alt=""></div>
+            <div class="section-img"><img src="img/image-25.png" alt=""></div>
+            <ol start="1">
+             	<li>Откройте файл <code>DefaultEngine.ini</code>, который находится в папке: MyProject/Config. В архиве также уже есть готовый файл <code>DefaultEngine.ini</code>. Вы можете:
+            <ul>
+             	<li>либо заменить ваш файл на тот, что из архива;</li>
+             	<li>либо добавить строки вручную.</li>
+            </ul>
+            Если вы добавляете строки вручную, вставьте следующий код в раздел
+            <code>[/Script/Engine.PhysicsSettings]</code>:
+            <pre><code>+PhysicalSurfaces=(Type=SurfaceType1,Name="Asphalt")
+            +PhysicalSurfaces=(Type=SurfaceType2,Name="Brick")
+            +PhysicalSurfaces=(Type=SurfaceType3,Name="Ceramic")
+            +PhysicalSurfaces=(Type=SurfaceType4,Name="Concrete")
+            +PhysicalSurfaces=(Type=SurfaceType5,Name="Dirt")
+            +PhysicalSurfaces=(Type=SurfaceType6,Name="Electrical")
+            +PhysicalSurfaces=(Type=SurfaceType7,Name="Fabric")
+            +PhysicalSurfaces=(Type=SurfaceType8,Name="Flesh")
+            +PhysicalSurfaces=(Type=SurfaceType9,Name="Glass")
+            +PhysicalSurfaces=(Type=SurfaceType10,Name="Grass")
+            +PhysicalSurfaces=(Type=SurfaceType11,Name="Gravel")
+            +PhysicalSurfaces=(Type=SurfaceType12,Name="Ice")
+            +PhysicalSurfaces=(Type=SurfaceType13,Name="Leaves")
+            +PhysicalSurfaces=(Type=SurfaceType14,Name="Metal")
+            +PhysicalSurfaces=(Type=SurfaceType15,Name="Mud")
+            +PhysicalSurfaces=(Type=SurfaceType16,Name="Oil")
+            +PhysicalSurfaces=(Type=SurfaceType17,Name="Paper")
+            +PhysicalSurfaces=(Type=SurfaceType18,Name="Plastic")
+            +PhysicalSurfaces=(Type=SurfaceType19,Name="Rock")
+            +PhysicalSurfaces=(Type=SurfaceType20,Name="Rubber")
+            +PhysicalSurfaces=(Type=SurfaceType21,Name="Snow")
+            +PhysicalSurfaces=(Type=SurfaceType22,Name="Sand")
+            +PhysicalSurfaces=(Type=SurfaceType23,Name="Soil")
+            +PhysicalSurfaces=(Type=SurfaceType24,Name="Water")
+            +PhysicalSurfaces=(Type=SurfaceType25,Name="Wood")
+            +PhysicalSurfaces=(Type=SurfaceType26,Name="Brains")</code></pre>
+            </li>
+             	<li>Запустите проект.</li>
+             	<li>Убедитесь, что все физические поверхности корректно применились.
+            <p>Для этого откройте <strong>Project Settings → Physics → Physical Surface</strong> и проверьте, что все типы поверхностей (Asphalt, Concrete, Metal и т.д.) присутствуют в списке, как показано на изображении выше.</p>
+            <p>Если список пуст или отображается только <code>Default</code>, значит настройки не применились — в этом случае проверьте правильность редактирования файла <code>DefaultEngine.ini</code>;</p>
+
+            <ul>
+             	<li data-section-id="14ko03n">убедитесь, что строки добавлены в раздел <code>[/Script/Engine.PhysicsSettings]</code>;</li>
+             	<li data-section-id="xe4ggx">перезапустите Unreal Engine.</li>
+            </ul>
+            </li>
+             	<li>Включите плагин <strong>PyToolkit</strong></li>
+             	<li>В Content Browser блюпринты будут находиться в папке: <code>Content/Blueprints</code></li>
+            </ol>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Описание настроек блюпринта
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-13.png" alt=""></div>
+            <h6>Setup</h6>
+            <ul>
+             	<li><strong>Init System</strong> — Тестовая кнопка. Производит один тестовый выстрел, вызывая все системы спавна (вспышка, гильза, импакт, звук, декали). В финальном сетапе не используется — выстрелы запускаются через события в Sequencer.</li>
+             	<li><strong>Reset Bones</strong> — Повторно сканирует и определяет нужные кости/сокеты на скелете оружия. Перебирает все имена костей на меше. Используется если оружие было заменено или изменено.</li>
+             	<li><strong>Reset Spray</strong> — Сбрасывает счётчик выпущенных пуль. Сбрасывает прогрессию паттерна спрея к начальному состоянию.</li>
+             	<li><strong>Reset System</strong> — Очищает всю карту от декалей.</li>
+             	<li><strong>Bake Mode</strong> — Переключает логику спавна эффектов между runtime-режимом и режимом запечки. Когда включён — декали, импакты и звуки идут по пути запечки в Level Sequence, а не создаются динамически. Не включать вручную — управляется через EUW.</li>
+             	<li><strong>Is Active</strong> — Мастер-переключатель. Если выключен — вся логика стрельбы и эффектов отключается.</li>
+             	<li><strong>Is 3rd Person Weapon</strong> — Режим оружия от третьего лица. Если включён, смещения и сокеты берутся напрямую с актора оружия. Если выключен — используется POV камера.</li>
+             	<li><strong>Is Dual Berettas Mode</strong> — Дуальный режим (два оружия). Вспышки и гильзы чередуются между двумя костями.</li>
+             	<li><strong>POV Camera</strong> — Камера для трассировки от первого лица.</li>
+             	<li><strong>Weapon</strong> — Актор оружия (SkeletalMeshActor). Источник сокетов и эффектов.</li>
+             	<li><strong>Recoil Spread</strong> — Дополнительный разброс от отдачи. Чем выше значение — тем сильнее разброс.</li>
+             	<li><strong>Is Spray</strong> — Включает логику паттерна спрея/разброса.</li>
+             	<li><strong>Spray Offset</strong> <em>(активен при Is Spray)</em> — Текущая интенсивность спрея: смещает конечную точку трассировки. Чем выше значение — тем сильнее отклонение.</li>
+             	<li><strong>Is Burst Fire</strong> — Режим очереди. Полезен для дробовиков и оружия с несколькими выстрелами за нажатие.</li>
+             	<li><strong>Burst Fire Count</strong> <em>(активен при Is Burst Fire)</em> — Количество выстрелов в очереди.</li>
+             	<li><strong>Enable Wallbangs</strong> — Включить пробитие стен.</li>
+             	<li><strong>Bullet Energy</strong> <em>(активен при Enable Wallbangs)</em> — Начальная энергия пули. Определяет, сколько преград может пробить пуля.</li>
+            </ul>
+
+            <hr />
+
+            <h6>Tracing</h6>
+            <ul>
+             	<li><strong>Trace Length</strong> — Дистанция трассировки (диапазон), используется для вычисления конечной точки луча.</li>
+             	<li><strong>Debug</strong> — Включает отладочную визуализацию трассировки.</li>
+             	<li><strong>Debug Wall Penetration</strong> — Включает отладочную трассировку специально для логики пробития стен.</li>
+             	<li><strong>Actors To Ignore</strong> — Акторы, которые трассировка игнорирует (сам актор оружия, персонаж и т.д.).</li>
+             	<li><strong>Muzzle Bone Additional Location</strong> — Дополнительное смещение позиции кости дула по X/Y/Z. Используется для тонкой подстройки точки вылета пули.</li>
+             	<li><strong>Muzzle Bone Additional Rotation</strong> — Дополнительный поворот кости дула. Позволяет скорректировать направление выстрела.</li>
+             	<li><strong>Tracing Additional Offset</strong> — Дополнительное смещение начальной точки трассировки.</li>
+            </ul>
+
+            <hr />
+
+            <h6>Bullets</h6>
+            <ul>
+             	<li><strong>Bullets Enable</strong> — <span>Включает спавн физических пуль и трассеров. Пули видны </span><strong>только в режиме симуляции/плея</strong><span>.</span></li>
+             	<li><strong>Tracers Every Shot</strong> — <span>Принудительно показывает трассер при каждом выстреле. Если выключено — трассеры появляются случайно/периодически.</span></li>
+             	<li><strong>Bullet Mesh</strong> — Меш пули (StaticMesh).</li>
+             	<li><strong>Bullet Scale</strong> — Масштаб пули.</li>
+            </ul>
+
+            <hr />
+
+            <h6>Muzzle Flash</h6>
+            <ul>
+             	<li><strong>Muzzle Flash Enable</strong> — Включает спавн эффектов вспышки дула при выстреле.</li>
+             	<li><strong>Muzzle Flash Bone</strong> — Кость (или сокет), из которой спавнится вспышка (основная).</li>
+             	<li><strong>Muzzle Flash Bone 2</strong> — Необязательный второй сокет для дуального режима. Если не задан — вспышка спавнится только из основной кости. Можно оставить пустым.</li>
+             	<li><strong>Muzzle Flash</strong> — Система частиц вспышки дула.</li>
+             	<li><strong>Muzzle Flash Rotation</strong> — Дополнительное смещение поворота вспышки.</li>
+             	<li><strong>Muzzle Flash Offset</strong> — Дополнительное смещение позиции вспышки.</li>
+             	<li><strong>Muzzle Flash Scale</strong> — Масштаб вспышки.</li>
+            </ul>
+
+            <hr />
+
+            <h6>Shells</h6>
+            <ul>
+             	<li><strong>Shells Enable</strong> — <span>Включает спавн гильз. Гильзы видны </span><strong>только в режиме симуляции/плея</strong><span>.</span></li>
+             	<li><strong>Shell Bone</strong> — Имя кости, из которой выбрасывается гильза (основной).</li>
+             	<li><strong>Shell Bone 2</strong> — <span>Необязательная вторая кость для дуального режима. Если не задана — выброс идёт только из основной кости. Можно оставить пустым.</span></li>
+             	<li><strong>Shell Speed Min / Shell Speed Max</strong> — Диапазон начальной скорости гильзы. Реальная скорость выбирается случайно в этом диапазоне.</li>
+             	<li><strong>Shells Offset</strong> — Смещение точки спавна гильзы относительно кости.</li>
+             	<li><strong>Shell Mesh</strong> — Меш гильзы (StaticMesh).</li>
+             	<li><strong>Shells Rotation</strong> — <span>Дополнительное смещение поворота меша гильзы.</span></li>
+             	<li><strong>Shells Mass</strong> — Масса гильзы в граммах. Влияет на физику падения.</li>
+             	<li><strong>Shells Scale</strong> — Масштаб гильзы.</li>
+            </ul>
+
+            <hr />
+
+            <h6>Impact</h6>
+            <ul>
+             	<li><strong>Impacts Enable</strong> — Включает спавн эффектов попадания в точке, куда попала пуля. Система автоматически определяет тип поверхности по физическому материалу и выбирает соответствующие частицы: искры на металле, облако пыли на бетоне, брызги крови на персонаже и т.д. При выключенном параметре никаких визуальных эффектов попадания не спавнится.</li>
+             	<li><strong>Default Impact</strong> — Система частиц, когда для поверхности не найден соответствующий физический материал.</li>
+             	<li><strong>Impacts Scale</strong> — Масштаб для всех частиц импакта (искры, облака пыли и т.д.).</li>
+            </ul>
+
+            <hr />
+
+            <h6>Time Dilation</h6>
+            <ul>
+             	<li><strong>Muzzle Flash Time Dilation</strong> — Замедление/ускорение эффектов вспышки дула.</li>
+             	<li><strong>Impact Time Dilation</strong> — Замедление/ускорение эффектов импакта.</li>
+             	<li><strong>Sound Time Dilation (Pitch)</strong> — Изменяет питч звуков в зависимости от time dilation.</li>
+             	<li><strong>TR Time Dilation Multiplier</strong> — Глобальный time dilation из ассета TimeRemapping. Передаётся снаружи (например, из Sequencer) и влияет на скорость воспроизведения всех эффектов системы.</li>
+            </ul>
+
+            <hr />
+
+            <h6>Decals</h6>
+            <ul>
+             	<li><strong>Decals Enable</strong> — Включить спавн декалей на поверхностях.</li>
+             	<li><strong>Decal</strong> — Материал декали для обычных поверхностей, когда для у них не найден соответствующий физический материал.</li>
+             	<li><strong>Blood Decals Enable</strong> — Включает спавн декалей крови на стенах позади персонажей при попадании.</li>
+             	<li><strong>Blood Max Distance</strong> — Максимальное расстояние между телом и стеной, при котором допускается спавн декаль крови.</li>
+            </ul>
+
+            <hr />
+
+            <h6>Sound</h6>
+            <ul>
+             	<li><strong>Weapon Sound Enable</strong> — Включить звук выстрела.</li>
+             	<li><strong>Impact Sound Enable</strong> — Включить звуки попадания (привязаны к физическому материалу поверхности).</li>
+             	<li><strong>Shells Sound Enable</strong> — Включить звуки гильз.</li>
+             	<li><strong>Weapon Sounds</strong> — Звуки выстрела. Из списка выбирается случайный.</li>
+             	<li><strong>Volume</strong> — Настройки громкости для каждого типа звука.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Запечка эффектов
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/image-14.png" alt=""></div>
+            <span>В папке с блюпринтом WeaponSystem также находится Editor Utility Widget. Он записывает все эффекты системы в Level Sequence покадрово. Делать это необязательно — система работает и без запечки. Но если нужно чтобы результат рендера был одинаковым при каждом запуске, без неё не обойтись: WeaponSystem рандомизирует эффекты при каждом воспроизведении.</span>
+            <ul>
+             	<li><strong>Weapon Systems</strong><span> — Список акторов WeaponSystem, которые нужно запечь.</span></li>
+            </ul>
+            <h6><span>Кнопки</span></h6>
+            <ul>
+             	<li><strong>Analyze</strong> — Анализирует все кадры секвенсера и собирает данные о частицах, декалях и звуках. Показывает статистику: количество частиц, декалей и звуков по кадрам.</li>
+             	<li><strong>Bake</strong> — Запекает собранные данные в Level Sequence.</li>
+             	<li><strong>Load Active Sequence </strong>— Загружает данные из открытого секвенсера и ищет там все <span>WeaponSystem акторы</span>.</li>
+             	<li><strong>Reset</strong> — Сбрасывает данные виджета в начальное состояние.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -376,7 +417,6 @@
       body.classList.toggle('open', !isOpen);
       btn.classList.toggle('open', !isOpen);
     }
-    setLang('en');
   </script>
 </body>
 </html>
