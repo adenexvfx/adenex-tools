@@ -7,52 +7,222 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    header { background: #161b22; border-bottom: 1px solid #30363d; padding: 20px 40px; display: flex; align-items: center; gap: 16px; }
-    header a { color: #58a6ff; text-decoration: none; font-size: 14px; }
-    header a:hover { text-decoration: underline; }
-    header span { color: #484f58; }
-    main { max-width: 800px; margin: 48px auto; padding: 0 20px; }
+    header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+    .breadcrumb a { color: #58a6ff; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: #484f58; }
+    .lang-switcher { display: flex; gap: 4px; }
+    .lang-btn { background: none; border: 1px solid #30363d; color: #8b949e; padding: 4px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.15s; }
+    .lang-btn.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+    .lang-btn:hover:not(.active) { border-color: #58a6ff; color: #58a6ff; }
+    main { max-width: 860px; margin: 0 auto; padding: 48px 20px 80px; }
     .hero-name { font-size: 32px; font-weight: 700; color: #e6edf3; }
-    .hero-meta { display: flex; gap: 12px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
+    .hero-meta { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
     .badge { font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 500; }
     .badge-type { background: #1f2937; border: 1px solid #374151; color: #9ca3af; }
     .badge-version { background: #0d2b12; border: 1px solid #238636; color: #3fb950; font-family: monospace; }
-    .description { margin-top: 28px; color: #8b949e; font-size: 15px; line-height: 1.7; }
-    .actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
-    .btn { padding: 10px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-block; }
+    .hero-desc { margin-top: 20px; color: #8b949e; font-size: 15px; line-height: 1.75; max-width: 640px; }
+    .hero-desc code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 13px; color: #79c0ff; font-family: monospace; }
+    .actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+    .btn { padding: 9px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-block; transition: all 0.15s; }
     .btn-primary { background: #238636; color: #fff; border: 1px solid #2ea043; }
     .btn-primary:hover { background: #2ea043; }
     .btn-secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
     .btn-secondary:hover { border-color: #58a6ff; color: #58a6ff; }
-    .file-info { margin-top: 8px; font-size: 12px; color: #484f58; }
-    hr { border: none; border-top: 1px solid #30363d; margin: 40px 0; }
+    .section { margin-top: 48px; }
+    .accordion { border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
+    .accordion-item { border-bottom: 1px solid #30363d; }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-header { width: 100%; background: #161b22; border: none; color: #e6edf3; text-align: left; padding: 16px 20px; font-size: 15px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.15s; }
+    .accordion-header:hover { background: #1c2128; }
+    .accordion-header .chevron { color: #484f58; font-size: 12px; transition: transform 0.2s; }
+    .accordion-header.open .chevron { transform: rotate(90deg); }
+    .accordion-body { display: none; padding: 20px 24px; background: #0d1117; font-size: 14px; line-height: 1.8; color: #8b949e; }
+    .accordion-body.open { display: block; }
+    .accordion-body ol, .accordion-body ul { padding-left: 20px; }
+    .accordion-body li { margin-bottom: 6px; }
+    .accordion-body ul ul { margin-top: 4px; }
+    .accordion-body h6 { color: #e6edf3; font-size: 13px; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .accordion-body h6:first-child { margin-top: 0; }
+    .accordion-body strong { color: #c9d1d9; }
+    .accordion-body code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 12px; color: #79c0ff; font-family: monospace; }
+    .accordion-body hr { border: none; border-top: 1px solid #30363d; margin: 16px 0; }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
+    footer a { color: #484f58; }
+    body.lang-en [data-lang="ru"] { display: none; }
+    body.lang-ru [data-lang="en"] { display: none; }
   </style>
 </head>
 <body>
   <header>
-    <a href="../">Adenex</a>
-    <span>/</span>
-    <span style="color:#e6edf3">S2 Maps Importer</span>
+    <div class="breadcrumb">
+      <a href="../">Adenex</a>
+      <span>/</span>
+      <span style="color:#e6edf3">S2 Maps Importer</span>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
   </header>
   <main>
     <div class="hero-name">S2 Maps Importer</div>
     <div class="hero-meta">
-      <span class="badge badge-type">Unreal Engine Plugin</span>
+      <span class="badge badge-type" data-lang="en">Unreal Engine Plugin</span>
+      <span class="badge badge-type" data-lang="ru">Unreal Engine Plugin</span>
       <span class="badge badge-version">v2.21.2</span>
     </div>
-    <div class="description">
-      Native UE5 C++ plugin for importing CS2 maps directly into Unreal Engine. Decompiles levels together with all associated assets — meshes, textures, materials, and auxiliary data — from Source 2 games including CS2, Dota 2, and Half-Life: Alyx.
-      <br><br>
-      Automates the full pipeline: asset extraction, FBX conversion via Blender, material generation, lighting placement, cables, and animated objects.
+    <div class="hero-desc" data-lang="en">
+      Native C++ Unreal Engine plugin for importing CS2 maps directly from decompiled <code>.vmdl_c</code> files. Supports static meshes, skeletal meshes, animations, material import, and full map placement via a built-in Slate UI.
+    </div>
+    <div class="hero-desc" data-lang="ru">
+      Нативный C++ плагин для Unreal Engine, импортирующий карты CS2 напрямую из декомпилированных <code>.vmdl_c</code> файлов. Поддерживает статические меши, скелетные меши, анимации, импорт материалов и полное размещение карты через встроенный Slate UI.
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="">Download</a>
+      <a class="btn btn-primary" href="" data-lang="en">Download</a>
+      <a class="btn btn-primary" href="" data-lang="ru">Скачать</a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
-    <div class="file-info"><!-- file size will go here --></div>
-    <hr>
+    <div class="section">
+      <div class="accordion">
+
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Installation</span>
+            <span data-lang="ru">Установка</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <ol>
+                <li>Download and extract the plugin archive.</li>
+                <li>Place the <code>S2MapsImporter</code> folder into the <code>Plugins</code> folder of your UE5 project (create it if it doesn't exist): <code>YourProject/Plugins/S2MapsImporter</code>.</li>
+                <li>Open the project in Unreal Engine. The plugin will compile automatically on first launch.</li>
+                <li>Enable the plugin in <strong>Edit &gt; Plugins</strong> if it isn't already active, then restart the engine.</li>
+                <li>The importer panel will appear in the editor toolbar or under <strong>Window &gt; S2 Maps Importer</strong>.</li>
+              </ol>
+              <hr>
+              <strong>Requirements:</strong>
+              <ul>
+                <li>Unreal Engine 5.4 or newer</li>
+                <li>Source2Viewer CLI for decompiling CS2 files</li>
+                <li>Counter-Strike 2 installed</li>
+              </ul>
+            </div>
+            <div data-lang="ru">
+              <ol>
+                <li>Скачайте и распакуйте архив с плагином.</li>
+                <li>Поместите папку <code>S2MapsImporter</code> в папку <code>Plugins</code> вашего UE5 проекта (создайте её, если не существует): <code>YourProject/Plugins/S2MapsImporter</code>.</li>
+                <li>Откройте проект в Unreal Engine. Плагин скомпилируется автоматически при первом запуске.</li>
+                <li>Включите плагин в <strong>Edit &gt; Plugins</strong> (если ещё не активен) и перезапустите движок.</li>
+                <li>Панель импортера появится на тулбаре редактора или в меню <strong>Window &gt; S2 Maps Importer</strong>.</li>
+              </ol>
+              <hr>
+              <strong>Требования:</strong>
+              <ul>
+                <li>Unreal Engine 5.4 или новее</li>
+                <li>Source2Viewer CLI для декомпиляции файлов CS2</li>
+                <li>Установленная Counter-Strike 2</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Core Features</span>
+            <span data-lang="ru">Основные возможности</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <ul>
+                <li>Direct binary parsing of CS2 <code>.vmdl_c</code> files — no FBX intermediate required</li>
+                <li>Import static meshes with all LODs</li>
+                <li>Import skeletal meshes and animations (ANIM/ASEQ) for animated props</li>
+                <li>Automatic material creation with tint color grouping</li>
+                <li>Full map placement from <code>.vmap_c</code> worldnode data</li>
+                <li>Batch import of entire maps</li>
+                <li>Support for multi-mesh worldnodes and embedded mesh references</li>
+                <li>Built-in Slate UI panel with Map and Settings tabs</li>
+              </ul>
+            </div>
+            <div data-lang="ru">
+              <ul>
+                <li>Прямой бинарный парсинг CS2 <code>.vmdl_c</code> файлов — без промежуточного FBX</li>
+                <li>Импорт статических мешей со всеми LOD</li>
+                <li>Импорт скелетных мешей и анимаций (ANIM/ASEQ) для анимированных пропсов</li>
+                <li>Автоматическое создание материалов с группировкой по цвету</li>
+                <li>Полное размещение карты из данных <code>.vmap_c</code> worldnode</li>
+                <li>Пакетный импорт целых карт</li>
+                <li>Поддержка multi-mesh worldnode и встроенных ссылок на меши</li>
+                <li>Встроенная Slate UI панель с вкладками Map и Settings</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Usage</span>
+            <span data-lang="ru">Использование</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <h6>Importing a Map</h6>
+              <ol>
+                <li>Decompile the CS2 map using Source2Viewer CLI. The output will contain <code>.vmdl_c</code> and <code>.vmap_c</code> files.</li>
+                <li>Open the S2 Maps Importer panel in Unreal Engine.</li>
+                <li>In the <strong>Map</strong> tab, select the decompiled map folder.</li>
+                <li>Click <strong>Import</strong>. The plugin will parse all props, create materials, and place everything in the level.</li>
+              </ol>
+              <hr>
+              <h6>Importing a Single Model</h6>
+              <ol>
+                <li>In the Content Browser, right-click and select <strong>Import</strong>.</li>
+                <li>Select a <code>.vmdl_c</code> file.</li>
+                <li>The plugin will create a StaticMesh or SkeletalMesh asset automatically.</li>
+              </ol>
+            </div>
+            <div data-lang="ru">
+              <h6>Импорт карты</h6>
+              <ol>
+                <li>Декомпилируйте карту CS2 с помощью Source2Viewer CLI. Результат содержит файлы <code>.vmdl_c</code> и <code>.vmap_c</code>.</li>
+                <li>Откройте панель S2 Maps Importer в Unreal Engine.</li>
+                <li>На вкладке <strong>Map</strong> выберите папку с декомпилированной картой.</li>
+                <li>Нажмите <strong>Import</strong>. Плагин разберёт все пропсы, создаст материалы и расставит их на уровне.</li>
+              </ol>
+              <hr>
+              <h6>Импорт одной модели</h6>
+              <ol>
+                <li>В Content Browser нажмите правой кнопкой мыши и выберите <strong>Import</strong>.</li>
+                <li>Выберите файл <code>.vmdl_c</code>.</li>
+                <li>Плагин автоматически создаст ассет StaticMesh или SkeletalMesh.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </main>
-  <footer>adenexvfx &mdash; <a href="../" style="color:#484f58">adenexvfx.github.io/adenex-releases</a></footer>
+  <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
+  <script>
+    function setLang(lang) {
+      document.body.className = 'lang-' + lang;
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+      });
+    }
+    function toggleAccordion(btn) {
+      const body = btn.nextElementSibling;
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      btn.classList.toggle('open', !isOpen);
+    }
+    setLang('en');
+  </script>
 </body>
 </html>

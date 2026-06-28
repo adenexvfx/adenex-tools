@@ -7,52 +7,365 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    header { background: #161b22; border-bottom: 1px solid #30363d; padding: 20px 40px; display: flex; align-items: center; gap: 16px; }
-    header a { color: #58a6ff; text-decoration: none; font-size: 14px; }
-    header a:hover { text-decoration: underline; }
-    header span { color: #484f58; }
-    main { max-width: 800px; margin: 48px auto; padding: 0 20px; }
+    header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+    .breadcrumb a { color: #58a6ff; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: #484f58; }
+    .lang-switcher { display: flex; gap: 4px; }
+    .lang-btn { background: none; border: 1px solid #30363d; color: #8b949e; padding: 4px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.15s; }
+    .lang-btn.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+    .lang-btn:hover:not(.active) { border-color: #58a6ff; color: #58a6ff; }
+    main { max-width: 860px; margin: 0 auto; padding: 48px 20px 80px; }
     .hero-name { font-size: 32px; font-weight: 700; color: #e6edf3; }
-    .hero-meta { display: flex; gap: 12px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
+    .hero-meta { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
     .badge { font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 500; }
     .badge-type { background: #1f2937; border: 1px solid #374151; color: #9ca3af; }
     .badge-version { background: #0d2b12; border: 1px solid #238636; color: #3fb950; font-family: monospace; }
-    .description { margin-top: 28px; color: #8b949e; font-size: 15px; line-height: 1.7; }
-    .actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
-    .btn { padding: 10px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-block; }
+    .hero-desc { margin-top: 20px; color: #8b949e; font-size: 15px; line-height: 1.75; max-width: 640px; }
+    .actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+    .btn { padding: 9px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-block; transition: all 0.15s; }
     .btn-primary { background: #238636; color: #fff; border: 1px solid #2ea043; }
     .btn-primary:hover { background: #2ea043; }
     .btn-secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
     .btn-secondary:hover { border-color: #58a6ff; color: #58a6ff; }
-    .file-info { margin-top: 8px; font-size: 12px; color: #484f58; }
-    hr { border: none; border-top: 1px solid #30363d; margin: 40px 0; }
+    .section { margin-top: 48px; }
+    .accordion { border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
+    .accordion-item { border-bottom: 1px solid #30363d; }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-header { width: 100%; background: #161b22; border: none; color: #e6edf3; text-align: left; padding: 16px 20px; font-size: 15px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.15s; }
+    .accordion-header:hover { background: #1c2128; }
+    .accordion-header .chevron { color: #484f58; font-size: 12px; transition: transform 0.2s; }
+    .accordion-header.open .chevron { transform: rotate(90deg); }
+    .accordion-body { display: none; padding: 20px 24px; background: #0d1117; font-size: 14px; line-height: 1.8; color: #8b949e; }
+    .accordion-body.open { display: block; }
+    .accordion-body ol, .accordion-body ul { padding-left: 20px; }
+    .accordion-body li { margin-bottom: 6px; }
+    .accordion-body ul ul { margin-top: 4px; }
+    .accordion-body h6 { color: #e6edf3; font-size: 13px; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .accordion-body h6:first-child { margin-top: 0; }
+    .accordion-body strong { color: #c9d1d9; }
+    .accordion-body code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 12px; color: #79c0ff; font-family: monospace; }
+    .accordion-body hr { border: none; border-top: 1px solid #30363d; margin: 16px 0; }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
+    footer a { color: #484f58; }
+    body.lang-en [data-lang="ru"] { display: none; }
+    body.lang-ru [data-lang="en"] { display: none; }
   </style>
 </head>
 <body>
   <header>
-    <a href="../">Adenex</a>
-    <span>/</span>
-    <span style="color:#e6edf3">S2 Stickers Manager</span>
+    <div class="breadcrumb">
+      <a href="../">Adenex</a>
+      <span>/</span>
+      <span style="color:#e6edf3">S2 Stickers Manager</span>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
   </header>
   <main>
     <div class="hero-name">S2 Stickers Manager</div>
     <div class="hero-meta">
-      <span class="badge badge-type">Widget</span>
+      <span class="badge badge-type" data-lang="en">Widget</span>
+      <span class="badge badge-type" data-lang="ru">Виджет</span>
       <span class="badge badge-version">v2.1</span>
     </div>
-    <div class="description">
-      Unreal Engine widget to view, edit, and import stickers and graffiti from CS2. Customize materials with control over wear, colors, and visual effects.
-      <br><br>
-      Supports Paper, Glitter, Metallic, Holographic, and Lenticular finishes. Includes a built-in filtering system for large sticker libraries and real-time material adjustments with preview.
+    <div class="hero-desc" data-lang="en">
+      Widget for viewing, editing, and importing CS2 stickers and graffiti into Unreal Engine. Full control over materials, wear, colors, and visual effects including Glitter, Holographic, Metallic, and Paper styles.
+    </div>
+    <div class="hero-desc" data-lang="ru">
+      Виджет для просмотра, редактирования и импорта стикеров и граффити из CS2 для Unreal Engine. Полный контроль над материалами, износом, цветами и визуальными эффектами.
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="">Download</a>
+      <a class="btn btn-primary" href="" data-lang="en">Download</a>
+      <a class="btn btn-primary" href="" data-lang="ru">Скачать</a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
-    <div class="file-info"><!-- file size will go here --></div>
-    <hr>
+    <div class="section">
+      <div class="accordion">
+
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Installation</span>
+            <span data-lang="ru">Установка</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <ol>
+                <li>Download and extract the <strong>PyToolkit</strong> plugin (v1.8+) into the <code>Plugins</code> folder of your Unreal Engine installation: <code>C:\Program Files\Epic Games\UE_5.6\Engine\Plugins</code>.</li>
+                <li>Launch Unreal Engine and enable the following plugins (<strong>Edit &gt; Plugins</strong>):
+                  <ul>
+                    <li>Editor Scripting Utilities</li>
+                    <li>Python Editor Script Plugin</li>
+                    <li>Python Foundation Packages</li>
+                    <li>Http Blueprint</li>
+                    <li>PyToolkit</li>
+                  </ul>
+                  Restart the engine.
+                </li>
+                <li>Download the widget archive. Open the archive, navigate to the <code>Content</code> folder, and copy all its files into the <code>Content</code> folder of your project.</li>
+                <li>In the Content Browser, find the <code>Widgets</code> folder, right-click <strong>S2_StickersManager</strong>, and select <strong>Run Editor Utility Widget</strong>.</li>
+              </ol>
+              <hr>
+              On first launch, configure the paths and import all stickers:
+              <ul style="margin-top:8px">
+                <li><strong>Decompiler Executable</strong> — Path to the <strong>Source2Viewer CLI</strong> decompiler.</li>
+                <li><strong>Game Folder</strong> — Path to your CS2 installation (e.g. <code>D:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive</code>).</li>
+                <li><strong>Decompiled Folder</strong> — Any folder for decompiled game files. Make sure you have enough free disk space.</li>
+              </ul>
+              <hr>
+              <strong>Requirements:</strong>
+              <ul>
+                <li>Unreal Engine 5.6 or newer</li>
+                <li>PyToolkit plugin v1.8+</li>
+                <li>Counter-Strike 2 installed</li>
+                <li>Source2Viewer CLI</li>
+                <li>Free disk space (first run may import thousands of textures)</li>
+              </ul>
+            </div>
+            <div data-lang="ru">
+              <ol>
+                <li>Скачайте и распакуйте плагин <strong>PyToolkit</strong> (минимум 1.8 версии) в папку <code>Plugins</code> в корневой директории Unreal Engine: <code>C:\Program Files\Epic Games\UE_5.6\Engine\Plugins</code>.</li>
+                <li>Запустите Unreal Engine и включите плагины (<strong>Edit &gt; Plugins</strong>):
+                  <ul>
+                    <li>Editor Scripting Utilities</li>
+                    <li>Python Editor Script Plugin</li>
+                    <li>Python Foundation Packages</li>
+                    <li>Http Blueprint</li>
+                    <li>PyToolkit</li>
+                  </ul>
+                  Перезапустите движок.
+                </li>
+                <li>Скачайте архив с виджетом. Откройте в архиве папку <code>Content</code> и скопируйте все её файлы в папку <code>Content</code> вашего проекта.</li>
+                <li>В Content Browser найдите папку <code>Widgets</code>, кликните по виджету <strong>S2_StickersManager</strong> правой кнопкой мыши и выберите <strong>Run Editor Utility Widget</strong>.</li>
+              </ol>
+              <hr>
+              При первом запуске заполните настройки и импортируйте все стикеры:
+              <ul style="margin-top:8px">
+                <li><strong>Decompiler Executable</strong> — Путь к декомпилеру <strong>Source2Viewer CLI</strong>.</li>
+                <li><strong>Game Folder</strong> — Путь к установленной CS2 (например: <code>D:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive</code>).</li>
+                <li><strong>Decompiled Folder</strong> — Любая папка для декомпилированных файлов игры.</li>
+              </ul>
+              <hr>
+              <strong>Требования:</strong>
+              <ul>
+                <li>Unreal Engine 5.6 или новее</li>
+                <li>PyToolkit plugin версии 1.8 и выше</li>
+                <li>Установленная Counter-Strike 2</li>
+                <li>Утилита Source2Viewer CLI</li>
+                <li>Свободное место на диске (первый запуск может импортировать несколько тысяч текстур)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Core Features</span>
+            <span data-lang="ru">Основные возможности</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <ul>
+                <li>Browse and manage a large library of stickers and graffiti</li>
+                <li>Built-in filtering — filter stickers by dominant color to quickly find matching assets</li>
+                <li>Full real-time material editing</li>
+                <li>Style support: Paper, Glitter, Metallic, Holographic, Lenticular, and Graffiti</li>
+                <li>Self-updating system for adding new stickers and graffiti</li>
+              </ul>
+            </div>
+            <div data-lang="ru">
+              <ul>
+                <li>Просмотр и управление большой библиотекой стикеров и граффити</li>
+                <li>Встроенная фильтрация — быстро находите стикеры по доминирующему цвету</li>
+                <li>Полноценная настройка материалов в реальном времени</li>
+                <li>Поддержка стилей: Paper, Glitter, Metallic, Holographic, Lenticular и Graffiti</li>
+                <li>Самообновляемая система добавления новых стикеров и граффити</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Material Settings</span>
+            <span data-lang="ru">Настройки материала</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <h6>UI Overview</h6>
+              <ol>
+                <li><strong>Back button</strong> — Returns to the sticker list or category.</li>
+                <li><strong>Show Backing</strong> — Toggles the sticker's paper backing to preview shape, transparency, and edges.</li>
+                <li><strong>Preview window</strong> — Real-time material display with rotation, zoom, and view controls.</li>
+                <li><strong>Main material settings</strong></li>
+                <li><strong>Material display settings</strong> — Roughness / Metalness / Visual effects.</li>
+                <li><strong>Textures</strong></li>
+                <li><strong>Camera panel</strong></li>
+                <li><strong>Save</strong> — Saves the final Material Instance.</li>
+              </ol>
+              <hr>
+              <h6>Main Tab — Mode</h6>
+              <ul>
+                <li><strong>Glitter</strong> — Adds glitter and micro-reflection effects.</li>
+                <li><strong>Holographic</strong> — Color shift based on viewing angle.</li>
+                <li><strong>Metallic</strong> — Metallic display type.</li>
+                <li><strong>Paper Backing</strong> — Paper backing imitating a classic sticker.</li>
+              </ul>
+              <hr>
+              <h6>Main Tab — Wear</h6>
+              <ul>
+                <li><strong>Wear</strong> — Overall wear level.</li>
+                <li><strong>Wear Bias</strong> — Shifts wear distribution across the surface.</li>
+                <li><strong>Wear Scratches</strong> — Intensity of scratches and micro-damage.</li>
+              </ul>
+              <hr>
+              <h6>Main Tab — Color</h6>
+              <ul>
+                <li><strong>Automatic PBR Color Fitting</strong> — Brings colors into correct PBR range.</li>
+                <li><strong>Color Tint</strong> — Primary sticker color.</li>
+                <li><strong>Tint Saturate</strong> — Tint saturation.</li>
+                <li><strong>Color Boost</strong> — Increases color contrast.</li>
+                <li><strong>SFX Color Boost</strong> — Boosts effect colors (holographic, glitter).</li>
+                <li><strong>Hue Shift</strong> — Shifts hue around the color wheel.</li>
+              </ul>
+              <hr>
+              <h6>Shading Tab</h6>
+              <ul>
+                <li><strong>Roughness Min / Max</strong> — Surface roughness range.</li>
+                <li><strong>Preserve Roughness</strong> — Preserves original roughness from the texture.</li>
+                <li><strong>Metalness Min / Max</strong> — Metallic behavior range.</li>
+                <li><strong>Normal Strength</strong> — Normal map strength.</li>
+                <li><strong>Glitter Scale</strong> — Glitter effect scale.</li>
+                <li><strong>Use Emissive</strong> — Enables sticker element glow.</li>
+                <li><strong>Holo Exponent</strong> — Sharpness and contrast of the holographic effect.</li>
+                <li><strong>Holo X/Y Offset</strong> — Holographic effect position offset.</li>
+              </ul>
+              <hr>
+              <h6>Textures Tab</h6>
+              <ul>
+                <li><strong>Sticker Texture</strong> — Main color texture.</li>
+                <li><strong>Normal Roughness Masks</strong> — Combined normal and roughness texture.</li>
+                <li><strong>Glitter Normal Texture</strong> — Normal texture for glitter effect.</li>
+                <li><strong>Holo Spectrum Texture</strong> — Texture for holographic effect.</li>
+                <li><strong>SFX Mask Texture</strong> — Holographic effect mask.</li>
+                <li><strong>Sticker Scratches</strong> — Scratch and damage texture.</li>
+              </ul>
+            </div>
+            <div data-lang="ru">
+              <h6>Общая структура интерфейса</h6>
+              <ol>
+                <li><strong>Кнопка возврата (Back)</strong> — Возвращает к списку стикеров или категории.</li>
+                <li><strong>Show Backing</strong> — Переключатель отображения задней подложки стикера.</li>
+                <li><strong>Окно предпросмотра</strong> — Реалтайм-отображение материала с ротацией, зумом и сменой угла.</li>
+                <li><strong>Основные настройки материала</strong></li>
+                <li><strong>Параметры отображения материала</strong> — Roughness / Metalness / Визуальные эффекты.</li>
+                <li><strong>Текстуры</strong></li>
+                <li><strong>Панель управления камерой</strong></li>
+                <li><strong>Save</strong> — Сохранение финального Material Instance.</li>
+              </ol>
+              <hr>
+              <h6>Вкладка Main — Mode</h6>
+              <ul>
+                <li><strong>Glitter</strong> — Добавляет эффект блёсток и микроскопических отражений.</li>
+                <li><strong>Holographic</strong> — Голографический переливающийся эффект.</li>
+                <li><strong>Metallic</strong> — Металлический тип отображения.</li>
+                <li><strong>Paper Backing</strong> — Бумажная подложка стикера.</li>
+              </ul>
+              <hr>
+              <h6>Вкладка Main — Wear</h6>
+              <ul>
+                <li><strong>Wear</strong> — Общий уровень износа.</li>
+                <li><strong>Wear Bias</strong> — Смещение распределения износа по поверхности.</li>
+                <li><strong>Wear Scratches</strong> — Интенсивность царапин и микроповреждений.</li>
+              </ul>
+              <hr>
+              <h6>Вкладка Main — Color</h6>
+              <ul>
+                <li><strong>Automatic PBR Color Fitting</strong> — Автоматически приводит цвета к корректному PBR-диапазону.</li>
+                <li><strong>Color Tint</strong> — Основной цвет стикера.</li>
+                <li><strong>Tint Saturate</strong> — Насыщенность цветового оттенка.</li>
+                <li><strong>Color Boost</strong> — Усиливает общий цветовой контраст.</li>
+                <li><strong>SFX Color Boost</strong> — Усиливает цвет эффектов (голография, блёстки).</li>
+                <li><strong>Hue Shift</strong> — Смещает оттенок по цветовому кругу.</li>
+              </ul>
+              <hr>
+              <h6>Вкладка Shading</h6>
+              <ul>
+                <li><strong>Roughness Min / Max</strong> — Диапазон шероховатости поверхности.</li>
+                <li><strong>Preserve Roughness</strong> — Сохраняет исходную шероховатость из текстуры.</li>
+                <li><strong>Metalness Min / Max</strong> — Диапазон металличности.</li>
+                <li><strong>Normal Strength</strong> — Сила нормалей.</li>
+                <li><strong>Glitter Scale</strong> — Масштаб эффекта блёсток.</li>
+                <li><strong>Use Emissive</strong> — Включает подсветку элементов стикера.</li>
+                <li><strong>Holo Exponent</strong> — Резкость и контраст голографического эффекта.</li>
+                <li><strong>Holo X/Y Offset</strong> — Смещение голографического эффекта.</li>
+              </ul>
+              <hr>
+              <h6>Вкладка Textures</h6>
+              <ul>
+                <li><strong>Sticker Texture</strong> — Основная цветная текстура стикера.</li>
+                <li><strong>Normal Roughness Masks</strong> — Комбинированная текстура нормалей и шероховатости.</li>
+                <li><strong>Glitter Normal Texture</strong> — Текстура нормалей для эффекта блёсток.</li>
+                <li><strong>Holo Spectrum Texture</strong> — Текстура для голографического эффекта.</li>
+                <li><strong>SFX Mask Texture</strong> — Маска голографического эффекта.</li>
+                <li><strong>Sticker Scratches</strong> — Текстура царапин и повреждений.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Troubleshooting</span>
+            <span data-lang="ru">Распространённые проблемы</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              If errors occur, make sure:
+              <ul style="margin-top:8px">
+                <li>The widget is installed at the correct path in your project.</li>
+                <li>All required plugins are enabled.</li>
+                <li>Unreal Engine 5.6 or newer is used.</li>
+                <li>The decompiler is updated to the latest version. If it doesn't work, try the DEV version.</li>
+              </ul>
+            </div>
+            <div data-lang="ru">
+              Если возникают ошибки — убедитесь, что:
+              <ul style="margin-top:8px">
+                <li>Виджет установлен по правильному пути в проекте.</li>
+                <li>Включены все необходимые плагины.</li>
+                <li>Используется Unreal Engine версии 5.6 или выше.</li>
+                <li>Декомпилер обновлён до последней версии. Если не работает — попробуйте DEV версию.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </main>
-  <footer>adenexvfx &mdash; <a href="../" style="color:#484f58">adenexvfx.github.io/adenex-releases</a></footer>
+  <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
+  <script>
+    function setLang(lang) {
+      document.body.className = 'lang-' + lang;
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+      });
+    }
+    function toggleAccordion(btn) {
+      const body = btn.nextElementSibling;
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      btn.classList.toggle('open', !isOpen);
+    }
+    setLang('en');
+  </script>
 </body>
 </html>
