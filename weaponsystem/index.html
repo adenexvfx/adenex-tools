@@ -33,24 +33,30 @@
     .hero-img { margin-top: 28px; border-radius: 8px; overflow: hidden; border: 1px solid #21262d; }
     .hero-img img { width: 100%; display: block; }
     .section { margin-top: 48px; }
+    .group-label { font-size: 11px; font-weight: 600; color: #484f58; text-transform: uppercase; letter-spacing: 0.12em; padding: 28px 0 10px; }
     .accordion { border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
+    .accordion + .group-label { padding-top: 32px; }
     .accordion-item { border-bottom: 1px solid #30363d; }
     .accordion-item:last-child { border-bottom: none; }
     .accordion-header { width: 100%; background: #161b22; border: none; color: #e6edf3; text-align: left; padding: 16px 20px; font-size: 15px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.15s; }
     .accordion-header:hover { background: #1c2128; }
     .accordion-header .chevron { color: #484f58; font-size: 12px; transition: transform 0.2s; }
     .accordion-header.open .chevron { transform: rotate(90deg); }
-    .accordion-body { display: none; padding: 20px 24px; background: #0d1117; font-size: 14px; line-height: 1.8; color: #8b949e; }
+    .accordion-body { display: none; padding: 20px 24px; background: #0d1117; font-size: 15px; line-height: 1.8; color: #8b949e; }
     .accordion-body.open { display: block; }
     .accordion-body ol, .accordion-body ul { padding-left: 20px; }
     .accordion-body li { margin-bottom: 6px; }
     .accordion-body ul ul, .accordion-body ol ol { margin-top: 4px; }
-    .accordion-body p { margin-bottom: 10px; }
+    .accordion-body p { margin-bottom: 12px; }
     .accordion-body p:last-child { margin-bottom: 0; }
     .accordion-body strong { color: #c9d1d9; }
     .accordion-body a { color: #58a6ff; }
-    .accordion-body code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 12px; color: #79c0ff; font-family: monospace; }
-    .accordion-body hr { border: none; border-top: 1px solid #30363d; margin: 16px 0; }
+    .accordion-body code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 13px; color: #79c0ff; font-family: monospace; }
+    .accordion-body pre { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 16px; font-size: 13px; color: #79c0ff; font-family: monospace; overflow-x: auto; margin-bottom: 12px; white-space: pre-wrap; }
+    .accordion-body hr { border: none; border-top: 1px solid #30363d; margin: 20px 0; }
+    .accordion-body h6 { font-size: 12px; font-weight: 600; color: #c9d1d9; text-transform: uppercase; letter-spacing: 0.07em; margin: 22px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #21262d; }
+    .accordion-body h6:first-child { margin-top: 0; }
+    .accordion-body h6 strong { font-weight: 600; color: #c9d1d9; }
     .section-img { margin: 0 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid #21262d; }
     .section-img img { width: 100%; display: block; }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
@@ -87,52 +93,6 @@
     </div>
     <div class="section">
       <div class="accordion">
-        <div class="accordion-item">
-          <button class="accordion-header" onclick="toggleAccordion(this)">
-            Общая структура интерфейса
-            <span class="chevron">&#9654;</span>
-          </button>
-          <div class="accordion-body">
-            <div class="section-img"><img src="img/main-glove-1.png" alt=""></div>
-            <ol>
-             	<li><strong>Кнопка возврата (Back)</strong> — возвращает пользователя к списку скинов.</li>
-             	<li><strong>Падающее меню</strong> —  переключатель режима отображения (Lit, Roughness, Metallic и др.).</li>
-             	<li><strong>Окно предпросмотра</strong> — реалтайм-отображение материала и всех изменений. Поддержка вращения, зума и смены угла обзора</li>
-             	<li><strong>Основные настройки материала</strong></li>
-             	<li><strong>Параметры отображения материала</strong> — настройка Roughness / Metalness</li>
-             	<li><strong>Настройка UV паттернов и потертостей</strong></li>
-             	<li><strong>Текстуры</strong>.</li>
-             	<li><strong>Запекание материала.</strong></li>
-             	<li><strong>Панель управления камерой</strong>.</li>
-             	<li><strong>Change Seed</strong> — генерация случайного UV для паттерна.</li>
-             	<li><b>Bake </b>— сохранение финального Material Instance для дальнейшего использования.</li>
-            </ol>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-header" onclick="toggleAccordion(this)">
-            Общая структура интерфейса
-            <span class="chevron">&#9654;</span>
-          </button>
-          <div class="accordion-body">
-            <div class="section-img"><img src="img/main-glove-1.png" alt=""></div>
-            <ol>
-             	<li><strong>Кнопка возврата (Back)</strong> — возвращает пользователя к списку скинов.</li>
-             	<li><strong>Падающее меню</strong> —  переключатель режима отображения (Lit, Roughness, Metallic и др.).</li>
-             	<li><strong>Окно предпросмотра</strong> — реалтайм-отображение материала и всех изменений. Поддержка вращения, зума и смены угла обзора</li>
-             	<li><strong>Основные настройки материала</strong></li>
-             	<li><strong>Параметры отображения материала</strong> — настройка Roughness / Metalness</li>
-             	<li><strong>Настройка UV паттернов и потертостей</strong></li>
-             	<li><strong>Текстуры</strong>.</li>
-             	<li><strong>Запекание материала.</strong></li>
-             	<li><strong>Панель управления камерой</strong>.</li>
-             	<li><strong>Change Seed</strong> — генерация случайного UV для паттерна.</li>
-             	<li><b>Bake </b>— сохранение финального Material Instance для дальнейшего использования.</li>
-            </ol>
-            <div class="section-img"><img src="img/image-26.png" alt=""></div>
-            <span>Полностью процедурная система оружия для кинематографических рендеров и игр. Автоматически определяет кости, спавнит вспышки, гильзы, декали, импакты и звуки. Поддерживает запечку через встроенный виджет.</span>
-          </div>
-        </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
             Основные возможности
