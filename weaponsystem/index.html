@@ -51,6 +51,10 @@
     footer a { color: #484f58; }
     body.lang-en [data-lang="ru"] { display: none; }
     body.lang-ru [data-lang="en"] { display: none; }
+    .hero-img { margin-top: 28px; border-radius: 8px; overflow: hidden; border: 1px solid #21262d; }
+    .hero-img img { width: 100%; display: block; }
+    .section-img { margin: 0 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid #21262d; }
+    .section-img img { width: 100%; display: block; }
   </style>
 </head>
 <body>
@@ -82,6 +86,9 @@
       <a class="btn btn-primary" href="" data-lang="en">Download</a>
       <a class="btn btn-primary" href="" data-lang="ru">Скачать</a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
+    </div>
+    <div class="hero-img">
+      <img src="img/hero.png" alt="Weapon System blueprint">
     </div>
     <div class="section">
       <div class="accordion">
@@ -207,6 +214,9 @@
             <span class="chevron">▶</span>
           </button>
           <div class="accordion-body">
+            <div class="section-img">
+              <img src="img/bp-settings.png" alt="Blueprint settings">
+            </div>
             <div data-lang="en">
               <h6>Setup</h6>
               <ul>
@@ -323,6 +333,9 @@
             <span class="chevron">▶</span>
           </button>
           <div class="accordion-body">
+            <div class="section-img">
+              <img src="img/bake-effects.png" alt="Baking effects widget">
+            </div>
             <div data-lang="en">
               The <strong>Editor Utility Widget</strong> included with the blueprint records all WeaponSystem effects into a Level Sequence frame by frame. Baking is optional — the system works without it. However, if you need identical results on every render (WeaponSystem randomizes effects each playback), baking is required.
               <ul style="margin-top:12px">
