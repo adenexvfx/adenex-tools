@@ -66,7 +66,8 @@
     footer a { color: #484f58; }
 
     /* i18n */
-    [data-lang] { display: none; }
+    body.lang-en [data-lang="ru"] { display: none; }
+    body.lang-ru [data-lang="en"] { display: none; }
   </style>
 </head>
 <body>
@@ -343,13 +344,8 @@
   <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
 
   <script>
-    let currentLang = 'en';
-
     function setLang(lang) {
-      currentLang = lang;
-      document.querySelectorAll('[data-lang]').forEach(el => {
-        el.style.display = el.dataset.lang === lang ? '' : 'none';
-      });
+      document.body.className = 'lang-' + lang;
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
       });
@@ -362,7 +358,6 @@
       btn.classList.toggle('open', !isOpen);
     }
 
-    // Init
     setLang('en');
   </script>
 </body>
