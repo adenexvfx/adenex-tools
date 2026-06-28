@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adenex — Plugins & Tools</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    header { background: #161b22; border-bottom: 1px solid #30363d; padding: 20px 40px; }
+    header h1 { font-size: 22px; color: #58a6ff; }
+    header p { color: #8b949e; font-size: 14px; margin-top: 4px; }
+    main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #8b949e; margin-bottom: 16px; margin-top: 36px; border-bottom: 1px solid #30363d; padding-bottom: 8px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; text-decoration: none; color: inherit; display: block; transition: border-color 0.15s; }
+    .card:hover { border-color: #58a6ff; }
+    .card-name { font-size: 16px; font-weight: 600; color: #e6edf3; }
+    .card-type { font-size: 12px; color: #8b949e; margin-top: 4px; }
+    .card-version { font-size: 12px; color: #3fb950; margin-top: 12px; font-family: monospace; }
+    footer { text-align: center; color: #484f58; font-size: 13px; padding: 60px 20px 30px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Adenex</h1>
+    <p>Plugins, widgets, and tools for Unreal Engine, Blender, and more</p>
+  </header>
+  <main>
+    <h2>Unreal Engine Plugins</h2>
+    <div class="grid">
+      <a class="card" href="pytoolkit/">
+        <div class="card-name">PyToolkit</div>
+        <div class="card-type">Unreal Engine Plugin</div>
+        <div class="card-version">v2.1</div>
+      </a>
+      <a class="card" href="s2mapsimporter/">
+        <div class="card-name">S2 Maps Importer</div>
+        <div class="card-type">Unreal Engine Plugin</div>
+        <div class="card-version">v2.21.2</div>
+      </a>
+      <a class="card" href="afxcamerapath/">
+        <div class="card-name">AFXCameraPath</div>
+        <div class="card-type">Unreal Engine Plugin</div>
+        <div class="card-version">v1.4</div>
+      </a>
+      <a class="card" href="weaponsystem/">
+        <div class="card-name">Weapon System</div>
+        <div class="card-type">Unreal Engine Blueprint</div>
+        <div class="card-version">v1.6</div>
+      </a>
+    </div>
+
+    <h2>Widgets</h2>
+    <div class="grid">
+      <a class="card" href="s2stickersmanager/">
+        <div class="card-name">S2 Stickers Manager</div>
+        <div class="card-type">Widget</div>
+        <div class="card-version">v2.1</div>
+      </a>
+      <a class="card" href="s2skinsmanager/">
+        <div class="card-name">S2 Skins Manager</div>
+        <div class="card-type">Widget</div>
+        <div class="card-version">v3.21</div>
+      </a>
+      <a class="card" href="ueditingtools-source2/">
+        <div class="card-name">UEditingTools for Source2</div>
+        <div class="card-type">Widget</div>
+        <div class="card-version">v4.5</div>
+      </a>
+      <a class="card" href="hammuerhelper/">
+        <div class="card-name">Hammuer Helper</div>
+        <div class="card-type">Widget</div>
+        <div class="card-version">v1.1</div>
+      </a>
+    </div>
+
+    <h2>Blender</h2>
+    <div class="grid">
+      <a class="card" href="io-scene-csgo/">
+        <div class="card-name">io_scene_CSGO</div>
+        <div class="card-type">Blender Plugin</div>
+        <div class="card-version">v1.34</div>
+      </a>
+    </div>
+  </main>
+  <footer>adenexvfx &mdash; adenexvfx.github.io/adenex-releases</footer>
+</body>
+</html>
