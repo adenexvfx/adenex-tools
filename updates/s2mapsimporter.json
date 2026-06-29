@@ -1,9 +1,9 @@
 {
   "version": "2.21.2",
-  "plugin_name": "S2 Maps Importer",
   "page_url": "https://adenexvfx.github.io/adenex-releases/s2mapsimporter/",
   "changelog_url": "https://adenexvfx.github.io/adenex-releases/s2mapsimporter/changelog.html",
   "download_url": "",
+  "download_source": "",
   "file_size": "",
   "message": "S2 Maps Importer 2.21.2 is available"
 }

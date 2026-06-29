@@ -1,9 +1,9 @@
 {
   "version": "1.6",
-  "plugin_name": "Weapon System",
   "page_url": "https://adenexvfx.github.io/adenex-releases/weaponsystem/",
   "changelog_url": "https://adenexvfx.github.io/adenex-releases/weaponsystem/changelog.html",
   "download_url": "",
-  "file_size": "",
+  "download_source": "Boosty",
+  "file_size": "325 MB",
   "message": "Weapon System 1.6 is available"
 }
