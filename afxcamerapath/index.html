@@ -51,9 +51,12 @@
     footer a { color: #484f58; }
     body.lang-en [data-lang="ru"] { display: none; }
     body.lang-ru [data-lang="en"] { display: none; }
+    body.lang-en .lang-ru { display: none; }
+    body.lang-ru .lang-en { display: none; }
+    .badge-size { background: #161b22; border: 1px solid #30363d; color: #6e7681; }
   </style>
 </head>
-<body>
+<body class="lang-en">
   <header>
     <div class="breadcrumb">
       <a href="../">Adenex</a>
@@ -71,6 +74,7 @@
       <span class="badge badge-type" data-lang="en">Unreal Engine Plugin</span>
       <span class="badge badge-type" data-lang="ru">Unreal Engine Plugin</span>
       <span class="badge badge-version">v1.4</span>
+      <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
     </div>
     <div class="hero-desc" data-lang="en">
       Editor plugin for building camera paths in Unreal Engine. Create, select, and manipulate keyframes directly in the viewport with stable GUID-based selection and click-based interaction via hit proxies.
@@ -79,8 +83,7 @@
       Редакторный плагин для построения путей камеры в Unreal Engine. Создавайте, выбирайте и управляйте кейфреймами прямо во вьюпорте — с устойчивой идентификацией по GUID и кликовым взаимодействием через hit proxies.
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="" data-lang="en">Download</a>
-      <a class="btn btn-primary" href="" data-lang="ru">Скачать</a>
+      <a class="btn btn-primary" id="download-btn" href=""><span class="lang-ru" id="dl-label-ru">Скачать</span><span class="lang-en" id="dl-label-en">Download</span></a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
     <div class="section">
@@ -187,6 +190,23 @@
   </main>
   <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
   <script>
+    fetch('../updates/afxcamerapath.json')
+      .then(r => r.json())
+      .then(data => {
+        const btn = document.getElementById('download-btn');
+        if (data.download_url) btn.href = data.download_url;
+        if (data.download_source) {
+          document.getElementById('dl-label-ru').textContent = 'Скачать (' + data.download_source + ')';
+          document.getElementById('dl-label-en').textContent = 'Download (' + data.download_source + ')';
+        }
+        if (data.file_size) {
+          const badge = document.getElementById('file-size-badge');
+          badge.textContent = data.file_size;
+          badge.style.display = '';
+        }
+      })
+      .catch(() => {});
+
     function setLang(lang) {
       document.body.className = 'lang-' + lang;
       document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -199,7 +219,6 @@
       body.classList.toggle('open', !isOpen);
       btn.classList.toggle('open', !isOpen);
     }
-    setLang('en');
   </script>
 </body>
 </html>

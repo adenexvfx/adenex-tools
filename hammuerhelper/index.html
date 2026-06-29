@@ -52,9 +52,12 @@
     footer a { color: #484f58; }
     body.lang-en [data-lang="ru"] { display: none; }
     body.lang-ru [data-lang="en"] { display: none; }
+    body.lang-en .lang-ru { display: none; }
+    body.lang-ru .lang-en { display: none; }
+    .badge-size { background: #161b22; border: 1px solid #30363d; color: #6e7681; }
   </style>
 </head>
-<body>
+<body class="lang-en">
   <header>
     <div class="breadcrumb">
       <a href="../">Adenex</a>
@@ -72,16 +75,16 @@
       <span class="badge badge-type" data-lang="en">Widget</span>
       <span class="badge badge-type" data-lang="ru">Виджет</span>
       <span class="badge badge-version">v1.1</span>
+      <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
     </div>
     <div class="hero-desc" data-lang="en">
-      Widget for preparing Source 1 maps for import into Unreal Engine using the HammuEr plugin. Cleans up model files, optionally distributes them across folders, and retargets materials.
+      Widget for preparing Source 1 maps for import into Unreal Engine using the HammuEr plugin. Cleans up model files, optionally distributes them across folders, and reassigns materials.
     </div>
     <div class="hero-desc" data-lang="ru">
       Виджет для подготовки Source 1 карт к импорту в Unreal Engine с использованием плагина HammuEr. Очищает файлы моделей, опционально распределяет их по папкам и ретаргетит материалы.
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="" data-lang="en">Download</a>
-      <a class="btn btn-primary" href="" data-lang="ru">Скачать</a>
+      <a class="btn btn-primary" id="download-btn" href=""><span class="lang-ru" id="dl-label-ru">Скачать</span><span class="lang-en" id="dl-label-en">Download</span></a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
     <div class="section">
@@ -104,7 +107,7 @@
               <strong>Requirements:</strong>
               <ul>
                 <li>Unreal Engine 5</li>
-                <li>PyToolkit plugin (required only for older versions 5.0–5.3)</li>
+                <li>PyToolkit plugin (required only for older widget versions 5.0–5.3)</li>
               </ul>
             </div>
             <div data-lang="ru">
@@ -118,7 +121,7 @@
               <strong>Требования:</strong>
               <ul>
                 <li>Unreal Engine 5</li>
-                <li>Плагин PyToolkit (только для старой версии 5.0–5.3)</li>
+                <li>Плагин PyToolkit (только для старой версии виджета 5.0–5.3)</li>
               </ul>
             </div>
           </div>
@@ -173,6 +176,23 @@
   </main>
   <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
   <script>
+    fetch('../updates/hammuerhelper.json')
+      .then(r => r.json())
+      .then(data => {
+        const btn = document.getElementById('download-btn');
+        if (data.download_url) btn.href = data.download_url;
+        if (data.download_source) {
+          document.getElementById('dl-label-ru').textContent = 'Скачать (' + data.download_source + ')';
+          document.getElementById('dl-label-en').textContent = 'Download (' + data.download_source + ')';
+        }
+        if (data.file_size) {
+          const badge = document.getElementById('file-size-badge');
+          badge.textContent = data.file_size;
+          badge.style.display = '';
+        }
+      })
+      .catch(() => {});
+
     function setLang(lang) {
       document.body.className = 'lang-' + lang;
       document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -185,7 +205,6 @@
       body.classList.toggle('open', !isOpen);
       btn.classList.toggle('open', !isOpen);
     }
-    setLang('en');
   </script>
 </body>
 </html>

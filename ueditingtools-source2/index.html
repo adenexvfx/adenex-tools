@@ -59,11 +59,25 @@
     .accordion-body h6 strong { font-weight: 600; color: #c9d1d9; }
     .section-img { margin: 0 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid #21262d; }
     .section-img img { width: 100%; display: block; }
+    body.lang-en .lang-ru { display: none; }
+    body.lang-ru .lang-en { display: none; }
+    .badge-size { background: #161b22; border: 1px solid #30363d; color: #6e7681; }
+    .section-img img { cursor: zoom-in; }
+    .section-img.vertical { max-width: 450px; margin-left: auto; margin-right: auto; }
+    .section-img.vertical img { width: 100%; }
+    .hero-img.vertical { max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero-img.vertical img { width: 100%; }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 6px; object-fit: contain; box-shadow: 0 8px 48px rgba(0,0,0,0.7); }
+    .img-row { display: flex; gap: 12px; margin: 0 0 16px; }
+    .img-row .section-img { flex: 1; margin: 0; }
+    @media (max-width: 540px) { .img-row { flex-direction: column; } }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
     footer a { color: #484f58; }
   </style>
 </head>
-<body>
+<body class="lang-ru">
   <header>
     <div class="breadcrumb">
       <a href="../">Adenex</a>
@@ -78,14 +92,16 @@
   <main>
     <div class="hero-name">UEditingTools for Source2</div>
     <div class="hero-meta">
-      <span class="badge badge-type">Виджет</span>
+      <span class="badge badge-type"><span class="lang-ru">Виджет</span><span class="lang-en">Widget</span></span>
       <span class="badge badge-version">v4.5</span>
+      <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
     </div>
     <div class="hero-desc">
-      Виджет для Unreal Engine 5.6+ для создания кинематографического контента из CS2-демок. Читает DMX-файлы из Source Filmmaker и автоматически создаёт Level Sequence с камерами, анимированными персонажами, оружием, гранатами и эффектами.
+      <span class="lang-ru">Виджет для Unreal Engine 5.6+ для создания кинематографического контента из CS2-демок. Читает DMX-файлы из Source Filmmaker и автоматически создаёт Level Sequence с камерами, анимированными персонажами, оружием, гранатами и эффектами.</span>
+      <span class="lang-en">A widget for importing .DMX animations and creating POVs in Unreal Engine. Reads DMX files from Source Filmmaker and automatically creates a Level Sequence with cameras, animated characters, weapons, grenades, and effects.</span>
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="">&#x21E9; Скачать</a>
+      <a class="btn btn-primary" id="download-btn" href=""><span class="lang-ru" id="dl-label-ru">Скачать</span><span class="lang-en" id="dl-label-en">Download</span></a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
     <div class="hero-img">
@@ -95,10 +111,11 @@
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Основные возможности
+            <span class="lang-ru">Основные возможности</span><span class="lang-en">Key Features</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <ul>
              	<li><strong>Парсинг и загрузка демо
             </strong>Читает DMX-файлы (экспорт из Source Filmmaker (SFM)) с данными CS2-демок: позиции игроков, кости скелета, тики, события. Конвертирует всё в структуры, понятные UE5.</li>
@@ -107,28 +124,47 @@
              	<li><strong>POV-режим (от первого лица)</strong>
             Генерирует камеру и рукава/перчатки и оружие конкретного игрока.</li>
             </ul>
+            </div>
+            <div class="lang-en">
+            <ul>
+              <li><strong>Demo parsing and import</strong><br />Reads DMX files (exported from Source Filmmaker (SFM)) containing CS2 demo data: player positions, skeletal bones, ticks, and events. Converts everything into UE5-compatible structures.</li>
+              <li><strong>Full scene import</strong><br />Automatically creates a Level Sequence with cameras, animated characters, weapons, grenades, static meshes, and Niagara/Cascade effects—based on demo data.</li>
+              <li><strong>POV mode (first-person)</strong><br />Generates a camera along with the selected player's arms/gloves and weapon.</li>
+            </ul>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Требования
+            <span class="lang-ru">Требования</span><span class="lang-en">Requirements</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <ul>
              	<li>Unreal Engine 5.6 или новее</li>
              	<li>Плагин <a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw">PyToolkit</a></li>
              	<li>Установленная Counter-Strike 2</li>
              	<li><a href="https://disk.yandex.ru/d/Sq43Ee_XhHsFFg">Парсер демок</a></li>
             </ul>
+            </div>
+            <div class="lang-en">
+            <ul>
+              <li>Unreal Engine 5.6 or newer</li>
+              <li>Plugin <a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw">PyToolkit</a></li>
+              <li>Installed Counter-Strike 2</li>
+              <li><a href="https://disk.yandex.ru/d/Sq43Ee_XhHsFFg">Demo Parser</a></li>
+            </ul>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Установка
+            <span class="lang-ru">Установка</span><span class="lang-en">Installation</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-27.png" alt=""></div>
             <a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Скачайте</strong> </a>и распакуйте плагин <strong>PyToolkit </strong>(минимум 1.8 версии) в папку <strong>Plugins</strong> в корневой директории Unreal Engine <code>(C:\Program Files\Epic Games\UE_5.6\Engine\Plugins)</code>.
 
@@ -142,17 +178,36 @@
             </ul>
             Перезапустите движок
             <div class="section-img"><img src="img/image1.png" alt=""></div>
-            Скачать архив<span> с виджетом. </span><span>Открыть папку с проектом и  <span class="EzKURWReUAB5oZgtQNkl" data-src-align="33:8">перейти</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="42:2">в</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="53:9">подпапку</span> "<span class="EzKURWReUAB5oZgtQNkl" data-src-align="45:7">Content" </span><em>(например: <span class="EzKURWReUAB5oZgtQNkl" data-src-align="69:39">D:\YourUE5Project\Content</span><span class="EzKURWReUAB5oZgtQNkl" data-src-align="108:1">\</span>)</em>. <span class="EzKURWReUAB5oZgtQNkl" data-src-align="113:4">Скопировать</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="118:3">все</span> под<span class="EzKURWReUAB5oZgtQNkl" data-src-align="126:7">папки</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="134:4">из</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="139:3:151:6">папки</span> "<span class="EzKURWReUAB5oZgtQNkl" data-src-align="143:7">Content"</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="158:2">в</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="161:7">архиве</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="169:3">и</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="173:5">вставить</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="179:4">их</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="184:2">в</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="187:3:199:6">папку</span> "<span class="EzKURWReUAB5oZgtQNkl" data-src-align="191:7">Content"</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="206:2">в</span> <span class="EzKURWReUAB5oZgtQNkl" data-src-align="214:7">проекте</span></span>
+            Скачать архив с виджетом. Открыть папку с проектом и перейти в подпапку &quot;Content&quot; (например: D:\YourUE5Project\Content). Скопировать все подпапки из папки &quot;Content&quot; в архиве и вставить их в папку &quot;Content&quot; в проекте
             <div class="section-img"><img src="img/image3.png" alt=""></div>
             Запустить Unreal Engine. Найти папку "Widgets" в <span>Content Browser, нажать правой кнопкой по виджету "UET_Main" и выбрать <em>Run Editor Utility Widget</em></span>
+            </div>
+            <div class="lang-en">
+            <div class="section-img"><img src="img/image-27.png" alt=""></div>
+            <p><a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Download</strong></a> and extract the <strong>PyToolkit</strong> plugin (version 1.8 or higher) into the <strong>Plugins</strong> folder in the root directory of Unreal Engine <code>(C:\Program Files\Epic Games\UE_5.6\Engine\Plugins)</code>.</p>
+            <p>Launch Unreal Engine and enable the following plugins (via <strong>Edit &gt; Plugins</strong>):</p>
+            <ul>
+              <li>Editor Scripting Utilities</li>
+              <li>Python Editor Script Plugin</li>
+              <li>Sequencer Scripting</li>
+              <li>HTTP Blueprint</li>
+              <li>PyToolkit</li>
+            </ul>
+            <p>Then restart the engine.</p>
+            <div class="section-img"><img src="img/image1.png" alt=""></div>
+            <p>Download the archive with the widget. Open your project folder and navigate to the subfolder &quot;Content&quot; (for example: D:\YourUE5Project\Content). Copy all subfolders from the &quot;Content&quot; folder in the archive and paste them into the &quot;Content&quot; folder in your project.</p>
+            <div class="section-img"><img src="img/image3.png" alt=""></div>
+            <p>Launch Unreal Engine. In the Content Browser, locate the &quot;Widgets&quot; folder, right-click the &quot;S2_UEditingTools&quot; widget, and select <em>Run Editor Utility Widget</em>.</p>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Настройка
+            <span class="lang-ru">Настройка</span><span class="lang-en">Settings</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-5.png" alt=""></div>
             <h6><strong>General Settings</strong></h6>
             <ul>
@@ -194,6 +249,42 @@
             <hr />
 
             <strong>Buttons Color</strong> — цвет кнопок интерфейса виджета.
+            </div>
+            <div class="lang-en">
+            <div class="section-img"><img src="img/image-5.png" alt=""></div>
+            <h6><strong>General Settings</strong></h6>
+            <ul>
+              <li><strong>Working Directory</strong> — the folder within your UE project where all demo data will be imported.</li>
+              <li><strong>CS2 Demo Parser Path</strong> — the path to the CS2 demo parser <code>.exe</code> file. <strong><a href="https://disk.yandex.ru/d/Sq43Ee_XhHsFFg">Download it here</a></strong>.</li>
+              <li><strong>Save Level</strong> — automatically saves the level after import.</li>
+              <li><strong>Verbose Logging</strong> — enables detailed log output.</li>
+            </ul>
+            <hr />
+            <h6><strong>Model Settings</strong></h6>
+            <ul>
+              <li><strong>Receives Decals</strong> — allows decals to be displayed on imported models.</li>
+              <li><strong>Bounds Scale</strong> — adjusts the collision bounds scale of models. If the value is too low, models may disappear at certain camera angles because the engine treats them as out of view. Increasing this value fixes the issue but may slightly impact performance.</li>
+              <li><strong>Models Scale</strong> — sets the scale of imported models.</li>
+            </ul>
+            <hr />
+            <h6><strong>Misc Settings</strong></h6>
+            <ul>
+              <li><strong>Use Weapon System (If Available)</strong> — uses the WeaponSystem Blueprint (if present in the project) to generate shot effects, blood, and related decals on surfaces.</li>
+              <li><strong>Import Particles For Grenades</strong> — imports particle effects for grenades.</li>
+              <li><strong>Grenades Particles Style</strong> — selects the particle system type for grenades: Niagara or Cascade (legacy).</li>
+            </ul>
+            <hr />
+            <h6><strong>Import Settings</strong></h6>
+            <ul>
+              <li><strong>Import Cameras</strong> — imports camera data from the demo.</li>
+              <li><strong>Import Players</strong> — imports player animations.</li>
+              <li><strong>Import Weapons</strong> — imports weapon animations.</li>
+              <li><strong>Import Nades</strong> — imports grenades.</li>
+              <li><strong>Import Static Models</strong> — imports static models.</li>
+            </ul>
+            <hr />
+            <strong>Buttons Color</strong> — sets the color of the widget interface buttons.
+            </div>
           </div>
         </div>
         <div class="accordion-item">
@@ -202,8 +293,11 @@
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div class="section-img"><img src="img/image-11.png" alt=""></div>
-            <div class="section-img"><img src="img/image-12.png" alt=""></div>
+            <div class="img-row">
+              <div class="section-img"><img src="img/image-11.png" alt=""></div>
+              <div class="section-img"><img src="img/image-12.png" alt=""></div>
+            </div>
+            <div class="lang-ru">
             Вкладка для создания POV (вид от первого лица) в сиквенсере. При открытии предлагает выбрать один из двух режимов работы.
             <h6>Auto (from parsed demo)</h6>
             <ul>
@@ -231,14 +325,38 @@
             <ul>
              	<li style="list-style-type: none;"></li>
             </ul>
+            </div>
+            <div class="lang-en">
+            A tab for creating POV (first-person view) in the Sequencer. When opened, it prompts you to choose one of two operating modes.
+            <h6>Auto (from parsed demo)</h6>
+            <ul>
+              <li>Automatic mode. Uses data from a previously imported demo: the script automatically determines the selected player's loadout—arms, gloves, and all weapons they used. The user can adjust replacements via a table, then click <strong>Import Camera and create POV</strong> to import the camera and generate a complete POV in the Sequencer. The result can be saved with <strong>Save POV files</strong> for reuse.</li>
+            </ul>
+            <hr />
+            <h6>Manual</h6>
+            Manual mode, divided into two steps.
+            <ol>
+              <li><strong>Step 1 — Spawn viewmodel</strong> (left tab):<br />Select a camera from the scene, set the bounds scale, and choose an animation style (Classic or AnimGraph2). After clicking <strong>Next</strong>, you can select the desired player model, gloves, and weapon.</li>
+              <li><strong>Step 2 — Animations</strong> (right tab):<br />Select arms, gloves, and a weapon from the list. The buttons below spawn the corresponding animation for all selected assets directly into the Sequencer at the current frame:
+                <ul>
+                  <li><strong>Idle</strong> — idle animation</li>
+                  <li><strong>Draw</strong> — weapon draw</li>
+                  <li><strong>Fire</strong> — firing (with ammo count setting)</li>
+                  <li><strong>Reload</strong> — reload</li>
+                  <li><strong>Look at</strong> — weapon inspect</li>
+                </ul>
+              </li>
+            </ol>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Редактирование камер
+            <span class="lang-ru">Редактирование камер</span><span class="lang-en">Camera Editing</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-8.png" alt=""></div>
             <ul>
              	<li><strong>Camera</strong> — выбор камеры из уровня, к которой будут применяться настройки.</li>
@@ -270,6 +388,34 @@
              	<li><strong>Sensor Width</strong> — ширина сенсора камеры.</li>
              	<li><strong>Sensor Height</strong> — высота сенсора камеры.</li>
             </ul>
+            </div>
+            <div class="lang-en">
+            <div class="section-img"><img src="img/image-8.png" alt=""></div>
+            <ul>
+              <li><strong>Camera</strong> — select a camera from the level to which the settings will be applied.</li>
+            </ul>
+            <hr />
+            <h6><strong>Offset</strong></h6>
+            <ul>
+              <li><strong>Rotation</strong> — rotation offset applied to all camera keys in the Sequencer (X / Y / Z in degrees).</li>
+              <li><strong>Location</strong> — position offset applied to all camera keys in the Sequencer (X / Y / Z).</li>
+            </ul>
+            <hr />
+            <h6><strong>Change FOV</strong></h6>
+            <ul>
+              <li><strong>Normal FOV</strong> — camera field of view in normal mode (not aiming).</li>
+              <li><strong>Zoom FOV</strong> — camera field of view in aiming mode.</li>
+            </ul>
+            <hr />
+            <h6><strong>FOV Info</strong></h6>
+            <p>Informational block displaying the final values after applying FOV settings. Fields are read-only.</p>
+            <ul>
+              <li><strong>New Horizontal FOV</strong> — resulting horizontal field of view.</li>
+              <li><strong>New Vertical FOV</strong> — resulting vertical field of view.</li>
+              <li><strong>Sensor Width</strong> — camera sensor width.</li>
+              <li><strong>Sensor Height</strong> — camera sensor height.</li>
+            </ul>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
@@ -278,6 +424,7 @@
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-9.png" alt=""></div>
             Вкладка с инструментами для работы с сиквенсером. Содержит два подраздела.
 
@@ -306,13 +453,85 @@
              	<li><strong>Белые</strong><span> </span>— второстепенные биты (опционально)</li>
             </ul>
             Удобно для синхронизации time-remap секвенсера с музыкой.
+            </div>
+            <div class="lang-en">
+            <div class="section-img"><img src="img/image-9.png" alt=""></div>
+            <p>A tab with tools for working in the Sequencer. Contains two sections.</p>
+            <hr />
+            <h6>Time Remap</h6>
+            <p>Creates a helper Level Sequence to control the playback speed of the main sequence using a Time Remap Blueprint.</p>
+            <p>Settings:</p>
+            <ul>
+              <li><strong>TR Object</strong> — Blueprint actor containing the time remap logic</li>
+              <li><strong>TR Time Controller</strong> — object that controls time (e.g., <code>24fps_TimeController</code>)</li>
+              <li><strong>TR Sequencer Path</strong> — path where the TR sequence will be created</li>
+              <li><strong>TR Sequence Prefix</strong> — name prefix for the TR sequence</li>
+            </ul>
+            <p>The <strong>Create sequence</strong> button creates a new sequence (or opens an existing one), sets up the Event Track and the <code>Playback Time</code> track, and opens the result in the editor.</p>
+            <hr />
+            <h6>BPM Helper</h6>
+            <p>Places markers in the Sequencer based on the rhythm of the music.</p>
+            <p>Takes BPM and time signature, calculates the interval between beats, and places colored markers across the entire sequence:</p>
+            <ul>
+              <li><strong>Green</strong> — main beats (every Nth beat according to the time signature, labeled with the bar number)</li>
+              <li><strong>White</strong> — secondary beats (optional)</li>
+            </ul>
+            <p>Useful for synchronizing Sequencer time remapping with music.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </main>
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
   <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
   <script>
+    fetch('../updates/ueditingtools-source2.json')
+      .then(r => r.json())
+      .then(data => {
+        const btn = document.getElementById('download-btn');
+        if (data.download_url) btn.href = data.download_url;
+        if (data.download_source) {
+          document.getElementById('dl-label-ru').textContent = 'Скачать (' + data.download_source + ')';
+          document.getElementById('dl-label-en').textContent = 'Download (' + data.download_source + ')';
+        }
+        if (data.file_size) {
+          const badge = document.getElementById('file-size-badge');
+          badge.textContent = data.file_size;
+          badge.style.display = '';
+        }
+      })
+      .catch(() => {});
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.hero-img img').forEach(img => {
+      const check = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          const container = img.closest('.hero-img');
+          container.classList.add('vertical');
+          if (img.naturalWidth < 600) container.style.maxWidth = img.naturalWidth + 'px';
+        }
+      };
+      if (img.complete) check();
+      else img.addEventListener('load', check);
+    });
+    document.querySelectorAll('.section-img img').forEach(img => {
+      const check = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          img.closest('.section-img').classList.add('vertical');
+        }
+      };
+      if (img.complete) check();
+      else img.addEventListener('load', check);
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('open');
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('open'); }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     function setLang(lang) {
       document.body.className = 'lang-' + lang;
       document.querySelectorAll('.lang-btn').forEach(btn => {

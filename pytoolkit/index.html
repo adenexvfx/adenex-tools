@@ -68,9 +68,12 @@
     /* i18n */
     body.lang-en [data-lang="ru"] { display: none; }
     body.lang-ru [data-lang="en"] { display: none; }
+    body.lang-en .lang-ru { display: none; }
+    body.lang-ru .lang-en { display: none; }
+    .badge-size { background: #161b22; border: 1px solid #30363d; color: #6e7681; }
   </style>
 </head>
-<body>
+<body class="lang-en">
   <header>
     <div class="breadcrumb">
       <a href="../">Adenex</a>
@@ -89,11 +92,12 @@
       <span class="badge badge-type" data-lang="en">Unreal Engine Plugin</span>
       <span class="badge badge-type" data-lang="ru">Плагин Unreal Engine</span>
       <span class="badge badge-version">v2.1</span>
+      <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
     </div>
 
     <div class="hero-desc" data-lang="en">
       A plugin for Unreal Engine that adds a robust set of tools for task automation, material workflows, and parameter management via Blueprint and Python.<br><br>
-      This plugin is a fork of the <a href="https://github.com/FXTD-ODYSSEY/Unreal-PyToolkit">Unreal-PyToolkit project</a> (FXTD-ODYSSEY) and has been actively developed as an independent branch since 2021. Required for most widgets to function properly.
+      This plugin is a fork of the <a href="https://github.com/FXTD-ODYSSEY/Unreal-PyToolkit">Unreal-PyToolkit project</a> (FXTD-ODYSSEY) and has been actively developed as an independent branch since 2021. It is required for most widgets to function properly.
     </div>
     <div class="hero-desc" data-lang="ru">
       Плагин для Unreal Engine, который добавляет удобные инструменты для автоматизации задач, работы с материалами и управления параметрами через Blueprint и Python.<br><br>
@@ -101,8 +105,7 @@
     </div>
 
     <div class="actions">
-      <a class="btn btn-primary" href="" data-lang="en">Download</a>
-      <a class="btn btn-primary" href="" data-lang="ru">Скачать</a>
+      <a class="btn btn-primary" id="download-btn" href=""><span class="lang-ru" id="dl-label-ru">Скачать</span><span class="lang-en" id="dl-label-en">Download</span></a>
       <a class="btn btn-secondary" href="changelog.html" data-lang="en">Changelog</a>
       <a class="btn btn-secondary" href="changelog.html" data-lang="ru">Changelog</a>
     </div>
@@ -344,6 +347,23 @@
   <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
 
   <script>
+    fetch('../updates/pytoolkit.json')
+      .then(r => r.json())
+      .then(data => {
+        const btn = document.getElementById('download-btn');
+        if (data.download_url) btn.href = data.download_url;
+        if (data.download_source) {
+          document.getElementById('dl-label-ru').textContent = 'Скачать (' + data.download_source + ')';
+          document.getElementById('dl-label-en').textContent = 'Download (' + data.download_source + ')';
+        }
+        if (data.file_size) {
+          const badge = document.getElementById('file-size-badge');
+          badge.textContent = data.file_size;
+          badge.style.display = '';
+        }
+      })
+      .catch(() => {});
+
     function setLang(lang) {
       document.body.className = 'lang-' + lang;
       document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -358,7 +378,6 @@
       btn.classList.toggle('open', !isOpen);
     }
 
-    setLang('en');
   </script>
 </body>
 </html>

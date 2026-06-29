@@ -13,8 +13,16 @@
     main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
     h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #8b949e; margin-bottom: 16px; margin-top: 36px; border-bottom: 1px solid #30363d; padding-bottom: 8px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
-    .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; text-decoration: none; color: inherit; display: block; transition: border-color 0.15s; }
-    .card:hover { border-color: #58a6ff; }
+    .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; text-decoration: none; color: inherit; display: block; overflow: hidden; transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+    .card:hover { border-color: #58a6ff; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.28); }
+    .card-media { aspect-ratio: 16 / 10; background: linear-gradient(135deg, #1a2231, #11161f); border-bottom: 1px solid #30363d; overflow: hidden; position: relative; }
+    .card-media img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .card-media-fallback { width: 100%; height: 100%; display: flex; align-items: flex-end; padding: 18px; background:
+      radial-gradient(circle at top left, rgba(88,166,255,0.28), transparent 38%),
+      radial-gradient(circle at bottom right, rgba(63,185,80,0.18), transparent 32%),
+      linear-gradient(135deg, #1a2231, #11161f); }
+    .card-media-fallback span { font-size: 22px; font-weight: 700; line-height: 1.05; color: #e6edf3; max-width: 170px; text-shadow: 0 2px 14px rgba(0,0,0,0.35); }
+    .card-body { padding: 18px 20px 20px; }
     .card-name { font-size: 16px; font-weight: 600; color: #e6edf3; }
     .card-type { font-size: 12px; color: #8b949e; margin-top: 4px; }
     .card-version { font-size: 12px; color: #3fb950; margin-top: 12px; font-family: monospace; }
@@ -24,58 +32,102 @@
 <body>
   <header>
     <h1>Adenex</h1>
-    <p>Plugins, widgets, and tools for Unreal Engine, Blender, and more</p>
+    <p>Plugins, blueprints, and widgets for Unreal Engine</p>
   </header>
   <main>
     <h2>Unreal Engine Plugins</h2>
     <div class="grid">
       <a class="card" href="pytoolkit/">
-        <div class="card-name">PyToolkit</div>
-        <div class="card-type">Unreal Engine Plugin</div>
-        <div class="card-version">v2.1</div>
+        <div class="card-media">
+          <div class="card-media-fallback"><span>PyToolkit</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">PyToolkit</div>
+          <div class="card-type">Unreal Engine Plugin</div>
+          <div class="card-version">v2.1</div>
+        </div>
       </a>
       <a class="card" href="s2mapsimporter/">
-        <div class="card-name">S2 Maps Importer</div>
-        <div class="card-type">Unreal Engine Plugin</div>
-        <div class="card-version">v2.21.2</div>
+        <div class="card-media">
+          <img src="s2mapsimporter/img/hero.png" alt="S2 Maps Importer">
+        </div>
+        <div class="card-body">
+          <div class="card-name">S2 Maps Importer</div>
+          <div class="card-type">Unreal Engine Plugin</div>
+          <div class="card-version">v2.21.2</div>
+        </div>
       </a>
       <a class="card" href="afxcamerapath/">
-        <div class="card-name">AFXCameraPath</div>
-        <div class="card-type">Unreal Engine Plugin</div>
-        <div class="card-version">v1.4</div>
+        <div class="card-media">
+          <div class="card-media-fallback"><span>AFXCameraPath</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">AFXCameraPath</div>
+          <div class="card-type">Unreal Engine Plugin</div>
+          <div class="card-version">v1.4</div>
+        </div>
       </a>
+    </div>
+
+    <h2>Blueprints</h2>
+    <div class="grid">
       <a class="card" href="weaponsystem/">
-        <div class="card-name">Weapon System</div>
-        <div class="card-type">Unreal Engine Blueprint</div>
-        <div class="card-version">v1.6</div>
+        <div class="card-media">
+          <img src="weaponsystem/img/hero.png" alt="Weapon System">
+        </div>
+        <div class="card-body">
+          <div class="card-name">Weapon System</div>
+          <div class="card-type">Unreal Engine Blueprint</div>
+          <div class="card-version">v1.6</div>
+        </div>
       </a>
     </div>
 
     <h2>Widgets</h2>
     <div class="grid">
       <a class="card" href="s2stickersmanager/">
-        <div class="card-name">S2 Stickers Manager</div>
-        <div class="card-type">Widget</div>
-        <div class="card-version">v2.1</div>
+        <div class="card-media">
+          <img src="s2stickersmanager/img/hero.png" alt="S2 Stickers Manager">
+        </div>
+        <div class="card-body">
+          <div class="card-name">S2 Stickers Manager</div>
+          <div class="card-type">Widget</div>
+          <div class="card-version">v2.1</div>
+        </div>
       </a>
       <a class="card" href="s2skinsmanager/">
-        <div class="card-name">S2 Skins Manager</div>
-        <div class="card-type">Widget</div>
-        <div class="card-version">v3.21</div>
+        <div class="card-media">
+          <img src="s2skinsmanager/img/hero.png" alt="S2 Skins Manager">
+        </div>
+        <div class="card-body">
+          <div class="card-name">S2 Skins Manager</div>
+          <div class="card-type">Widget</div>
+          <div class="card-version">v3.21</div>
+        </div>
       </a>
       <a class="card" href="ueditingtools-source2/">
-        <div class="card-name">UEditingTools for Source2</div>
-        <div class="card-type">Widget</div>
-        <div class="card-version">v4.5</div>
+        <div class="card-media">
+          <img src="ueditingtools-source2/img/hero.png" alt="UEditingTools for Source2">
+        </div>
+        <div class="card-body">
+          <div class="card-name">UEditingTools for Source2</div>
+          <div class="card-type">Widget</div>
+          <div class="card-version">v4.5</div>
+        </div>
       </a>
       <a class="card" href="hammuerhelper/">
-        <div class="card-name">Hammuer Helper</div>
-        <div class="card-type">Widget</div>
-        <div class="card-version">v1.1</div>
+        <div class="card-media">
+          <div class="card-media-fallback"><span>Hammuer Helper</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Hammuer Helper</div>
+          <div class="card-type">Widget</div>
+          <div class="card-version">v1.1</div>
+        </div>
       </a>
     </div>
 
   </main>
-  <footer>adenexvfx &mdash; adenexvfx.github.io/adenex-releases</footer>
+  <footer>adenexvfx &mdash; adenexvfx.github.io/adenex-tools</footer>
 </body>
 </html>

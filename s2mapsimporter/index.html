@@ -59,11 +59,22 @@
     .accordion-body h6 strong { font-weight: 600; color: #c9d1d9; }
     .section-img { margin: 0 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid #21262d; }
     .section-img img { width: 100%; display: block; }
+    body.lang-en .lang-ru { display: none; }
+    body.lang-ru .lang-en { display: none; }
+    .badge-size { background: #161b22; border: 1px solid #30363d; color: #6e7681; }
+    .section-img img { cursor: zoom-in; }
+    .section-img.vertical { max-width: 450px; margin-left: auto; margin-right: auto; }
+    .section-img.vertical img { width: 100%; }
+    .hero-img.vertical { max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero-img.vertical img { width: 100%; }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 6px; object-fit: contain; box-shadow: 0 8px 48px rgba(0,0,0,0.7); }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
     footer a { color: #484f58; }
   </style>
 </head>
-<body>
+<body class="lang-ru">
   <header>
     <div class="breadcrumb">
       <a href="../">Adenex</a>
@@ -80,12 +91,13 @@
     <div class="hero-meta">
       <span class="badge badge-type">Unreal Engine Plugin</span>
       <span class="badge badge-version">v2.21.2</span>
+      <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
     </div>
     <div class="hero-desc">
       Нативный C++ плагин для Unreal Engine, импортирующий карты CS2 напрямую из декомпилированных .vmdl_c файлов.
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="">&#x21E9; Скачать</a>
+      <a class="btn btn-primary" id="download-btn" href=""><span class="lang-ru" id="dl-label-ru">Скачать</span><span class="lang-en" id="dl-label-en">Download</span></a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
     <div class="hero-img">
@@ -246,8 +258,55 @@
       </div>
     </div>
   </main>
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
   <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
   <script>
+    fetch('../updates/s2mapsimporter.json')
+      .then(r => r.json())
+      .then(data => {
+        const btn = document.getElementById('download-btn');
+        if (data.download_url) btn.href = data.download_url;
+        if (data.download_source) {
+          document.getElementById('dl-label-ru').textContent = 'Скачать (' + data.download_source + ')';
+          document.getElementById('dl-label-en').textContent = 'Download (' + data.download_source + ')';
+        }
+        if (data.file_size) {
+          const badge = document.getElementById('file-size-badge');
+          badge.textContent = data.file_size;
+          badge.style.display = '';
+        }
+      })
+      .catch(() => {});
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.hero-img img').forEach(img => {
+      const check = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          const container = img.closest('.hero-img');
+          container.classList.add('vertical');
+          if (img.naturalWidth < 600) container.style.maxWidth = img.naturalWidth + 'px';
+        }
+      };
+      if (img.complete) check();
+      else img.addEventListener('load', check);
+    });
+    document.querySelectorAll('.section-img img').forEach(img => {
+      const check = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          img.closest('.section-img').classList.add('vertical');
+        }
+      };
+      if (img.complete) check();
+      else img.addEventListener('load', check);
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('open');
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('open'); }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     function setLang(lang) {
       document.body.className = 'lang-' + lang;
       document.querySelectorAll('.lang-btn').forEach(btn => {

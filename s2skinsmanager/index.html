@@ -59,11 +59,22 @@
     .accordion-body h6 strong { font-weight: 600; color: #c9d1d9; }
     .section-img { margin: 0 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid #21262d; }
     .section-img img { width: 100%; display: block; }
+    body.lang-en .lang-ru { display: none; }
+    body.lang-ru .lang-en { display: none; }
+    .badge-size { background: #161b22; border: 1px solid #30363d; color: #6e7681; }
+    .section-img img { cursor: zoom-in; }
+    .section-img.vertical { max-width: 450px; margin-left: auto; margin-right: auto; }
+    .section-img.vertical img { width: 100%; }
+    .hero-img.vertical { max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero-img.vertical img { width: 100%; }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 6px; object-fit: contain; box-shadow: 0 8px 48px rgba(0,0,0,0.7); }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
     footer a { color: #484f58; }
   </style>
 </head>
-<body>
+<body class="lang-ru">
   <header>
     <div class="breadcrumb">
       <a href="../">Adenex</a>
@@ -78,14 +89,16 @@
   <main>
     <div class="hero-name">S2 Skins Manager</div>
     <div class="hero-meta">
-      <span class="badge badge-type">Виджет</span>
+      <span class="badge badge-type"><span class="lang-ru">Виджет</span><span class="lang-en">Widget</span></span>
       <span class="badge badge-version">v3.21</span>
+      <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
     </div>
     <div class="hero-desc">
-      Продвинутый редактор скинов оружия и перчаток для Unreal Engine. Просматривайте, настраивайте и создавайте скины с полным контролем над материалами, паттернами, износом, цветами и визуальными эффектами.
+      <span class="lang-ru">Продвинутый редактор скинов оружия и перчаток для Unreal Engine. Просматривайте, настраивайте и создавайте скины с полным контролем над материалами, паттернами, износом, цветами и визуальными эффектами.</span>
+      <span class="lang-en">Advanced weapon and glove skin editor for Unreal Engine. The widget enables you to preview, customize, and create skins with full control over materials, patterns, wear, colors, and visual effects.</span>
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="">&#x21E9; Скачать</a>
+      <a class="btn btn-primary" id="download-btn" href=""><span><span class="lang-ru" id="dl-label-ru">Скачать</span><span class="lang-en" id="dl-label-en">Download</span></a></span>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
     <div class="hero-img">
@@ -95,38 +108,17 @@
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Общая структура интерфейса
+            <span class="lang-ru">Основные возможности</span><span class="lang-en">Key features</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
-            <div class="section-img"><img src="img/main-glove-1.png" alt=""></div>
-            <ol><li><strong>Кнопка возврата (Back)</strong> — возвращает пользователя к списку скинов.</li><li><strong>Падающее меню</strong> —  переключатель режима отображения (Lit, Roughness, Metallic и др.).</li><li><strong>Окно предпросмотра</strong> — реалтайм-отображение материала и всех изменений. Поддержка вращения, зума и смены угла обзора</li><li><strong>Основные настройки материала</strong></li><li><strong>Параметры отображения материала</strong> — настройка Roughness / Metalness</li><li><strong>Настройка UV паттернов и потертостей</strong></li><li><strong>Текстуры</strong>.</li><li><strong>Запекание материала.</strong></li><li><strong>Панель управления камерой</strong>.</li><li><strong>Change Seed</strong> — генерация случайного UV для паттерна.</li><li><b>Bake </b>— сохранение финального Material Instance для дальнейшего использования.</li></ol>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-header" onclick="toggleAccordion(this)">
-            Общая структура интерфейса
-            <span class="chevron">&#9654;</span>
-          </button>
-          <div class="accordion-body">
-            <div class="section-img"><img src="img/main-glove-1.png" alt=""></div>
-            <ol><li><strong>Кнопка возврата (Back)</strong> — возвращает пользователя к списку скинов.</li><li><strong>Падающее меню</strong> —  переключатель режима отображения (Lit, Roughness, Metallic и др.).</li><li><strong>Окно предпросмотра</strong> — реалтайм-отображение материала и всех изменений. Поддержка вращения, зума и смены угла обзора</li><li><strong>Основные настройки материала</strong></li><li><strong>Параметры отображения материала</strong> — настройка Roughness / Metalness</li><li><strong>Настройка UV паттернов и потертостей</strong></li><li><strong>Текстуры</strong>.</li><li><strong>Запекание материала.</strong></li><li><strong>Панель управления камерой</strong>.</li><li><strong>Change Seed</strong> — генерация случайного UV для паттерна.</li><li><b>Bake </b>— сохранение финального Material Instance для дальнейшего использования.</li></ol>
-            <div class="section-img"><img src="img/Screenshot-2025-12-22-144704.png" alt=""></div>
-            <p>Продвинутый редактор скинов оружия и перчаток для Unreal Engine. <br />Виджет позволяет просматривать, настраивать и создавать скины с полным контролем над материалами, паттернами, износом, цветами и визуальными эффектами</p>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-header" onclick="toggleAccordion(this)">
-            Основные возможности
-            <span class="chevron">&#9654;</span>
-          </button>
-          <div class="accordion-body">
+            <div class="lang-ru">
             <ul>
              	<li>
             <p>Просмотр и управление большой библиотекой скинов</p>
             </li>
              	<li>
-            <p>Поддержка CS2- и CS:GO-моделей</p>
+            <p>Поддержка моделей CS2 и CS:GO</p>
             </li>
              	<li>
             <p>Полноценная настройка материалов в реальном времени</p>
@@ -143,22 +135,46 @@
             </li>
             </ul>
           </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-header" onclick="toggleAccordion(this)">
-            Требования
-            <span class="chevron">&#9654;</span>
-          </button>
-          <div class="accordion-body">
-            <ul><li>Unreal Engine 5.6 или новее</li><li>PyToolkit plugin (версии 1.8 и выше)</li><li><p>Установленная <strong>Counter-Strike 2</strong></p></li><li><p>Утилита <strong>Source2Viewer CLI</strong> для декомпиляции моделей и текстур</p></li><li><p>Свободное место на диске (первый запуск может импортировать несколько тысяч текстур)</p></li></ul>
+            <div class="lang-en">
+<ul>
+  <li><p>Browse and manage a large skin library</p></li>
+  <li><p>Support for CS2 and CS:GO models</p></li>
+  <li><p>Full real-time material customization</p></li>
+  <li>Support for styles: Anodized, Spraypaint, Case Hardened, and more</li>
+  <li><p>Modes: Glitter, Pearlescence, Overlay, Spraypaint Halftone, and more</p></li>
+  <li><p>Animated UVs for patterns with ready-to-use presets</p></li>
+  <li><p>Self-updating system for adding new skins</p></li>
+</ul>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Установка
+            <span class="lang-ru">Требования</span><span class="lang-en">Requirements</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
+            <ul><li>Unreal Engine 5.6 или новее</li><li>PyToolkit plugin (версии 1.8 и выше)</li><li><p>Установленная <strong>Counter-Strike 2</strong></p></li><li><p>Утилита <strong>Source2Viewer CLI</strong> для декомпиляции моделей и текстур</p></li><li><p>Свободное место на диске (первый запуск может импортировать несколько тысяч текстур)</p></li></ul>
+          </div>
+            <div class="lang-en">
+<ul>
+  <li>Unreal Engine 5.6 or newer</li>
+  <li>PyToolkit plugin (version 1.8 or higher)</li>
+  <li><p>Installed <strong>Counter-Strike 2</strong></p></li>
+  <li><p>The <strong>Source2Viewer CLI</strong> utility for decompiling models and textures</p></li>
+  <li><p>Available disk space (the first launch may import several thousand textures)</p></li>
+</ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="lang-ru">Установка</span><span class="lang-en">Installation</span>
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image2.png" alt=""></div>
             <p>Скачайте и распакуйте плагин <strong><a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw">PyToolkit</a></strong> (минимум 1.8 версии) в папку <strong>Plugins</strong> в корневой директории Unreal Engine <code>(C:\Program Files\Epic Games\UE_5.6\Engine\Plugins)</code>.</p><p>Запустите Unreal Engine и включите следующие плагины (в меню <strong>Edit &gt; Plugins</strong>):</p><ul><li>Editor Scripting Utilities</li><li>Python Editor Script Plugin</li><li><span>Python Foundation Packages</span></li><li>Http Blueprint</li><li>PyToolkit</li></ul><p>Затем перезапустите движок.</p>
             <div class="section-img"><img src="img/image-9.png" alt=""></div>
@@ -173,7 +189,7 @@
             При первом запуске будет предложено заполнить поля с настройками и импортировать все найденные скины.
             <ul>
              	<li>
-            <p><strong>Decompiler Executable</strong><br />Путь к декомпилеру <strong><a href="https://github.com/ValveResourceFormat/ValveResourceFormat/releases">Source2Viewer CLI</a></strong> (обычно называется <span data-view-component="true" class="Truncate-text text-bold">cli-windows-x64.zip</span>).</p>
+            <p><strong>Decompiler Executable</strong><br />Путь к декомпилеру <strong><a href="https://github.com/ValveResourceFormat/ValveResourceFormat/releases">Source2Viewer CLI</a></strong> (в репозитории обычно называется <span data-view-component="true" class="Truncate-text text-bold">cli-windows-x64.zip</span>. Нужно извлечь всё из архива и указать путь к <code>.exe</code> файлу.).</p>
             </li>
              	<li>
             <p><strong>Game Folder</strong><br />Путь к установленной CS2 (например: D:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive).</p>
@@ -182,24 +198,66 @@
             <p><strong>Decompiled Folder</strong><br />Любая папка, куда будут складываться  декомпилированные файлы из игры (главное, чтобы на диске хватало места).</p>
             </li>
             </ul>
-            После импорта всех скинов можно будет выбрать любой скин для любого оружия, а так же воспользоваться полем поиска
+            После импорта всех скинов можно будет выбрать любой скин для любого оружия, а также воспользоваться полем поиска
+          </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/image2.png" alt=""></div>
+<p>Download and extract the <strong><a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw">PyToolkit</a></strong> plugin (version 1.8 or higher) into the <strong>Plugins</strong> folder in the Unreal Engine root directory <code>(C:\Program Files\Epic Games\UE_5.6\Engine\Plugins)</code>.</p>
+<p>Launch Unreal Engine and enable the following plugins (in <strong>Edit &gt; Plugins</strong>):</p>
+<ul>
+  <li>Editor Scripting Utilities</li>
+  <li>Python Editor Script Plugin</li>
+  <li><span>Python Foundation Packages</span></li>
+  <li>Http Blueprint</li>
+  <li>PyToolkit</li>
+</ul>
+<p>Then restart the engine.</p>
+<div class="section-img"><img src="img/image-9.png" alt=""></div>
+<ol>
+  <li>Download the widget archive</li>
+  <li>Extract the archive to any folder — this is a ready-to-use project. If you need to add the widget to an existing project, open the <strong>Content</strong> folder in the downloaded project and copy all its files into your project's <strong>Content</strong> folder.</li>
+  <li>Open the project.</li>
+  <li>In the <strong>Content Browser</strong>, locate the <strong>Widgets</strong> folder. Right-click the <strong>S2 Skins Manager</strong> widget and select <strong>Run Editor Utility Widget</strong>.</li>
+</ol>
+The widget is ready to use.
+<div class="section-img"><img src="img/Screenshot-2025-12-22-143355.png" alt=""></div>
+On first launch, you will be prompted to fill in the configuration fields and import all detected skins.
+<ul>
+  <li><p><strong>Decompiler Executable</strong><br />Path to the <strong><a href="https://github.com/ValveResourceFormat/ValveResourceFormat/releases">Source2Viewer CLI</a></strong> decompiler (typically named in the repository as <span class="Truncate-text text-bold">cli-windows-x64.zip</span>. You need to extract everything from the archive and specify the path to the <code>.exe</code> file).</p></li>
+  <li><p><strong>Game Folder</strong><br />Path to your installed CS2 directory (for example: D:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive).</p></li>
+  <li><p><strong>Decompiled Folder</strong><br />Any folder where the decompiled game files will be stored (make sure you have sufficient disk space).</p></li>
+</ul>
+After importing all skins, you'll be able to select any skin for any weapon and use the search field.
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Распространённые проблемы
+            <span class="lang-ru">Распространённые проблемы</span><span class="lang-en">Common issues</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <p>Если возникают ошибки — убедитесь, что:</p><ul><li>Виджет установлен по правильному пути в проекте;</li><li>Включены все необходимые плагины;</li><li>Используется Unreal Engine версии 5.6 или выше (в имени архива с виджетом указана минимально нужная версия движка);</li><li>Декомпилер обновлён до последней версии.<br />Если декомпилер не работает, можно попробовать использовать DEV версию.</li></ul>
           </div>
+            <div class="lang-en">
+<p>If you encounter errors, make sure that:</p>
+<ul>
+  <li>The widget is installed in the correct project directory;</li>
+  <li>All required plugins are enabled;</li>
+  <li>You are using Unreal Engine version 5.6 or higher (the minimum required version is indicated in the widget archive name);</li>
+  <li>The decompiler is updated to the latest version.<br />If the decompiler still doesn't work, try using the DEV version.</li>
+</ul>
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Применение скина
+            <span class="lang-ru">Применение скина</span><span class="lang-en">Applying a skin</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-17.png" alt=""></div>
             <p>После сохранения (или запекания — для старых перчаток) материал скина появляется в <strong>Content Browser</strong>.<br />Чтобы применить материал к оружию или перчаткам, нужно:</p>
 
@@ -208,16 +266,26 @@
              	<li data-section-id="lfz9ru">либо назначить его вручную в панели <strong>Details</strong>, заменив соответствующий слот материала, как показано на скриншоте выше.</li>
             </ul>
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/image-17.png" alt=""></div>
+<p>After saving (or baking — for older gloves), the skin material will appear in the <strong>Content Browser</strong>.<br />To apply the material to a weapon or gloves, you need to:</p>
+<ul>
+  <li>drag and drop the material directly onto the model in the Viewport,</li>
+  <li>or assign it manually in the <strong>Details</strong> panel by replacing the corresponding material slot, as shown in the screenshot above.</li>
+</ul>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="group-label">Описание настроек для редактирования скина оружия</div>
+      <div class="group-label"><span class="lang-ru">Описание настроек для редактирования скина оружия</span><span class="lang-en">Weapon skin editing settings overview</span></div>
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Общая структура интерфейса
+            <span class="lang-ru">Общая структура интерфейса</span><span class="lang-en">General interface structure</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/main-scaled.png" alt=""></div>
             <ol>
              	<li><strong>Кнопка возврата (Back)</strong> — возвращает пользователя к списку скинов.</li>
@@ -235,13 +303,33 @@
              	<li><strong>Save</strong> — сохранение финального Material Instance для дальнейшего использования.</li>
             </ol>
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/main-scaled.png" alt=""></div>
+<ol>
+  <li><strong>Back Button</strong> — returns the user to the skin list.</li>
+  <li><strong>"Texture View" Toggle</strong> — displays the UV layout.</li>
+  <li><strong>Dropdown Menu</strong> — switches the display mode (Lit, Roughness, Metallic, etc.).</li>
+  <li><strong>"CS2 Model" Toggle</strong> — enables the CS2 weapon model view.</li>
+  <li><strong>Preview Window</strong> — real-time display of the material and all changes. Supports rotation, zoom, and camera angle adjustment.</li>
+  <li><strong>Core Material Settings</strong></li>
+  <li><strong>Material Display Parameters</strong> — Roughness / Metalness adjustment</li>
+  <li><strong>UV Pattern and Wear Settings</strong></li>
+  <li><strong>FX Effects</strong> — settings for Glitter, Case Hardened, Pearlescence, Overlay, Halftone, and Emissive.</li>
+  <li><strong>Textures</strong></li>
+  <li><strong>Camera and Lighting Controls</strong></li>
+  <li><strong>Random Seed</strong> — generates random UVs for patterns.</li>
+  <li><strong>Save</strong> — saves the final Material Instance for further use.</li>
+</ol>
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Main”
+            <span class="lang-ru">Вкладка “Main”</span><span class="lang-en">Tab “Main”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/Screenshot-2025-12-22-113257.png" alt=""></div>
             <h6><strong>Main Settings</strong></h6>
             <strong>Paint Style</strong> — определяет базовый стиль рендеринга скина. От выбранного стиля зависит набор доступных параметров, логика наложения паттернов и поведение материала.
@@ -281,23 +369,84 @@
             <p><strong>Color Saturation</strong> — управляет насыщенностью цветов. Низкие значения делают цвет более приглушенным, высокие - более ярким.</p>
             <p><strong>Use AO In Final Color</strong> — учитывает текстуру Ambient Occlusion при формировании финального цвета, добавляя глубину и визуальный объем.</p>
           </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Shading”
-            <span class="chevron">&#9654;</span>
-          </button>
-          <div class="accordion-body">
-            <div class="section-img"><img src="img/Screenshot-2025-12-22-114109.png" alt=""></div>
-            <h6>Roughness</h6><p><strong>Roughness From Pattern</strong> — использует значения шероховатости непосредственно из паттерна. Позволяет управлять микрорельефом поверхности на основе текстуры паттерна.</p><p><strong>Roughness Uses Pattern UVs</strong> — применяет UV-координаты паттерна для текстуры шероховатости. </p><p><strong>Use Roughness by Color</strong> — включает управление шероховатостью на основе цветовой маски. Разные цветовые области паттерна могут иметь различную степень шероховатости.</p><p><strong>Roughness Toplayer Min</strong> — минимальное значение шероховатости верхнего слоя покрытия (скина).</p><p><strong>Roughness Toplayer Max</strong> — максимальное значение шероховатости верхнего слоя покрытия (скина).</p><p><strong>Roughness Underlayer Min</strong> — минимальное значение шероховатости нижнего слоя материала (оружия), проявляющегося при износе.</p><p><strong>Roughness Underlayer Max</strong> — максимальное значение шероховатости нижнего слоя материала (оружия).</p><p><strong>Roughness Mask Power</strong> — степень влияния маски шероховатости. Чем выше значение, тем сильнее контраст между гладкими и матовыми участками.</p><p><strong>Use Roughness Texture</strong> — использует отдельную текстуру шероховатости вместо процедурных значений.</p><p><strong>Roughness by Color</strong> — включает управление шероховатостью для каждого цветового слоя, сформированного на основе масок из текстуры и Paint-By-Number масок. Позволяет задавать разную шероховатость для отдельных цветовых областей скина.</p><p><strong>Paint Roughness</strong> — базовое значение шероховатости краски. Используется, если не заданы дополнительные источники шероховатости. Зависит от маски скина.</p><hr /><h6>Metalness</h6><p><strong>Metalness Toplayer Min</strong> — минимальное значение металличности верхнего слоя покрытия (скина).</p><p><strong>Metalness Toplayer Max</strong> — максимальное значение металличности верхнего слоя покрытия.</p><p><strong>Metalness Underlayer Min</strong> — минимальное значение металличности нижнего слоя материала (оружия).</p><p><strong>Metalness Underlayer Max</strong> — максимальное значение металличности нижнего слоя материала.</p><p><strong>Metalness Mask Power</strong> — степень влияния маски металличности. Определяет контраст между металлическими и неметаллическими участками.</p><p><strong>Paint Metalness</strong> — базовое значение металличности краски. Используется как основа для формирования металлических свойств покрытия. Зависит от маски скина.</p>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Screenshot-2025-12-22-113257.png" alt=""></div>
+<h6><strong>Main Settings</strong></h6>
+<strong>Paint Style</strong> — defines the base rendering style of the skin. The selected style determines the available parameters, pattern blending logic, and overall material behavior.
+<p><strong>Pearlescence</strong> — enables a pearlescent effect. The surface color shifts depending on the viewing angle and lighting conditions. Used for skins with a pronounced iridescent finish.</p>
+<p><strong>Glitter</strong> — enables a glitter effect in the material. Adds microscopic reflective particles, creating a sparkling surface appearance.</p>
+<p><strong>Use Overlay</strong> — enables an additional layer on top of the base material. Used for graphical elements or effects without affecting the underlying skin layer.</p>
+<p><strong>Case Hardening</strong> — activates a metal hardening simulation mode. Generates a characteristic multicolor pattern with smooth color transitions.</p>
+<p><strong>Use Emissive</strong> — enables a self-illuminated material layer. Allows adding elements that glow independently of scene lighting.</p>
+<hr />
+<h6>Wear</h6>
+<p><strong>Wear</strong> — the primary wear parameter. Controls the level of paint erosion and exposure of the underlying material layer.</p>
+<p><strong>Wear Multiplier</strong> — a wear intensity multiplier. Amplifies or reduces the effect of the <em>Wear</em> parameter without changing its base value.</p>
+<p><strong>Wear Softness</strong> — controls the smoothness of transitions between worn and unworn areas. Lower values produce sharper edges; higher values create softer wear.</p>
+<p><strong>Paint Durability</strong> — a durability mask for the coating. Defines which areas wear out faster and which retain paint longer.</p>
+<hr />
+<h6>Texture Adjustment</h6>
+<p><strong>Basecolor Top Layer Brightness</strong> — controls the brightness of the top color layer (the skin).</p>
+<p><strong>Basecolor Top Layer Contrast</strong> — adjusts the contrast of the top color layer, making the pattern sharper or softer.</p>
+<p><strong>Underlayer Brightness</strong> — sets the brightness of the underlying material layer (the weapon).</p>
+<p><strong>Underlayer Contrast</strong> — controls the contrast of the underlying material.</p>
+<p><strong>Metal Color Brightness</strong> — controls brightness in metallic areas of the skin.</p>
+<hr />
+<h6>Color</h6>
+<p><strong>Color 0 (Base Coat)</strong> — the base paint layer applied to all paintable surfaces of the weapon. Serves as the foundation for all subsequent color layers and is always applied first.</p>
+<p><strong>Color 1 (Red Mask)</strong> — a color applied over the base layer using the red channel of the pattern as a mask.</p>
+<p><strong>Color 2 (Green Mask)</strong> — a color applied over the Red Mask layer using the green channel of the pattern as a mask.</p>
+<p><strong>Color 3 (Blue Mask)</strong> — a color applied over the Green Mask layer using the blue channel of the pattern as a mask. This is the final color layer in the blending sequence.</p>
+<p><strong>Case Hardening Color</strong> — used only with the Case Hardening style. Determines which color layer is replaced by the Case Hardening effect.</p>
+<p><strong>Color Exponent</strong> — enhances color depth and intensity without directly changing brightness.</p>
+<p><strong>Color Hue Shift</strong> — shifts the hue of the entire color palette along the color wheel.</p>
+<p><strong>Color Saturation</strong> — controls color intensity. Lower values produce more muted tones; higher values create more vibrant colors.</p>
+<p><strong>Use AO In Final Color</strong> — incorporates the Ambient Occlusion texture into the final color output, adding depth and visual volume.</p>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “UVs”
+            <span class="lang-ru">Вкладка “Shading”</span><span class="lang-en">Tab “Shading”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
+            <div class="section-img"><img src="img/Screenshot-2025-12-22-114109.png" alt=""></div>
+            <h6>Roughness</h6><p><strong>Roughness From Pattern</strong> — использует значения шероховатости непосредственно из паттерна. Позволяет управлять микрорельефом поверхности на основе текстуры паттерна.</p><p><strong>Roughness Uses Pattern UVs</strong> — применяет UV-координаты паттерна для текстуры шероховатости. </p><p><strong>Use Roughness by Color</strong> — включает управление шероховатостью на основе цветовой маски. Разные цветовые области паттерна могут иметь различную степень шероховатости.</p><p><strong>Roughness Toplayer Min</strong> — минимальное значение шероховатости верхнего слоя покрытия (скина).</p><p><strong>Roughness Toplayer Max</strong> — максимальное значение шероховатости верхнего слоя покрытия (скина).</p><p><strong>Roughness Underlayer Min</strong> — минимальное значение шероховатости нижнего слоя материала (оружия), проявляющегося при износе.</p><p><strong>Roughness Underlayer Max</strong> — максимальное значение шероховатости нижнего слоя материала (оружия).</p><p><strong>Roughness Mask Power</strong> — степень влияния маски шероховатости. Чем выше значение, тем сильнее контраст между гладкими и матовыми участками.</p><p><strong>Use Roughness Texture</strong> — использует отдельную текстуру шероховатости вместо процедурных значений.</p><p><strong>Roughness by Color</strong> — включает управление шероховатостью для каждого цветового слоя, сформированного на основе масок из текстуры и Paint-By-Number масок. Позволяет задавать разную шероховатость для отдельных цветовых областей скина.</p><p><strong>Paint Roughness</strong> — базовое значение шероховатости краски. Используется, если не заданы дополнительные источники шероховатости. Зависит от маски скина.</p><hr /><h6>Metalness</h6><p><strong>Metalness Toplayer Min</strong> — минимальное значение металличности верхнего слоя покрытия (скина).</p><p><strong>Metalness Toplayer Max</strong> — максимальное значение металличности верхнего слоя покрытия.</p><p><strong>Metalness Underlayer Min</strong> — минимальное значение металличности нижнего слоя материала (оружия).</p><p><strong>Metalness Underlayer Max</strong> — максимальное значение металличности нижнего слоя материала.</p><p><strong>Metalness Mask Power</strong> — степень влияния маски металличности. Определяет контраст между металлическими и неметаллическими участками.</p><p><strong>Paint Metalness</strong> — базовое значение металличности краски. Используется как основа для формирования металлических свойств покрытия. Зависит от маски скина.</p>
+          </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Screenshot-2025-12-22-114109.png" alt=""></div>
+<h6>Roughness</h6>
+<p><strong>Roughness From Pattern</strong> — uses roughness values directly from the pattern. Allows control over surface microdetail based on the pattern texture.</p>
+<p><strong>Roughness Uses Pattern UVs</strong> — applies the pattern's UV coordinates to the roughness texture.</p>
+<p><strong>Use Roughness by Color</strong> — enables roughness control based on a color mask. Different color regions of the pattern can have varying roughness levels.</p>
+<p><strong>Roughness Toplayer Min</strong> — minimum roughness value for the top coating layer (skin).</p>
+<p><strong>Roughness Toplayer Max</strong> — maximum roughness value for the top coating layer (skin).</p>
+<p><strong>Roughness Underlayer Min</strong> — minimum roughness value for the underlying material layer (weapon), revealed through wear.</p>
+<p><strong>Roughness Underlayer Max</strong> — maximum roughness value for the underlying material layer (weapon).</p>
+<p><strong>Roughness Mask Power</strong> — controls the influence of the roughness mask. Higher values increase contrast between smooth and matte areas.</p>
+<p><strong>Use Roughness Texture</strong> — uses a separate roughness texture instead of procedural values.</p>
+<p><strong>Roughness by Color</strong> — enables roughness control per color layer, generated from texture masks and Paint-By-Number masks. Allows different roughness values for individual color regions of the skin.</p>
+<p><strong>Paint Roughness</strong> — base roughness value of the paint. Used when no additional roughness sources are specified. Depends on the skin mask.</p>
+<hr />
+<h6>Metalness</h6>
+<p><strong>Metalness Toplayer Min</strong> — minimum metalness value for the top coating layer (skin).</p>
+<p><strong>Metalness Toplayer Max</strong> — maximum metalness value for the top coating layer.</p>
+<p><strong>Metalness Underlayer Min</strong> — minimum metalness value for the underlying material layer (weapon).</p>
+<p><strong>Metalness Underlayer Max</strong> — maximum metalness value for the underlying material layer.</p>
+<p><strong>Metalness Mask Power</strong> — controls the influence of the metalness mask. Defines contrast between metallic and non-metallic areas.</p>
+<p><strong>Paint Metalness</strong> — base metalness value of the paint. Serves as the foundation for defining the coating's metallic properties. Depends on the skin mask.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="lang-ru">Вкладка “UVs”</span><span class="lang-en">Tab “UVs”</span>
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/Screenshot-2025-12-22-115042.png" alt=""></div>
             <h6>Pattern UV</h6>
             <p><strong>Pattern Scale</strong> — задает масштаб паттерна на поверхности оружия. Меньшие значения увеличивают размер элементов узора, большие — делают рисунок более мелким.</p>
@@ -322,13 +471,35 @@
             <h6>Grunge UV</h6>
             <p> Те же самые настройки, что и для паттерна, но для текстуры загрязнений и шумов на поверхности скина.</p>
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Screenshot-2025-12-22-115042.png" alt=""></div>
+<h6>Pattern UV</h6>
+<p><strong>Pattern Scale</strong> — sets the scale of the pattern on the weapon surface. Lower values increase the size of pattern elements, while higher values make the pattern finer.</p>
+<p><strong>Pattern Rotation</strong> — rotates the pattern around its center, changing the orientation of the design on the model surface.</p>
+<p><strong>Pattern Offset U</strong> — shifts the pattern along the horizontal UV coordinate.</p>
+<p><strong>Pattern Offset V</strong> — shifts the pattern along the vertical UV coordinate.</p>
+<p><strong>Animated UVs</strong> — enables animation of the pattern's UV coordinates. Used to create dynamic effects and moving patterns. You can choose from 9 animated presets.</p>
+<hr />
+<p><strong>Pattern Rotation Center U</strong> — defines the rotation center of the pattern along the U axis.</p>
+<p><strong>Pattern Rotation Center V</strong> — defines the rotation center of the pattern along the V axis.</p>
+<p><strong>Pattern Scope Scale</strong> — an additional pattern scaling parameter. Used only for the SSG08 weapon.</p>
+<p><strong>Mesh Bounds</strong> — controls the scale of the weapon model. Used only in triplanar styles (3 and 6).</p>
+<hr />
+<h6>Wear UV</h6>
+<p>Same settings as for the pattern, but applied to the wear texture on the skin surface.</p>
+<hr />
+<h6>Grunge UV</h6>
+<p>Same settings as for the pattern, but applied to the dirt and noise texture on the skin surface.</p>
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Effects”
+            <span class="lang-ru">Вкладка “Effects”</span><span class="lang-en">Tab “Effects”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/Screenshot-2025-12-22-120232.png" alt=""></div>
             <h6>Glitter</h6>
             <p><strong>Glitter Intensity</strong> — управляет интенсивностью эффекта блёсток. Определяет, насколько заметны отражающие частицы на поверхности материала.</p>
@@ -401,36 +572,161 @@
             <p><strong>Emissive Speed X</strong> — скорость анимации UV-координат по оси X.</p>
             <p><strong>Emissive Speed Y</strong> — скорость анимации UV-координат по оси Y.</p>
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Screenshot-2025-12-22-120232.png" alt=""></div>
+<h6>Glitter</h6>
+<p><strong>Glitter Intensity</strong> — controls the intensity of the glitter effect. Determines how visible the reflective particles are on the material surface.</p>
+<p><strong>Glitter Scale</strong> — sets the scale of the glitter pattern. Higher values make particles smaller, while lower values make them larger.</p>
+<p><strong>Glitter Rainbow Balance</strong> — adjusts the balance of color iridescence in the glitter, shifting the effect toward rainbow tones.</p>
+<p><strong>Glitter Rainbow Spread</strong> — controls the distribution of rainbow colors in the glitter effect, affecting the level of color variation.</p>
+<hr />
+<h6>Case Hardening</h6>
+<p><strong>Case Hardening Geometric Influence</strong> — defines how strongly the curvature texture affects the formation of the hardened metal pattern.</p>
+<p><strong>Case Hardening Pattern Influence</strong> — controls the influence of the pattern on the distribution of the hardening effect across the surface.</p>
+<p><strong>Case Hardening Ramp Offset</strong> — shifts the gradient of the hardening color transition along the Y axis, altering the color variation.</p>
+<p><strong>Case Hardening Trilinear</strong> — enables triplanar mode for the hardening effect.</p>
+<hr />
+<h6>Pearlescence</h6>
+<p><strong>Pearlescence Mask Uses Pattern UVs</strong> — uses the pattern's UV coordinates for the pearlescence mask.</p>
+<p><strong>Pearlescent on Metallic Only</strong> — restricts the pearlescent effect to metallic areas only.</p>
+<p><strong>Use Pearlescence Mask</strong> — enables a custom mask to control where the pearlescent effect is applied.</p>
+<p><strong>Pearlescent Scale</strong> — defines the degree of color shift based on the angle between the surface and the camera direction.</p>
+<p><strong>Pearlescence Color Intensity</strong> — controls the intensity of the pearlescent color shift.</p>
+<p><strong>Pearlescence Shift</strong> — shifts the hue of the pearlescent effect, altering its color character.</p>
+<hr />
+<h6>Overlay</h6>
+<p><strong>Overlay Uses Pattern UVs</strong> — uses the pattern's UV coordinates for the overlay texture.</p>
+<p><strong>Overlay Blend Mode</strong> — defines how the overlay layer blends with the base material. Available modes include transparency, hue/saturation replacement, multiply, additive blending, and layering over albedo.</p>
+<p><strong>Overlay Mask Mode</strong> — defines which mask is used to limit the overlay layer.<br />Available modes: <strong>0</strong> (no mask), <strong>1</strong> (base layer), <strong>2</strong> (red channel), <strong>3</strong> (green channel), <strong>4</strong> (blue channel), <strong>5</strong> (combined RGB), <strong>6</strong> (pattern mask).</p>
+<p><strong>Overlay Brightness</strong> — controls the brightness of the overlay layer.</p>
+<p><strong>Overlay Durability</strong> — defines how resistant the overlay layer is to wear.</p>
+<p><strong>Overlay Material Strength</strong> — controls the influence strength of the overlay material on the final result.</p>
+<p><strong>Overlay Metalness</strong> — controls the metalness of the overlay layer.</p>
+<p><strong>Overlay Roughness</strong> — sets the roughness of the overlay layer.</p>
+<p><strong>Overlay Pearlescent Mask</strong> — defines how the pearlescent effect affects the overlay layer.</p>
+<p><strong>Overlay Albedo Strength</strong> — controls the visibility and strength of the overlay texture in the final result.</p>
+<hr />
+<h6>Halftone</h6>
+<p><strong>Spraypaint Halftone</strong> — enables a halftone effect (pattern alpha channel), simulating a spraypaint finish.</p>
+<p><strong>Halftone in Cavity</strong> — limits the halftone effect using the cavity texture.</p>
+<p><strong>Halftone Cavity Cutoff</strong> — sets the threshold of the cavity texture at which halftone density reaches its maximum.</p>
+<p><strong>Halftone Rotation Offset X</strong> — offsets halftone rotation for the red mask channel.</p>
+<p><strong>Halftone Rotation Offset Y</strong> — offsets halftone rotation for the green mask channel.</p>
+<p><strong>Halftone Rotation Offset Z</strong> — offsets halftone rotation for the blue mask channel.</p>
+<p><strong>Halftone Thresholds</strong> — controls the softness or sharpness of halftone edges.</p>
+<p><strong>Halftone Pattern Levels</strong> — affects halftone density.</p>
+<hr />
+<h6>Emissive</h6>
+<p><strong>Emissive Use Mask Texture</strong> — uses a mask texture to limit the emissive area of the skin. Allows the effect to be applied only to selected parts of the weapon.</p>
+<p><strong>Emissive Intensity</strong> — sets the intensity of the emission.</p>
+<p><strong>Emissive Mask Power</strong> — controls the contrast and influence strength of the emissive mask.</p>
+<p><strong>Emissive Use Pattern</strong> — enables emissive control via pattern color channels. Allows defining different emission areas using Base, Red, Green, and Blue masks.</p>
+<p><strong>Emissive Black</strong> — sets emission intensity for the base (black) pattern layer.</p>
+<p><strong>Emissive R</strong> — sets emission intensity for the area defined by the red pattern channel.</p>
+<p><strong>Emissive G</strong> — sets emission intensity for the area defined by the green pattern channel.</p>
+<p><strong>Emissive B</strong> — sets emission intensity for the area defined by the blue pattern channel.</p>
+<p><strong>Emissive Mask Texture</strong> — the mask texture that defines the shape and distribution of the emission.</p>
+<p><strong>Emissive Use Texture</strong> — enables the use of a dedicated emissive texture instead of procedural or pattern-based masks.</p>
+<p><strong>Emissive Texture</strong> — the texture used to define the emission pattern.</p>
+<p><strong>Emissive Color</strong> — the emission color.</p>
+<p><strong>Emissive Use Flickering</strong> — enables a flickering emission effect.</p>
+<p><strong>Emissive Flickering Frequency</strong> — sets the flickering frequency.</p>
+<p><strong>Emissive Animated UVs</strong> — enables UV animation for the emissive texture.</p>
+<p><strong>Emissive Speed X</strong> — UV animation speed along the X axis.</p>
+<p><strong>Emissive Speed Y</strong> — UV animation speed along the Y axis.</p>
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Textures”
+            <span class="lang-ru">Вкладка “Textures”</span><span class="lang-en">Tab “Textures”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/Screenshot-2025-12-22-123851.png" alt=""></div>
             <h6>Textures</h6><p><strong>Override Ambient Occlusion</strong> — позволяет переопределить текстуру Ambient Occlusion пользовательской текстурой вместо стандартной.</p><p><strong>Override Masks</strong> — включает использование пользовательской текстуры масок, заменяя стандартные маски оружия.</p><p><strong>Override Metalness</strong> — позволяет переопределить текстуру металличности отдельной текстурой.</p><p><strong>Override Roughness</strong> — позволяет переопределить текстуру шероховатости отдельной текстурой.</p><p><strong>Override Position</strong> — включает использование пользовательской текстуры Position Map вместо стандартной.</p><p><strong>Override Base Color</strong> — позволяет заменить базовую текстуру albedo пользовательской текстурой.</p><p><strong>Use All Masks</strong> — принудительно использует все доступные маски независимо от выбранного стиля и активных эффектов (только для стиля triplanar).</p><p><strong>Use Custom Normal Map</strong> — включает использование пользовательской текстуры нормалей.</p><p><strong>Use SFX Mask</strong> — включает использование SFX-маски для управления эффектами, такими как перламутровость, поверхностная закалка и блёстки.</p><hr /><p><strong>Pattern Texture</strong> — текстура паттерна, определяющая распределение цветовых масок и узора на поверхности оружия.</p><p><strong>Pattern Normal Map</strong> — нормали паттерна, добавляющая дополнительный микрорельеф поверх базовой геометрии.</p><p><strong>Wear Texture</strong> — текстура износа, определяющая области и характер стирания покрытия.</p><p><strong>Grunge Texture</strong> — текстура загрязнений и шума, добавляющая визуальную вариативность и детализацию поверхности.</p><p><strong>SFX Mask Texture</strong> — чёрно-белая маска, определяющая области применения визуальных эффектов.</p><p><strong>Overlay Texture</strong> — полноцветная текстура, используемая в качестве overlay-слоя поверх базового albedo.</p><p><strong>Case Hardening Color Ramp</strong> — полноцветная текстура, используемая для формирования градиентов в режиме Case Hardening.</p><p><strong>Glitter Normal Map</strong> — текстура нормалей, используемая для добавления микрорельефа эффекту блёсток.</p><p><strong>Glitter Mask Texture</strong> — маска, определяющая области применения эффекта блёсток.</p><hr /><p><strong>Overridden AO</strong> — пользовательская текстура Ambient Occlusion, используемая при включённом Override Ambient Occlusion.</p><p><strong>Overridden Roughness</strong> — пользовательская текстура шероховатости, заменяющая стандартную roughness-текстуру.</p><p><strong>Overridden Metalness</strong> — пользовательская текстура металличности, заменяющая стандартную metalness-текстуру.</p><p><strong>Overridden Masks</strong> — пользовательская текстура масок, заменяющая стандартные маски оружия.</p><p><strong>Overridden Base Color Texture</strong> — пользовательская базовая текстура albedo, используемая вместо стандартной.</p><p><strong>Overridden Position Map</strong> — пользовательская текстура Position Map, заменяющая стандартную.</p><hr /><p><strong>Base Color Texture</strong> — базовая albedo текстура оружия, используемая как нижний слой всех скинов.</p><p><strong>AO Texture</strong> — текстура Ambient Occlusion оружия, добавляющая глубину и затенение в углублениях.</p><p><strong>Exponent Texture</strong> — текстура шероховатости и металличности оружия.</p><p><strong>Weapon Normal Map</strong> — текстура нормалей оружия, определяющая микрорельеф поверхности.</p><p><strong>Masks Texture</strong> — стандартная текстура масок оружия, содержащая цветовые и служебные каналы.</p><p><strong>Position Map, Surface Texture</strong> — текстуры позиционирования, используемая для трипланарных стилей.</p><hr /><h6>Mesh</h6><p><strong>Preview 3D Model</strong> — модель оружия, используемая для предпросмотра скина в окне виджета.</p>
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Screenshot-2025-12-22-123851.png" alt=""></div>
+<h6>Textures</h6>
+<p><strong>Override Ambient Occlusion</strong> — allows replacing the default Ambient Occlusion texture with a custom one.</p>
+<p><strong>Override Masks</strong> — enables the use of a custom mask texture, replacing the default weapon masks.</p>
+<p><strong>Override Metalness</strong> — allows overriding the metalness texture with a custom one.</p>
+<p><strong>Override Roughness</strong> — allows overriding the roughness texture with a custom one.</p>
+<p><strong>Override Position</strong> — enables the use of a custom Position Map instead of the default one.</p>
+<p><strong>Override Base Color</strong> — allows replacing the base albedo texture with a custom one.</p>
+<p><strong>Use All Masks</strong> — forces the use of all available masks regardless of the selected style or active effects (triplanar style only).</p>
+<p><strong>Use Custom Normal Map</strong> — enables the use of a custom normal map.</p>
+<p><strong>Use SFX Mask</strong> — enables the use of an SFX mask to control effects such as pearlescence, case hardening, and glitter.</p>
+<hr />
+<p><strong>Pattern Texture</strong> — the pattern texture that defines the distribution of color masks and the pattern layout on the weapon surface.</p>
+<p><strong>Pattern Normal Map</strong> — a normal map for the pattern, adding additional microdetail on top of the base geometry.</p>
+<p><strong>Wear Texture</strong> — the wear texture that defines where and how the coating is worn.</p>
+<p><strong>Grunge Texture</strong> — a dirt and noise texture that adds visual variation and surface detail.</p>
+<p><strong>SFX Mask Texture</strong> — a black-and-white mask that defines where visual effects are applied.</p>
+<p><strong>Overlay Texture</strong> — a full-color texture used as an overlay layer on top of the base albedo.</p>
+<p><strong>Case Hardening Color Ramp</strong> — a full-color texture used to generate gradients in Case Hardening mode.</p>
+<p><strong>Glitter Normal Map</strong> — a normal map used to add microdetail to the glitter effect.</p>
+<p><strong>Glitter Mask Texture</strong> — a mask that defines where the glitter effect is applied.</p>
+<hr />
+<p><strong>Overridden AO</strong> — a custom Ambient Occlusion texture used when Override Ambient Occlusion is enabled.</p>
+<p><strong>Overridden Roughness</strong> — a custom roughness texture that replaces the default one.</p>
+<p><strong>Overridden Metalness</strong> — a custom metalness texture that replaces the default one.</p>
+<p><strong>Overridden Masks</strong> — a custom mask texture that replaces the default weapon masks.</p>
+<p><strong>Overridden Base Color Texture</strong> — a custom base albedo texture used instead of the default one.</p>
+<p><strong>Overridden Position Map</strong> — a custom Position Map that replaces the default one.</p>
+<hr />
+<p><strong>Base Color Texture</strong> — the base albedo texture of the weapon, used as the underlying layer for all skins.</p>
+<p><strong>AO Texture</strong> — the weapon's Ambient Occlusion texture, adding depth and shadowing in recessed areas.</p>
+<p><strong>Exponent Texture</strong> — a texture that defines roughness and metalness properties.</p>
+<p><strong>Weapon Normal Map</strong> — the weapon's normal map, defining surface microdetail.</p>
+<p><strong>Masks Texture</strong> — the default weapon mask texture containing color and utility channels.</p>
+<p><strong>Position Map, Surface Texture</strong> — positioning textures used for triplanar styles.</p>
+<hr />
+<h6>Mesh</h6>
+<p><strong>Preview 3D Model</strong> — the weapon model used for previewing the skin in the widget viewport.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="group-label">Описание настроек для редактирования скина перчаток (старый шейдер)</div>
+      <div class="group-label"><span class="lang-ru">Описание настроек для редактирования скина перчаток (старый шейдер)</span><span class="lang-en">Glove skin editing settings (legacy shader)</span></div>
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Общая структура интерфейса
+            <span class="lang-ru">Общая структура интерфейса</span><span class="lang-en">General interface structure</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/main-glove-1.png" alt=""></div>
             <ol><li><strong>Кнопка возврата (Back)</strong> — возвращает пользователя к списку скинов.</li><li><strong>Падающее меню</strong> —  переключатель режима отображения (Lit, Roughness, Metallic и др.).</li><li><strong>Окно предпросмотра</strong> — реалтайм-отображение материала и всех изменений. Поддержка вращения, зума и смены угла обзора</li><li><strong>Основные настройки материала</strong></li><li><strong>Параметры отображения материала</strong> — настройка Roughness / Metalness</li><li><strong>Настройка UV паттернов и потертостей</strong></li><li><strong>Текстуры</strong>.</li><li><strong>Запекание материала.</strong></li><li><strong>Панель управления камерой</strong>.</li><li><strong>Change Seed</strong> — генерация случайного UV для паттерна.</li><li><b>Bake </b>— сохранение финального Material Instance для дальнейшего использования.</li></ol>
+          </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/main-glove-1.png" alt=""></div>
+<ol>
+  <li><strong>Back Button</strong> — returns the user to the skin list.</li>
+  <li><strong>Dropdown Menu</strong> — switches the display mode (Lit, Roughness, Metallic, etc.).</li>
+  <li><strong>Preview Window</strong> — real-time display of the material and all changes. Supports rotation, zoom, and camera angle adjustment.</li>
+  <li><strong>Core Material Settings</strong></li>
+  <li><strong>Material Display Parameters</strong> — Roughness / Metalness settings</li>
+  <li><strong>UV Pattern and Wear Settings</strong></li>
+  <li><strong>Textures</strong></li>
+  <li><strong>Material Baking</strong></li>
+  <li><strong>Camera Controls</strong></li>
+  <li><strong>Change Seed</strong> — generates a random UV layout for the pattern.</li>
+  <li><b>Bake</b> — saves the final Material Instance for further use.</li>
+</ol>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Main”
+            <span class="lang-ru">Вкладка “Main”</span><span class="lang-en">Tab “Main”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/Screenshot-2025-12-22-133405.png" alt=""></div>
             <h6>Wear</h6>
             <p><strong>Wear Progress</strong> — задаёт общий уровень износа перчаток. Влияет на степень повреждений, выцветание, загрязнение и проявление потертостей.</p>
@@ -468,56 +764,163 @@
             <p><strong>Hue Shift</strong> — сдвигает оттенок всех цветов палитры по цветовому кругу.</p>
             <p><strong>Color Saturation</strong> — регулирует насыщенность итогового цвета материала.</p>
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Screenshot-2025-12-22-133405.png" alt=""></div>
+<h6>Wear</h6>
+<p><strong>Wear Progress</strong> — sets the overall wear level of the gloves. Affects the degree of damage, fading, dirt buildup, and scuff visibility.</p>
+<p><strong>Wear Exponent</strong> — controls the wear distribution curve. Lower values create more uniform wear; higher values concentrate it in specific zones.</p>
+<p><strong>Curvature Wear Boost</strong> — amplifies wear on edges and protruding parts of the geometry. Used to emphasize the glove shape.</p>
+<p><strong>Curvature Wear Power</strong> — sets how strongly surface curvature influences wear. Higher values make wear more localized on sharp edges.</p>
+<p><strong>Grime</strong> — defines the intensity of dirt and grime added on top of the material even at low wear levels.</p>
+<hr />
+<h6>Pattern Settings</h6>
+<p><strong>Use Pattern</strong> — enables a pattern for forming the surface color and details.</p>
+<p style="padding-left: 40px;"><strong>Use Pattern = 0 — Pattern Disabled</strong> — the pattern is completely disabled.
+<strong>Use Pattern = 1 — Pattern Replace (Selective Replacement)</strong> — the pattern is used to replace one specific palette color.
+— the color specified in <code>Pattern Replace Index</code> is excluded from the palette and replaced by the pattern.
+— the remaining palette colors remain unchanged.
+<strong>Use Pattern = 2 — Raw Pattern (Unfiltered Pattern)</strong> — the pattern is used as-is, without palette binding.<br />— <code>Pattern Color Indices</code> are not used.
+<strong>Use Pattern = 3 — Pattern Overlay (Full Palette Modulation)</strong> — the pattern is applied to the entire palette.<br />— each palette color blends with the pattern rather than being selectively replaced.</p>
+<p><strong>Pattern Color Indices</strong> — an array of indices defining which palette colors are used for each color channel of the pattern.</p>
+<p><strong>Pattern Detail Influence</strong> — controls how strongly the pattern affects surface micro-detail and layer blending.</p>
+<p><strong>Pattern Paint Thickness</strong> — sets the virtual thickness of the pattern's paint layer. Affects shading, normals, and interaction with wear.</p>
+<p><strong>Flip Fixup</strong> — corrects normal direction.</p>
+<p><strong>Pattern Replace Index</strong> — specifies which palette color should be replaced by the pattern in modes where the pattern participates in replacement.</p>
+<p><strong>Sample Slice</strong> — determines which texture array layers are sampled for grunge, detail, and detail normal.</p>
+<hr />
+<h6>Color</h6>
+<p><strong>Color 1 – Color 8</strong> — the color palette used for blending the pattern, wear, and base material.</p>
+<p><strong>Color Power</strong> — controls the overall brightness and intensity of the color palette.</p>
+<p><strong>Hue Shift</strong> — shifts the hue of all palette colors along the color wheel.</p>
+<p><strong>Color Saturation</strong> — adjusts the saturation of the final material color.</p>
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Shading”
+            <span class="lang-ru">Вкладка “Shading”</span><span class="lang-en">Tab “Shading”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/Screenshot-2025-12-22-140649.png" alt=""></div>
             <h6>Roughness Top Layer</h6><p><strong>Roughness Top Layer Black</strong> — значение шероховатости верхнего слоя для участков, не попадающих ни под одну цветовую маску (фон).</p><p><strong>Roughness Top Layer R</strong> — шероховатость верхнего слоя для областей, определённых красным каналом маски материала.</p><p><strong>Roughness Top Layer G</strong> — шероховатость верхнего слоя для областей, определённых зелёным каналом маски материала.</p><p><strong>Roughness Top Layer B</strong> — шероховатость верхнего слоя для областей, определённых синим каналом маски материала.</p><hr /><h6>Roughness Bottom Layer</h6><p><strong>Roughness Bottom Layer Black</strong> — шероховатость нижнего слоя (под краской) для немаскированных областей.</p><p><strong>Roughness Bottom Layer R</strong> — шероховатость нижнего слоя для красной маски.</p><p><strong>Roughness Bottom Layer G</strong> — шероховатость нижнего слоя для зелёной маски.</p><p><strong>Roughness Bottom Layer B</strong> — шероховатость нижнего слоя для синей маски.</p><hr /><h6>Metalness</h6><p><strong>Metalness Black</strong> — определяет, будет ли немаскированная часть материала выглядеть как окрашенная поверхность или как металл. Обычно используется для базового диэлектрического материала (кожа, ткань, пластик).</p><p><strong>Metalness R</strong> — управляет значением Metalness для красного канала маски.</p><p><strong>Metalness G</strong> — управляет значением Metalness для зелёного канала маски.</p><p><strong>Metalness B</strong> — управляет значением Metalness для синего канала маски.</p><hr /><h6>Detail Normal Top Layer</h6><p><strong>Detail Normal Top Layer Black</strong> — глубина detail-normal для верхнего слоя вне масок.</p><p><strong>Detail Normal Top Layer R</strong> — глубина detail-normal для верхнего слоя в красной маске.</p><p><strong>Detail Normal Top Layer G</strong> — глубина detail-normal для верхнего слоя в зелёной маске.</p><p><strong>Detail Normal Top Layer B</strong> — глубина detail-normal для верхнего слоя в синей маске.</p><hr /><h6>Detail Normal Bottom Layer</h6><p><strong>Detail Normal Bottom Layer Black</strong> — глубина detail-normal для нижнего слоя вне масок.</p><p><strong>Detail Normal Bottom Layer R</strong> — глубина detail-normal для нижнего слоя в красной маске.</p><p><strong>Detail Normal Bottom Layer G</strong> — глубина detail-normal для нижнего слоя в зелёной маске.</p><p><strong>Detail Normal Bottom Layer B</strong> — глубина detail-normal для нижнего слоя в синей маске.</p><p>Эти значения участвуют в формировании изношенных и повреждённых нормалей</p>
           </div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “UVs”
-            <span class="chevron">&#9654;</span>
-          </button>
-          <div class="accordion-body">
-            <div class="section-img"><img src="img/Screenshot-2025-12-22-141755.png" alt=""></div>
-            <h6>Pattern UV</h6><p><strong>Pattern Scale</strong> — задает масштаб паттерна на перчатках. Больше значение — мельче паттерн.</p><p><strong>Pattern Rotation</strong> — поворачивает паттерн вокруг центра, изменяя ориентацию рисунка на поверхности перчаток.</p><p><strong>Pattern Offset U/V</strong> — сдвиг паттерна.</p><hr /><h6>Detail UV</h6><p><strong>Detail Scale</strong> — контролирует плотность мелких мелкого шума и повреждений.</p><hr /><h6><strong>Grunge UV</strong></h6><p><strong>Grunge Scale</strong> — управляет размером грязи и следов износа: мелкая или крупная текстура.</p><p><strong>Grunge Rotation</strong> — поворачивает текстуру грязи и износа.</p><p><strong>Grunge Offset U / V</strong> — сдвиг  грязи и износа.</p>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Screenshot-2025-12-22-140649.png" alt=""></div>
+<h6>Roughness Top Layer</h6>
+<p><strong>Roughness Top Layer Black</strong> — roughness of the top layer for areas not covered by any color mask (background).</p>
+<p><strong>Roughness Top Layer R</strong> — roughness of the top layer for areas defined by the red channel of the material mask.</p>
+<p><strong>Roughness Top Layer G</strong> — roughness of the top layer for areas defined by the green channel of the material mask.</p>
+<p><strong>Roughness Top Layer B</strong> — roughness of the top layer for areas defined by the blue channel of the material mask.</p>
+<hr />
+<h6>Roughness Bottom Layer</h6>
+<p><strong>Roughness Bottom Layer Black</strong> — roughness of the bottom layer (beneath the paint) for unmasked areas.</p>
+<p><strong>Roughness Bottom Layer R</strong> — roughness of the bottom layer for the red mask.</p>
+<p><strong>Roughness Bottom Layer G</strong> — roughness of the bottom layer for the green mask.</p>
+<p><strong>Roughness Bottom Layer B</strong> — roughness of the bottom layer for the blue mask.</p>
+<hr />
+<h6>Metalness</h6>
+<p><strong>Metalness Black</strong> — defines whether the unmasked portion of the material appears as a painted surface or as metal. Typically used for the base dielectric material (leather, fabric, plastic).</p>
+<p><strong>Metalness R</strong> — controls the Metalness value for the red channel mask.</p>
+<p><strong>Metalness G</strong> — controls the Metalness value for the green channel mask.</p>
+<p><strong>Metalness B</strong> — controls the Metalness value for the blue channel mask.</p>
+<hr />
+<h6>Detail Normal Top Layer</h6>
+<p><strong>Detail Normal Top Layer Black</strong> — detail normal depth for the top layer outside masks.</p>
+<p><strong>Detail Normal Top Layer R</strong> — detail normal depth for the top layer in the red mask.</p>
+<p><strong>Detail Normal Top Layer G</strong> — detail normal depth for the top layer in the green mask.</p>
+<p><strong>Detail Normal Top Layer B</strong> — detail normal depth for the top layer in the blue mask.</p>
+<hr />
+<h6>Detail Normal Bottom Layer</h6>
+<p><strong>Detail Normal Bottom Layer Black</strong> — detail normal depth for the bottom layer outside masks.</p>
+<p><strong>Detail Normal Bottom Layer R</strong> — detail normal depth for the bottom layer in the red mask.</p>
+<p><strong>Detail Normal Bottom Layer G</strong> — detail normal depth for the bottom layer in the green mask.</p>
+<p><strong>Detail Normal Bottom Layer B</strong> — detail normal depth for the bottom layer in the blue mask.</p>
+<p>These values contribute to forming worn and damaged normals.</p>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Textures”
+            <span class="lang-ru">Вкладка “UVs”</span><span class="lang-en">Tab “UVs”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
+            <div class="section-img"><img src="img/Screenshot-2025-12-22-141755.png" alt=""></div>
+            <h6>Pattern UV</h6><p><strong>Pattern Scale</strong> — задает масштаб паттерна на перчатках. Больше значение — мельче паттерн.</p><p><strong>Pattern Rotation</strong> — поворачивает паттерн вокруг центра, изменяя ориентацию рисунка на поверхности перчаток.</p><p><strong>Pattern Offset U/V</strong> — сдвиг паттерна.</p><hr /><h6>Detail UV</h6><p><strong>Detail Scale</strong> — контролирует плотность мелкого шума и повреждений.</p><hr /><h6><strong>Grunge UV</strong></h6><p><strong>Grunge Scale</strong> — управляет размером грязи и следов износа: мелкая или крупная текстура.</p><p><strong>Grunge Rotation</strong> — поворачивает текстуру грязи и износа.</p><p><strong>Grunge Offset U / V</strong> — сдвиг  грязи и износа.</p>
+          </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Screenshot-2025-12-22-141755.png" alt=""></div>
+<h6>Pattern UV</h6>
+<p><strong>Pattern Scale</strong> — sets the scale of the pattern on the gloves. Higher values make the pattern finer.</p>
+<p><strong>Pattern Rotation</strong> — rotates the pattern around its center, changing the orientation of the design on the glove surface.</p>
+<p><strong>Pattern Offset U/V</strong> — shifts the pattern position.</p>
+<hr />
+<h6>Detail UV</h6>
+<p><strong>Detail Scale</strong> — controls the density of fine noise and damage details.</p>
+<hr />
+<h6><strong>Grunge UV</strong></h6>
+<p><strong>Grunge Scale</strong> — controls the size of dirt and wear marks: fine or coarse texture.</p>
+<p><strong>Grunge Rotation</strong> — rotates the dirt and wear texture.</p>
+<p><strong>Grunge Offset U / V</strong> — shifts the dirt and wear texture position.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="lang-ru">Вкладка “Textures”</span><span class="lang-en">Tab “Textures”</span>
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/Screenshot-2025-12-22-142319.png" alt=""></div>
             <h6>Textures</h6><p><strong>AO</strong> — текстура, влияющая на затемнение, износ и повреждения материала.</p><p><strong>Material Mask</strong> — текстура, используемая для выбора значений цвета, шероховатости, normal detail, износа и других параметров по каналам R, G и B.</p><p><strong>Noise</strong> — добавляет случайность и «живость» цвету, убирая плоский вид.</p><p><strong>Normal</strong> — оригинальная текстура нормалей перчаток, к которой добавляются detail-нормали, износ и рельеф краёв.</p><p><strong>Pattern</strong> — основная текстура скина.</p><p><strong>Detail</strong> — добавляет мелкую текстуру, делая поверхность более реалистичной.</p><p><strong>Detail Normal</strong> — добавляет ощущение мелких неровностей и шероховатости.</p><p><strong>Grunge</strong> — текстура, отвечающая за грязь, потёртости и следы использования.</p>
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Screenshot-2025-12-22-142319.png" alt=""></div>
+<h6>Textures</h6>
+<p><strong>AO</strong> — a texture affecting darkening, wear, and material damage.</p>
+<p><strong>Material Mask</strong> — a texture used to select color values, roughness, normal detail, wear, and other parameters by R, G, and B channels.</p>
+<p><strong>Noise</strong> — adds randomness and liveliness to the color, eliminating a flat appearance.</p>
+<p><strong>Normal</strong> — the original glove normal texture, to which detail normals, wear, and edge relief are added.</p>
+<p><strong>Pattern</strong> — the primary skin texture.</p>
+<p><strong>Detail</strong> — adds fine texture, making the surface more realistic.</p>
+<p><strong>Detail Normal</strong> — adds the sense of small bumps and surface roughness.</p>
+<p><strong>Grunge</strong> — a texture responsible for dirt, scuffs, and signs of use.</p>
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Bake Settings”
+            <span class="lang-ru">Вкладка “Bake Settings”</span><span class="lang-en">Tab “Bake Settings”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/Screenshot-2025-12-22-142739.png" alt=""></div>
             <h6>Bake Settings</h6><p><strong>Open Material Instance</strong> — после запекания сразу открывает итоговый Material Instance для проверки.</p><p><strong>Baked Texture Size</strong> — качество финальных текстур после запекания.</p><p><strong>Destination Directory</strong> — папка, в которую будут сохранены все запечённые текстуры.</p>
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Screenshot-2025-12-22-142739.png" alt=""></div>
+<h6>Bake Settings</h6>
+<p><strong>Open Material Instance</strong> — after baking, immediately opens the resulting Material Instance for review.</p>
+<p><strong>Baked Texture Size</strong> — the quality of the final textures after baking.</p>
+<p><strong>Destination Directory</strong> — the folder where all baked textures will be saved.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="group-label">Описание настроек для редактирования скина перчаток (новый шейдер)</div>
+      <div class="group-label"><span class="lang-ru">Описание настроек для редактирования скина перчаток (новый шейдер)</span><span class="lang-en">Glove skin editing settings (new shader)</span></div>
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Общая структура интерфейса
+            <span class="lang-ru">Общая структура интерфейса</span><span class="lang-en">General interface structure</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/Artboard-1.png" alt=""></div>
             <ol>
              	<li><strong>Кнопка возврата (Back)</strong> — возвращает пользователя к списку скинов.</li>
@@ -544,13 +947,42 @@
              	<li><b>Save </b>— сохранение финального Material Instance для дальнейшего использования.</li>
             </ol>
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/Artboard-1.png" alt=""></div>
+<ol>
+  <li><strong>Back Button</strong> — returns the user to the skin list.</li>
+  <li><strong>"Texture View" Toggle</strong> — displays the UV layout.</li>
+  <li><strong>Dropdown Menu</strong> — switches the display mode (Lit, Roughness, Metallic, etc.).
+<ul>
+  <li><strong>Lit</strong> — the final glove view with albedo, lighting, tint, and damage.</li>
+  <li><strong>Roughness</strong> — surface roughness. White = matte, black = glossy.</li>
+  <li><strong>Metalness</strong> — metallic and non-metallic surface areas. White = metal, black = leather or fabric.</li>
+  <li><strong>Normal</strong> — surface relief.</li>
+  <li><strong>Layer Mask</strong> — layer weights (RGBA = layers 1–4). Shows which layer is applied at each point on the surface.</li>
+  <li><strong>Tint Zone</strong> — visualization of 8 tint zones in rainbow colors (red → orange → yellow → ... → purple). Each color is a separate zone that can be recolored independently.</li>
+  <li><strong>Tint RGB</strong> — the final paint color applied to the glove.</li>
+</ul>
+  </li>
+  <li><strong>Preview Window</strong> — real-time display of the material and all changes. Supports rotation, zoom, and camera angle adjustment.</li>
+  <li><strong>Core Material Settings</strong></li>
+  <li><strong>Material Display Parameters</strong> — pattern, Roughness / Metalness settings</li>
+  <li><strong>UV Pattern and Wear Settings for all layers</strong></li>
+  <li><b>Advanced glove settings for all 4 layers</b></li>
+  <li><strong>Skin Textures</strong></li>
+  <li><strong>Camera Controls</strong></li>
+  <li><strong>Random Seed</strong> — generates a random UV layout for the pattern.</li>
+  <li><b>Save</b> — saves the final Material Instance for further use.</li>
+</ol>
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Main”
+            <span class="lang-ru">Вкладка “Main”</span><span class="lang-en">Tab “Main”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image.png" alt=""></div>
             <h6>Wear</h6>
             <p><strong>Wear Progress</strong><span> — Степень износа перчатки. </span><code>0</code><span> — как новая, </span><code>1</code><span> — максимально потёртая с царапинами и грязью.</span></p>
@@ -568,13 +1000,31 @@
 
             <strong>Pattern Hue</strong> — Сдвиг оттенка паттерна. <code>0</code> — без изменений, значения от <code>-1</code> до <code>1</code> соответствуют повороту цвета на <code>-360°</code>..<code>+360°</code> по цветовому кругу.
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/image.png" alt=""></div>
+<h6>Wear</h6>
+<p><strong>Wear Progress</strong> — the degree of glove wear. <code>0</code> — like new, <code>1</code> — maximally worn with scratches and dirt.</p>
+<hr />
+<h6>Color</h6>
+<p><strong>Id 1–8 Color</strong> — color and tint intensity for each of the 8 zones. The color defines the zone's hue; the alpha (A) determines how strongly this color repaints the surface.</p>
+<p><strong>Id 1–8 Pattern</strong> — whether to display the pattern in this zone. If disabled — the pattern is hidden in the zone, even if it is enabled globally.</p>
+<strong>Pattern Brightness</strong> — pattern brightness. <code>1.0</code> — unchanged, lower = darker, higher = brighter.
+
+<strong>Pattern Contrast</strong> — pattern contrast. <code>1.0</code> — unchanged, lower = softer, higher = sharper difference between light and dark.
+
+<strong>Pattern Saturation</strong> — pattern color saturation. <code>1.0</code> — unchanged, <code>0</code> — fully grayscale.
+
+<strong>Pattern Hue</strong> — pattern hue shift. <code>0</code> — unchanged, values from <code>-1</code> to <code>1</code> correspond to rotation of <code>-360°</code>..<code>+360°</code> on the color wheel.
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Shading”
+            <span class="lang-ru">Вкладка “Shading”</span><span class="lang-en">Tab “Shading”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-1.png" alt=""></div>
             <h6>Pattern</h6>
             <strong>Pattern Enabled</strong> — Включает отображение рисунка на перчатке. Если выключено — паттерн не виден.
@@ -622,13 +1072,58 @@
 
             <strong>Substrate Burnishing Roughness Brightness 1–4</strong> — Шероховатость нижнего слоя материала в зонах износа. Меньше <code>1</code> — подложка блестит при протирании.
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/image-1.png" alt=""></div>
+<h6>Pattern</h6>
+<strong>Pattern Enabled</strong> — enables display of the pattern on the glove. If disabled — the pattern is not visible.
+
+<strong>Pattern Paint Layer</strong> — pattern blending mode. Disabled — the pattern affects surface coloring from within. Enabled — the pattern is applied on top of the finished color.
+
+<strong>Tint ID</strong> — enables the zone coloring system. When disabled, all zone color settings are ignored.
+
+<strong>Flip Fixup</strong> — mirrors UVs horizontally. Needed for the right glove so the pattern is oriented symmetrically to the left.
+
+<strong>Pattern Cloth</strong> — how much the glove fabric in the pattern area gives a velvety sheen.
+
+<strong>Pattern Emboss</strong> — height of the relief along pattern edges. The higher the value, the more the paint appears raised. Only works with Pattern Paint Emboss enabled.
+
+<strong>Pattern Normal Distortion</strong> — how much surface relief distorts the pattern placement. Higher values make the design follow surface bumps more strongly.
+
+<strong>Pattern Translucency Threshold</strong> — pattern transparency threshold for the embossed paint mode. Pixels below the threshold do not participate in the relief.
+
+<strong>Pattern Paint Emboss</strong> — pattern transparency interpretation mode. Disabled — semi-transparent areas show through (watercolor, hand-painted). Enabled — the paint becomes solid and gains raised edges.
+
+<strong>Pattern Paint Respects Tint Mask</strong> — whether to consider the tint mask when applying the pattern. At value <code>1</code>, the pattern is only visible where the surface can be tinted.
+
+<hr />
+<h6>Roughness</h6>
+<p><strong>Roughness Layer 1–4</strong> — roughness multiplier for each material layer. <code>1.0</code> — unchanged, lower = glossier, higher = more matte.</p>
+<hr />
+<h6>Normals</h6>
+<p><strong>Normal Layer 1–4</strong> — relief intensity for each layer. <code>1.0</code> — unchanged, <code>0</code> — surface is completely smooth.</p>
+<hr />
+<h6>Shading</h6>
+<strong>Damage Bevel Metalness 1–4</strong> — metalness of scratch edges on layer N. Higher values make scratches look like exposed metal.
+
+<strong>Damage Bevel Roughness Brightness 1–4</strong> — roughness of scratch edges on layer N. Below <code>1</code> — edges are shiny, above — matte.
+
+<strong>Grime Roughness Brightness 1–4</strong> — how much dirt makes layer N surface more matte. Above <code>1</code> — dirty areas lose shine more strongly.
+
+<strong>Burnishing Metalness 1–4</strong> — metalness of worn areas on layer N. Simulates exposure of metal beneath the coating during wear.
+
+<strong>Surface Burnishing Roughness Brightness 1–4</strong> — roughness of the main surface in wear zones of layer N. Below <code>1</code> — worn spots are shiny (polishing effect).
+
+<strong>Substrate Burnishing Roughness Brightness 1–4</strong> — roughness of the bottom material layer in wear zones. Below <code>1</code> — the substrate shines when rubbed.
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “UVs”
+            <span class="lang-ru">Вкладка “UVs”</span><span class="lang-en">Tab “UVs”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-2.png" alt=""></div>
             <h6>UV - Pattern</h6>
             <strong>Pattern Rotation</strong> — Угол поворота паттерна в градусах. <code>0</code> — без поворота.
@@ -664,13 +1159,48 @@
 
             <strong>UV Scale 1...4 U / V</strong> — Масштаб тайлинга текстур слоя N. Больше — текстура мельче и повторяется чаще.
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/image-2.png" alt=""></div>
+<h6>UV - Pattern</h6>
+<strong>Pattern Rotation</strong> — pattern rotation angle in degrees. <code>0</code> — no rotation.
+
+<strong>Pattern Offset U / V</strong> — pattern shift horizontally / vertically.
+
+<strong>Pattern Scale U / V</strong> — pattern scale horizontally / vertically. Higher = finer pattern and more repetitions, lower = larger.
+
+<strong>Pattern Center</strong> — the point around which pattern rotation and scaling are applied. Default is center (<code>0.5, 0.5</code>).
+
+<hr />
+<h6>UV - Grime</h6>
+<strong>Grime Rotation</strong> — rotation angle of the dirt texture.
+
+<strong>Grime Offset U / V</strong> — dirt texture shift horizontally / vertically.
+
+<strong>Grime UV Scale 1–4</strong> — dirt tiling scale for each material layer. Higher = finer dirt.
+
+<hr />
+<h6>UV - Damage</h6>
+<strong>Damage Rotation</strong> — rotation angle of the scratch texture.
+
+<strong>Damage Offset U / V</strong> — scratch texture shift horizontally / vertically.
+
+<strong>Damage UV Scale 1–4</strong> — scratch tiling scale for each layer. Higher = finer scratches.
+
+<hr />
+<h6>UV - Layer 1–4</h6>
+<strong>UV Offset 1...4 U / V</strong> — layer N texture shift horizontally / vertically.
+
+<strong>UV Scale 1...4 U / V</strong> — layer N texture tiling scale. Higher = finer texture and more repetitions.
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Advanced”
+            <span class="lang-ru">Вкладка “Advanced”</span><span class="lang-en">Tab “Advanced”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-3.png" alt=""></div>
             <h6>Adv - Damage</h6>
             <strong>Damage Height Blend Softness 1–4</strong> — Плавность перехода между чистой поверхностью и зоной царапин слоя N. Выше — граница размытее.
@@ -754,13 +1284,94 @@
 
             <strong>Substrate Grime Min Max 1–4</strong><span> — Диапазон износа для накопления грязи на подложке слоя N. R = начало появления грязи, G = максимальная загрязнённость.</span>
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/image-3.png" alt=""></div>
+<h6>Adv - Damage</h6>
+<strong>Damage Height Blend Softness 1–4</strong> — softness of the transition between the clean surface and the scratch zone of layer N. Higher = more blurred boundary.
+
+<strong>Damage Min Max 1–4</strong> — wear range for scratches to appear on layer N. R = wear level at which damage begins, G = level of full wear.
+
+<hr />
+<h6>Adv - Damage Bevel</h6>
+<strong>Damage Bevel Anisotropy 1–4</strong> — directionality of the highlight on scratch edges. <code>0</code> — isotropic highlight, higher = highlight stretches along the edge.
+
+<strong>Damage Bevel Blend Softness 1–4</strong> — softness of scratch edges on layer N. Higher = edges are more blurred and soft.
+
+<strong>Damage Bevel Cloth 1–4</strong> — how much fabric gives a velvety sheen on scratch edges of layer N.
+
+<strong>Damage Bevel Color Brightness 1–4</strong> — brightness of the scratch edge color on layer N.
+
+<strong>Damage Bevel Color Contrast 1–4</strong> — contrast of the scratch edge color on layer N.
+
+<strong>Damage Bevel Color Saturation 1–4</strong> — saturation of the scratch edge color on layer N. <code>0</code> — grayscale edges.
+
+<strong>Damage Bevel Emboss 1–4</strong> — relief height on scratch edges of layer N. Higher = edges appear more raised.
+
+<strong>Damage Bevel Color Tint 1–4</strong> — color tint of scratch edges on layer N. Allows tinting the edges a different color.
+
+<strong>Damage Bevel Blend to Substrate 1–4</strong> — whether deep scratches transition to the bottom material layer. Enabled — what is "underneath" the surface becomes visible.
+
+<strong>Damage Bevel Use Tint Mask 1–4</strong> — whether to consider the tint mask when displaying scratch edges. Enabled — edges are only visible where the surface can be tinted.
+
+<hr />
+<h6>Adv - Grime</h6>
+<strong>Grime Translucency 1–4</strong> — overall dirt visibility on layer N. <code>0</code> — no dirt, <code>1</code> — dirt fully visible.
+
+<hr />
+<h6>Adv - Burnishing</h6>
+<strong>Burnishing Cloth 1–4</strong> — how much worn spots on layer N give a velvety fabric sheen.
+
+<strong>Burnishing Color Brightness 1–4</strong> — brightness of the surface in worn zones of layer N.
+
+<strong>Burnishing Color Contrast 1–4</strong> — contrast of the surface in worn zones of layer N.
+
+<strong>Burnishing Color Saturation 1–4</strong> — saturation of worn zone colors on layer N.
+
+<strong>Burnishing Grime 1–4</strong> — minimum dirt level in worn zones of layer N. Dirt does not disappear completely even on shiny areas.
+
+<strong>Burnishing Normal Scale 1–4</strong> — surface relief intensity in worn zones of layer N.
+
+<strong>Burnishing Color Tint 1–4</strong> — color tint of worn zones on layer N.
+
+<hr />
+<h6>Adv - Surface</h6>
+<strong>Surface Color Brightness 1–4</strong> — brightness of the main texture of layer N.
+
+<strong>Surface Color Contrast 1–4</strong> — contrast of the main texture of layer N.
+
+<strong>Surface Color Saturation 1–4</strong> — saturation of the main texture of layer N. <code>0</code> — grayscale.
+
+<strong>Surface Color Tint 1–4</strong> — color and tinting strength of the main surface of layer N. Alpha (A) sets tint intensity.
+
+<strong>Surface Burnishing Min Max 1–4</strong> — wear range for the polishing effect on the main surface of layer N. R = effect start, G = maximum intensity.
+
+<strong>Surface Grime Min Max 1–4</strong> — wear range for dirt accumulation on the main surface of layer N. R = dirt appearance start, G = maximum dirtiness.
+
+<hr />
+<h6>Adv - Substrate</h6>
+<strong>Substrate Color Brightness 1–4</strong> — brightness of the bottom material layer (substrate) of layer N.
+
+<strong>Substrate Color Contrast 1–4</strong> — contrast of the substrate of layer N.
+
+<strong>Substrate Color Saturation 1–4</strong> — saturation of the substrate of layer N.
+
+<strong>Substrate Composite Color Translucency 1–4</strong> — how strongly zone color tints the substrate of layer N. <code>0</code> — substrate is not tinted, <code>1</code> — fully tinted.
+
+<strong>Substrate Color Tint 1–4</strong> — color tint of the substrate of layer N.
+
+<strong>Substrate Burnishing Min Max 1–4</strong> — wear range for the polishing effect on the substrate of layer N. R = effect start, G = maximum intensity.
+
+<strong>Substrate Grime Min Max 1–4</strong> — wear range for dirt accumulation on the substrate of layer N. R = dirt appearance start, G = maximum dirtiness.
+            </div>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Textures”
+            <span class="lang-ru">Вкладка “Textures”</span><span class="lang-en">Tab “Textures”</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-4.png" alt=""></div>
             <strong>Pattern Texture</strong> — Рисунок/декаль на перчатке. RGB = цвет, A = маска прозрачности (компрессия: <code>BC7</code>, sRGB вкл).
 
@@ -790,12 +1401,90 @@
 
             <strong>Tint ID Texture</strong> — Карта зон окраски. R-канал кодирует одну из 8 зон, каждую из которых можно покрасить независимо (компрессия: <code>Grayscale</code>, sRGB выкл).
           </div>
+            <div class="lang-en">
+<div class="section-img"><img src="img/image-4.png" alt=""></div>
+<strong>Pattern Texture</strong> — the pattern/decal on the glove. RGB = color, A = transparency mask (compression: <code>BC7</code>, sRGB on).
+
+<strong>Damage Texture 1–4</strong> — scratch and wear mask for layer N. R channel only — lighter areas = more damage (compression: <code>Grayscale</code>, sRGB off).
+
+<strong>Grime Texture 1–4</strong> — dirt and dust texture for layer N. RGB = dirt color applied to worn areas (compression: <code>BC7</code>, sRGB on).
+
+<strong>Substrate Texture 1–4</strong> — the bottom material layer (leather, plastic, fabric) showing through scratches and wear. RGB = color, A = zone tinting mask (compression: <code>BC7</code>, sRGB on).
+
+<strong>Substrate Normal 1–4</strong> — normal map of the bottom layer. Defines substrate relief in worn zones (compression: <code>BC7</code>, sRGB off).
+
+<strong>Substrate Properties 1–4</strong> — PBR data for the substrate. R = min roughness, G = metalness, B = cloth factor, A = lower threshold of the damage range (compression: <code>BC7</code>, sRGB off).
+
+<strong>Surface Texture 1–4</strong> — main surface texture of layer N. RGB = color, A = zone tinting mask (compression: <code>BC7</code>, sRGB on).
+
+<strong>Surface Normal 1–4</strong> — normal map of the main surface of layer N. X/Z channels also store the roughness range (compression: <code>BC7</code>, sRGB off).
+
+<strong>Surface Properties 1–4</strong> — PBR data for the surface. R = min roughness, G = metalness, B = cloth factor, A = upper damage threshold (compression: <code>BC7</code>, sRGB off).
+
+<strong>Layer ID</strong> — layer mask. R/G/B = weights of layers 1/2/3, weight of layer 4 is calculated automatically. Defines which material is visible at each point (compression: <code>BC7</code>, sRGB off).
+
+<strong>Normal Map</strong> — base normal map of the object. Defines mesh relief — seams, folds, embossing (compression: <code>BC7</code>, sRGB off).
+
+<strong>Object Properties</strong> — baked object data. R = AO (corner shadows), G = baked damage, B = wear strength per pixel (compression: <code>BC7</code>, sRGB off).
+
+<strong>Pattern Properties</strong> — PBR properties of the pattern. R = metalness, G = roughness of the paint layer (compression: <code>BC7</code>, sRGB off).
+
+<strong>Tint ID Texture</strong> — tint zone map. R channel encodes one of 8 zones, each of which can be colored independently (compression: <code>Grayscale</code>, sRGB off).
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </main>
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
   <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
   <script>
+    fetch('../updates/s2skinsmanager.json')
+      .then(r => r.json())
+      .then(data => {
+        const btn = document.getElementById('download-btn');
+        if (data.download_url) btn.href = data.download_url;
+        if (data.download_source) {
+          document.getElementById('dl-label-ru').textContent = 'Скачать (' + data.download_source + ')';
+          document.getElementById('dl-label-en').textContent = 'Download (' + data.download_source + ')';
+        }
+        if (data.file_size) {
+          const badge = document.getElementById('file-size-badge');
+          badge.textContent = data.file_size;
+          badge.style.display = '';
+        }
+      })
+      .catch(() => {});
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.hero-img img').forEach(img => {
+      const check = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          const container = img.closest('.hero-img');
+          container.classList.add('vertical');
+          if (img.naturalWidth < 600) container.style.maxWidth = img.naturalWidth + 'px';
+        }
+      };
+      if (img.complete) check();
+      else img.addEventListener('load', check);
+    });
+    document.querySelectorAll('.section-img img').forEach(img => {
+      const check = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          img.closest('.section-img').classList.add('vertical');
+        }
+      };
+      if (img.complete) check();
+      else img.addEventListener('load', check);
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('open');
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('open'); }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     function setLang(lang) {
       document.body.className = 'lang-' + lang;
       document.querySelectorAll('.lang-btn').forEach(btn => {

@@ -59,11 +59,22 @@
     .accordion-body h6 strong { font-weight: 600; color: #c9d1d9; }
     .section-img { margin: 0 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid #21262d; }
     .section-img img { width: 100%; display: block; }
+    body.lang-en .lang-ru { display: none; }
+    body.lang-ru .lang-en { display: none; }
+    .badge-size { background: #161b22; border: 1px solid #30363d; color: #6e7681; }
+    .section-img img { cursor: zoom-in; }
+    .section-img.vertical { max-width: 450px; margin-left: auto; margin-right: auto; }
+    .section-img.vertical img { width: 100%; }
+    .hero-img.vertical { max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero-img.vertical img { width: 100%; }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 6px; object-fit: contain; box-shadow: 0 8px 48px rgba(0,0,0,0.7); }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
     footer a { color: #484f58; }
   </style>
 </head>
-<body>
+<body class="lang-ru">
   <header>
     <div class="breadcrumb">
       <a href="../">Adenex</a>
@@ -78,14 +89,16 @@
   <main>
     <div class="hero-name">S2 Stickers Manager</div>
     <div class="hero-meta">
-      <span class="badge badge-type">Виджет</span>
+      <span class="badge badge-type"><span class="lang-ru">Виджет</span><span class="lang-en">Widget</span></span>
       <span class="badge badge-version">v2.1</span>
+      <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
     </div>
     <div class="hero-desc">
-      Виджет для просмотра, редактирования и импорта стикеров и граффити из CS2 для Unreal Engine. Полный контроль над материалами, износом, цветами и визуальными эффектами.
+      <span class="lang-ru">Виджет для просмотра, редактирования и импорта стикеров и граффити из CS2 для Unreal Engine. Полный контроль над материалами, износом, цветами и визуальными эффектами.</span>
+      <span class="lang-en">A widget for viewing, editing, and importing stickers and graffiti from Counter-Strike 2 into Unreal Engine. The widget allows you to configure and create assets with full control over materials, wear, colors, and visual effects.</span>
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="">&#x21E9; Скачать</a>
+      <a class="btn btn-primary" id="download-btn" href=""><span class="lang-ru" id="dl-label-ru">Скачать</span><span class="lang-en" id="dl-label-en">Download</span></a>
       <a class="btn btn-secondary" href="changelog.html">Changelog</a>
     </div>
     <div class="hero-img">
@@ -95,10 +108,11 @@
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Основные возможности
+            <span class="lang-ru">Основные возможности</span><span class="lang-en">Key Features</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <ul>
              	<li>Просмотр и управление большой библиотекой стикеров и граффити</li>
              	<li>Виджет имеет встроенную систему фильтрации, которая позволяет быстро находить визуально подходящие элементы и значительно сокращает время навигации по коллекции.
@@ -107,23 +121,45 @@
              	<li>Поддержка стилей: Paper, Glitter, Metallic, Holographic, Lenticular и Graffiti</li>
              	<li>Самообновляемая система добавления новых стикеров и граффити</li>
             </ul>
+            </div>
+            <div class="lang-en">
+            <ul>
+              <li>Browse and manage a large library of stickers and graffiti</li>
+              <li>The widget includes a built-in filtering system that helps you quickly find visually suitable items and significantly reduces navigation time across the collection. Stickers can be filtered by dominant color.</li>
+              <li>Full real-time material customization</li>
+              <li>Supports styles: Paper, Glitter, Metallic, Holographic, Lenticular, and Graffiti</li>
+              <li>Self-updating system for adding new stickers and graffiti</li>
+            </ul>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Требования
+            <span class="lang-ru">Требования</span><span class="lang-en">Requirements</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <ul><li>Unreal Engine 5.6 или новее</li><li>PyToolkit plugin (версии 1.8 и выше)</li><li><p>Установленная <strong>Counter-Strike 2</strong></p></li><li><p>Утилита <strong>Source2Viewer CLI</strong> для декомпиляции моделей и текстур</p></li><li><p>Свободное место на диске (первый запуск может импортировать несколько тысяч текстур)</p></li></ul>
+            </div>
+            <div class="lang-en">
+            <ul>
+              <li>Unreal Engine 5.6 or newer</li>
+              <li>PyToolkit plugin (version 1.8 or higher)</li>
+              <li><p>Installed <strong>Counter-Strike 2</strong></p></li>
+              <li><p>The <strong>Source2Viewer CLI</strong> utility for decompiling models and textures</p></li>
+              <li><p>Available disk space (the first run may import several thousand textures)</p></li>
+            </ul>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Установка
+            <span class="lang-ru">Установка</span><span class="lang-en">Installation</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-27.png" alt=""></div>
             <a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Скачайте</strong> </a>и распакуйте плагин <strong>PyToolkit </strong>(минимум 1.8 версии) в папку <strong>Plugins</strong> в корневой директории Unreal Engine <code>(C:\Program Files\Epic Games\UE_5.6\Engine\Plugins)</code>.
 
@@ -139,7 +175,7 @@
             <div class="section-img"><img src="img/image-29.png" alt=""></div>
             <ol>
              	<li>Скачайте архив с виджетом</li>
-             	<li>Распакуйте содержимое архива. Откройте в скачанном архипапку <strong>Content</strong> и скопируйте все её файлы в папку <strong>Content</strong> вашего проекта.</li>
+             	<li>Распакуйте содержимое архива. Откройте в скачанном архиве папку <strong>Content</strong> и скопируйте все её файлы в папку <strong>Content</strong> вашего проекта.</li>
              	<li>В <strong>Content Browser</strong> найдите папку <strong>Widgets</strong>. Кликните по виджету <strong>S2_StickersManager</strong> правой кнопкой мыши и выберите <strong>Run Editor Utility Widget</strong>.</li>
             </ol>
             Виджет готов к работе.
@@ -156,16 +192,55 @@
             <p><strong>Decompiled Folder</strong><br />Любая папка, куда будут складываться  декомпилированные файлы из игры (главное, чтобы на диске хватало места).</p>
             </li>
             </ul>
-            После импорта всех стикеров можно будет выбрать любой стикер из нужной капсулы, а так же воспользоваться полем поиска
+            После импорта всех стикеров можно будет выбрать любой стикер из нужной капсулы, а также воспользоваться полем поиска
+            </div>
+            <div class="lang-en">
+            <div class="section-img"><img src="img/image-27.png" alt=""></div>
+            <p><a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Download</strong></a> and extract the <strong>PyToolkit</strong> plugin (version 1.8 or higher) into the <strong>Plugins</strong> folder in the root directory of Unreal Engine <code>(C:\Program Files\Epic Games\UE_5.6\Engine\Plugins)</code>.</p>
+            <p>Launch Unreal Engine and enable the following plugins (via <strong>Edit &gt; Plugins</strong>):</p>
+            <ul>
+              <li>Editor Scripting Utilities</li>
+              <li>Python Editor Script Plugin</li>
+              <li>HTTP Blueprint</li>
+              <li>PyToolkit</li>
+            </ul>
+            <p>Then restart the engine.</p>
+            <div class="section-img"><img src="img/image-29.png" alt=""></div>
+            <ol>
+              <li>Download the widget archive</li>
+              <li>Extract the contents of the archive. Open the <strong>Content</strong> folder in the downloaded archive and copy all its files into your project's <strong>Content</strong> folder.</li>
+              <li>In the <strong>Content Browser</strong>, locate the <strong>Widgets</strong> folder. Right-click the <strong>S2_StickersManager</strong> widget and select <strong>Run Editor Utility Widget</strong>.</li>
+            </ol>
+            <p>The widget is ready to use.</p>
+            <div class="section-img"><img src="img/image.png" alt=""></div>
+            <p>On the first launch, you'll be prompted to fill in the settings fields and import all detected stickers and graffiti.</p>
+            <ul>
+              <li><p><strong>Decompiler Executable</strong><br />Path to the <a href="https://github.com/ValveResourceFormat/ValveResourceFormat/releases"><strong>Source2Viewer CLI</strong></a> decompiler (usually named <span class="Truncate-text text-bold">cli-windows-x64.zip</span>).</p></li>
+              <li><p><strong>Game Folder</strong><br />Path to your installed CS2 (for example: D:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive).</p></li>
+              <li><p><strong>Decompiled Folder</strong><br />Any folder where decompiled game files will be stored (make sure you have enough disk space).</p></li>
+            </ul>
+            <p>After all stickers are imported, you'll be able to select any sticker from a specific capsule and use the search field to find what you need.</p>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Распространённые проблемы
+            <span class="lang-ru">Распространённые проблемы</span><span class="lang-en">Common Issues</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <p>Если возникают ошибки — убедитесь, что:</p><ul><li>Виджет установлен по правильному пути в проекте;</li><li>Включены все необходимые плагины;</li><li>Используется Unreal Engine версии 5.6 или выше (в имени архива с виджетом указана минимально нужная версия движка);</li><li>Декомпилер обновлён до последней версии.<br />Если декомпилер не работает, можно попробовать использовать DEV версию.</li></ul>
+            </div>
+            <div class="lang-en">
+            <p>If you encounter errors, make sure that:</p>
+            <ul>
+              <li>The widget is installed in the correct location within the project;</li>
+              <li>All required plugins are enabled;</li>
+              <li>You are using Unreal Engine version 5.6 or newer (the minimum required version is specified in the widget archive name);</li>
+              <li>The decompiler is updated to the latest version.<br />If the decompiler does not work, try using the DEV version.</li>
+            </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -173,14 +248,15 @@
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Общая структура интерфейса
+            <span class="lang-ru">Общая структура интерфейса</span><span class="lang-en">Overall Interface Structure</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/main.png" alt=""></div>
             <ol>
              	<li><strong>Кнопка возврата (Back)</strong> — возвращает пользователя к предыдущему экрану (списку стикеров или категории).</li>
-             	<li><strong>Флаг “Show backing”</strong> — Переключатель отображения задней подложки стикера.<br />Позволяет включить или скрыть фон, чтобы оценить форму, прозрачность и края стикера.</li>
+             	<li><strong>Флаг "Show backing"</strong> — Переключатель отображения задней подложки стикера.<br />Позволяет включить или скрыть фон, чтобы оценить форму, прозрачность и края стикера.</li>
              	<li><strong>Окно предпросмотра</strong> — реалтайм-отображение материала и всех изменений. Поддержка вращения, зума и смены угла обзора</li>
              	<li><strong>Основные настройки материала</strong></li>
              	<li><strong>Параметры отображения материала</strong> — настройка Roughness / Metalness / Визуальных эффектов</li>
@@ -188,14 +264,29 @@
              	<li><strong>Панель управления камерой</strong>.</li>
              	<li><strong>Save</strong> — сохранение финального Material Instance для дальнейшего использования.</li>
             </ol>
+            </div>
+            <div class="lang-en">
+            <div class="section-img"><img src="img/main.png" alt=""></div>
+            <ol>
+              <li><strong>Back button</strong> — returns the user to the previous screen (sticker list or category).</li>
+              <li><strong>"Show Backing" toggle</strong> — controls the visibility of the sticker's backing layer.<br />Allows you to show or hide the background to better evaluate the shape, transparency, and edges of the sticker.</li>
+              <li><strong>Preview window</strong> — real-time display of the material and all changes. Supports rotation, zoom, and viewing angle adjustments.</li>
+              <li><strong>Core material settings</strong></li>
+              <li><strong>Material display parameters</strong> — adjust Roughness, Metalness, and visual effects.</li>
+              <li><strong>Textures</strong></li>
+              <li><strong>Camera controls panel</strong></li>
+              <li><strong>Save</strong> — saves the final Material Instance for later use.</li>
+            </ol>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Main”
+            <span class="lang-ru">Вкладка "Main"</span><span class="lang-en">Tab "Main"</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-2.png" alt=""></div>
             <h6><strong>Mode</strong></h6>
             <p>Определяет активные визуальные режимы материала стикера:</p>
@@ -260,14 +351,47 @@
             <p><strong>Hue Shift</strong> — смещает оттенок по цветовому кругу.</p>
             </li>
             </ul>
+            </div>
+            <div class="lang-en">
+            <div class="section-img"><img src="img/image-2.png" alt=""></div>
+            <h6><strong>Mode</strong></h6>
+            <p>Defines the active visual modes of the sticker material:</p>
+            <ul>
+              <li><p><strong>Glitter</strong> — adds a sparkle effect with microscopic reflections.</p></li>
+              <li><p><strong>Holographic</strong> — enables a holographic effect with color shifting based on the viewing angle.</p></li>
+              <li><p><strong>Metallic</strong> — enables a metallic rendering mode.</p></li>
+              <li><p><strong>Paper Backing</strong> — enables a paper backing that simulates a classic sticker.</p></li>
+            </ul>
+            <hr />
+            <h6>Wear</h6>
+            <p>Sticker wear parameters:</p>
+            <ul>
+              <li><p><strong>Wear</strong> — overall wear level. Higher values result in stronger aging effects.</p></li>
+              <li><p><strong>Wear Bias</strong> — shifts the distribution of wear across the surface.</p></li>
+              <li><p><strong>Wear Scratches</strong> — controls the intensity of scratches and micro-damage.</p></li>
+            </ul>
+            <hr />
+            <h6>Color</h6>
+            <p>Color processing settings:</p>
+            <ul>
+              <li><p><strong>Automatic PBR Color Fitting</strong> — automatically adjusts colors to a valid PBR range.</p></li>
+              <li><p><strong>Legacy Tint Multiply</strong> — enables the legacy color multiply mode (for compatibility).</p></li>
+              <li><p><strong>Color Tint</strong> — the base color of the sticker.</p></li>
+              <li><p><strong>Tint Saturate</strong> — saturation level of the color tint.</p></li>
+              <li><p><strong>Color Boost</strong> — increases overall color contrast.</p></li>
+              <li><p><strong>SFX Color Boost</strong> — enhances effect colors (holographic, glitter).</p></li>
+              <li><p><strong>Hue Shift</strong> — shifts the hue along the color wheel.</p></li>
+            </ul>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Shading”
+            <span class="lang-ru">Вкладка "Shading"</span><span class="lang-en">Tab "Shading"</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-3.png" alt=""></div>
             <h6>Roughness</h6>
             <p>Настройки шероховатости верхнего слоя:</p>
@@ -326,14 +450,45 @@
             <p><strong>Holo X/Y Offset</strong> — смещение голографического эффекта.</p>
             </li>
             </ul>
+            </div>
+            <div class="lang-en">
+            <div class="section-img"><img src="img/image-3.png" alt=""></div>
+            <h6>Roughness</h6>
+            <p>Top layer roughness settings:</p>
+            <ul>
+              <li><p><strong>Roughness Min</strong> — minimum surface roughness (smoother, more reflective appearance).</p></li>
+              <li><p><strong>Roughness Max</strong> — maximum surface roughness (more matte appearance).</p></li>
+              <li><p><strong>Preserve Roughness</strong> — preserves the original roughness value from the texture.</p></li>
+            </ul>
+            <hr />
+            <h6>Metalness</h6>
+            <p>Material reflection characteristics:</p>
+            <ul>
+              <li><p><strong>Metalness Min</strong> — minimum level of metallic behavior for the surface.</p></li>
+              <li><p><strong>Metalness Max</strong> — maximum level of metallic behavior for the surface.</p></li>
+            </ul>
+            <hr />
+            <h6>SFX</h6>
+            <p>Visual effects parameters:</p>
+            <ul>
+              <li><p><strong>Normal Strength</strong> — normal map intensity.</p></li>
+              <li><p><strong>Glitter Scale</strong> — scale of the glitter effect (lower values produce larger particles; higher values produce finer detail).</p></li>
+              <li><p><strong>Glitter Normal Strength</strong> — normal map intensity for the glitter effect.</p></li>
+              <li><p><strong>Use Emissive</strong> — enables emissive lighting for sticker elements.</p></li>
+              <li><p><strong>Clamp Spectrum V</strong> — limits the color spectrum range for the holographic effect.</p></li>
+              <li><p><strong>Holo Exponent</strong> — controls sharpness and contrast of the holographic effect.</p></li>
+              <li><p><strong>Holo X/Y Offset</strong> — offsets the holographic effect.</p></li>
+            </ul>
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            Вкладка “Textures”
+            <span class="lang-ru">Вкладка "Textures"</span><span class="lang-en">Tab "Textures"</span>
             <span class="chevron">&#9654;</span>
           </button>
           <div class="accordion-body">
+            <div class="lang-ru">
             <div class="section-img"><img src="img/image-4.png" alt=""></div>
             <h6>Textures</h6>
             <p><strong>Sticker Texture </strong>— основная цветная текстура стикера. Определяет форму, цвет и базовый рисунок.</p>
@@ -342,13 +497,71 @@
             <p><strong>Holo Spectrum Texture </strong>— текстура для голографического эффекта.</p>
             <p><strong>SFX Mask Texture </strong>— маска голографического эффекта.</p>
             <p><strong>Sticker Scratches</strong> — текстура царапин и повреждений. Используется для добавления реалистичного износа и неровностей поверхности.</p>
+            </div>
+            <div class="lang-en">
+            <div class="section-img"><img src="img/image-4.png" alt=""></div>
+            <h6>Textures</h6>
+            <p><strong>Sticker Texture</strong> — the main color texture of the sticker. Defines its shape, color, and base design.</p>
+            <p><strong>Normal Roughness Masks</strong> — a combined texture containing normal and surface roughness data.</p>
+            <p><strong>Glitter Normal Texture</strong> — a normal map for the glitter effect. Defines how individual particles reflect light.</p>
+            <p><strong>Holo Spectrum Texture</strong> — a texture used for the holographic effect.</p>
+            <p><strong>SFX Mask Texture</strong> — a mask texture for the holographic effect.</p>
+            <p><strong>Sticker Scratches</strong> — a texture for scratches and damage. Used to add realistic wear and surface imperfections.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </main>
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
   <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
   <script>
+    fetch('../updates/s2stickersmanager.json')
+      .then(r => r.json())
+      .then(data => {
+        const btn = document.getElementById('download-btn');
+        if (data.download_url) btn.href = data.download_url;
+        if (data.download_source) {
+          document.getElementById('dl-label-ru').textContent = 'Скачать (' + data.download_source + ')';
+          document.getElementById('dl-label-en').textContent = 'Download (' + data.download_source + ')';
+        }
+        if (data.file_size) {
+          const badge = document.getElementById('file-size-badge');
+          badge.textContent = data.file_size;
+          badge.style.display = '';
+        }
+      })
+      .catch(() => {});
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.hero-img img').forEach(img => {
+      const check = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          const container = img.closest('.hero-img');
+          container.classList.add('vertical');
+          if (img.naturalWidth < 600) container.style.maxWidth = img.naturalWidth + 'px';
+        }
+      };
+      if (img.complete) check();
+      else img.addEventListener('load', check);
+    });
+    document.querySelectorAll('.section-img img').forEach(img => {
+      const check = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          img.closest('.section-img').classList.add('vertical');
+        }
+      };
+      if (img.complete) check();
+      else img.addEventListener('load', check);
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('open');
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('open'); }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     function setLang(lang) {
       document.body.className = 'lang-' + lang;
       document.querySelectorAll('.lang-btn').forEach(btn => {
