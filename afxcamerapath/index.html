@@ -47,6 +47,8 @@
     .accordion-body strong { color: #c9d1d9; }
     .accordion-body code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 12px; color: #79c0ff; font-family: monospace; }
     .accordion-body hr { border: none; border-top: 1px solid #30363d; margin: 16px 0; }
+    .accordion-body p { margin-bottom: 12px; }
+    .accordion-body p:last-child { margin-bottom: 0; }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
     footer a { color: #484f58; }
     body.lang-en [data-lang="ru"] { display: none; }
@@ -54,6 +56,9 @@
     body.lang-en .lang-ru { display: none; }
     body.lang-ru .lang-en { display: none; }
     .badge-size { background: #161b22; border: 1px solid #30363d; color: #6e7681; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .tag { background: #161b22; border: 1px solid #30363d; color: #8b949e; font-size: 12px; padding: 2px 8px; border-radius: 4px; font-family: monospace; }
+    .footnote { font-size: 12px; color: #484f58; margin-top: 12px; }
   </style>
 </head>
 <body class="lang-en">
@@ -71,16 +76,15 @@
   <main>
     <div class="hero-name">AFXCameraPath</div>
     <div class="hero-meta">
-      <span class="badge badge-type" data-lang="en">Unreal Engine Plugin</span>
-      <span class="badge badge-type" data-lang="ru">Unreal Engine Plugin</span>
+      <span class="badge badge-type">Unreal Engine Plugin</span>
       <span class="badge badge-version">v1.4</span>
       <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
     </div>
     <div class="hero-desc" data-lang="en">
-      Editor plugin for building camera paths in Unreal Engine. Create, select, and manipulate keyframes directly in the viewport with stable GUID-based selection and click-based interaction via hit proxies.
+      A free community plugin for Unreal Engine 5 that adds an HLAE-style camera path workflow inside the editor. Create camera paths from keyframes, preview them live with a Cine Camera, import/export HLAE <code>.bvh</code> / <code>.cam</code> files, and bake the result to Sequencer.
     </div>
     <div class="hero-desc" data-lang="ru">
-      Редакторный плагин для построения путей камеры в Unreal Engine. Создавайте, выбирайте и управляйте кейфреймами прямо во вьюпорте — с устойчивой идентификацией по GUID и кликовым взаимодействием через hit proxies.
+      Бесплатный плагин для Unreal Engine 5 с HLAE-style рабочим процессом путей камеры прямо в редакторе. Создавайте пути из кейфреймов, просматривайте их в реальном времени через Cine Camera, импортируйте и экспортируйте файлы HLAE <code>.bvh</code> / <code>.cam</code>, а также запекайте результат в Sequencer.
     </div>
     <div class="actions">
       <a class="btn btn-primary" id="download-btn" href=""><span class="lang-ru" id="dl-label-ru">Скачать</span><span class="lang-en" id="dl-label-en">Download</span></a>
@@ -89,6 +93,156 @@
     <div class="section">
       <div class="accordion">
 
+        <!-- Features -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Features</span>
+            <span data-lang="ru">Возможности</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <ul>
+                <li><strong>AFX Camera Path Actor</strong> for path authoring in the level</li>
+                <li>Per-key control for <strong>Position, Rotation, Focal Length, Focus Distance, and Aperture</strong></li>
+                <li>Built-in <strong>timeline and keyframe editor</strong></li>
+                <li><strong>Live viewport preview</strong> via a Cine Camera Actor</li>
+                <li><strong>Bake to Sequencer</strong></li>
+                <li><strong>HLAE <code>.bvh</code> / <code>.cam</code> import and export</strong></li>
+                <li>Adjust keyframes directly in the viewport with the <strong>transform gizmo</strong></li>
+                <li>Dockable editor panel (Slate UI)</li>
+              </ul>
+            </div>
+            <div data-lang="ru">
+              <ul>
+                <li><strong>AFX Camera Path Actor</strong> для создания путей прямо в уровне</li>
+                <li>Управление на уровне кейфрейма: <strong>Position, Rotation, Focal Length, Focus Distance и Aperture</strong></li>
+                <li>Встроенный <strong>таймлайн и редактор кейфреймов</strong></li>
+                <li><strong>Live-предпросмотр</strong> во вьюпорте через Cine Camera Actor</li>
+                <li><strong>Запекание в Sequencer</strong></li>
+                <li><strong>Импорт и экспорт HLAE <code>.bvh</code> / <code>.cam</code></strong></li>
+                <li>Редактирование кейфреймов во вьюпорте через <strong>transform gizmo</strong></li>
+                <li>Пристыковываемая панель редактора (Slate UI)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interpolation & Smoothing -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">Interpolation &amp; Smoothing</span>
+            <span data-lang="ru">Интерполяция и сглаживание</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <h6>Position</h6>
+              <div class="tag-list">
+                <span class="tag">Catmull-Rom Uniform</span>
+                <span class="tag">Catmull-Rom Centripetal</span>
+                <span class="tag">Bezier</span>
+                <span class="tag">Hermite</span>
+                <span class="tag">Linear</span>
+                <span class="tag">B-Spline</span>
+              </div>
+              <h6>Rotation</h6>
+              <div class="tag-list">
+                <span class="tag">Slerp</span>
+                <span class="tag">Slerp Smootherstep</span>
+                <span class="tag">Squad</span>
+                <span class="tag">Squad Safe</span>
+                <span class="tag">Quaternion Bezier</span>
+                <span class="tag">Quaternion Moving Average</span>
+                <span class="tag">Cubic + Smooth Roll</span>
+                <span class="tag">Swing-Twist Smooth</span>
+                <span class="tag">Look Ahead Along Path</span>
+              </div>
+              <h6>Time easing</h6>
+              <div class="tag-list">
+                <span class="tag">Linear</span>
+                <span class="tag">Ease In</span>
+                <span class="tag">Ease Out</span>
+                <span class="tag">Ease In-Out</span>
+                <span class="tag">Cinematic Ease</span>
+              </div>
+              <hr>
+              <p>Optional <strong>constant-speed motion</strong> mode is also available.</p>
+            </div>
+            <div data-lang="ru">
+              <h6>Позиция</h6>
+              <div class="tag-list">
+                <span class="tag">Catmull-Rom Uniform</span>
+                <span class="tag">Catmull-Rom Centripetal</span>
+                <span class="tag">Bezier</span>
+                <span class="tag">Hermite</span>
+                <span class="tag">Linear</span>
+                <span class="tag">B-Spline</span>
+              </div>
+              <h6>Ротация</h6>
+              <div class="tag-list">
+                <span class="tag">Slerp</span>
+                <span class="tag">Slerp Smootherstep</span>
+                <span class="tag">Squad</span>
+                <span class="tag">Squad Safe</span>
+                <span class="tag">Quaternion Bezier</span>
+                <span class="tag">Quaternion Moving Average</span>
+                <span class="tag">Cubic + Smooth Roll</span>
+                <span class="tag">Swing-Twist Smooth</span>
+                <span class="tag">Look Ahead Along Path</span>
+              </div>
+              <h6>Easing по времени</h6>
+              <div class="tag-list">
+                <span class="tag">Linear</span>
+                <span class="tag">Ease In</span>
+                <span class="tag">Ease Out</span>
+                <span class="tag">Ease In-Out</span>
+                <span class="tag">Cinematic Ease</span>
+              </div>
+              <hr>
+              <p>Также доступен режим <strong>постоянной скорости движения</strong>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- How to use -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span data-lang="en">How to use</span>
+            <span data-lang="ru">Использование</span>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="accordion-body">
+            <div data-lang="en">
+              <ol>
+                <li>Open the plugin tool window from the editor toolbar.</li>
+                <li>Create an <strong>AFX Camera Path Actor</strong> in the level.</li>
+                <li>Select or create your <strong>Cine Camera Actor</strong>.</li>
+                <li>Create keys with <strong>Add From View</strong> — captures the current viewport or piloted camera.</li>
+                <li>Use <strong>Update From Current View</strong> to refresh a selected key from the current shot.</li>
+                <li>Use <strong>Snap Camera To Key</strong> to jump the active camera or editor view to a selected key.</li>
+                <li>Adjust keyframe position, rotation and lens parameters directly in the viewport with the transform gizmo.</li>
+                <li>Preview the path live in the viewport.</li>
+                <li>Bake to Sequencer or export to <code>.bvh</code> / <code>.cam</code>.</li>
+              </ol>
+            </div>
+            <div data-lang="ru">
+              <ol>
+                <li>Откройте окно плагина с тулбара редактора.</li>
+                <li>Создайте <strong>AFX Camera Path Actor</strong> в уровне.</li>
+                <li>Выберите или создайте <strong>Cine Camera Actor</strong>.</li>
+                <li>Создавайте кейфреймы через <strong>Add From View</strong> — захватывает текущий вьюпорт или piloted-камеру.</li>
+                <li>Используйте <strong>Update From Current View</strong>, чтобы обновить выбранный кейфрейм из текущего положения камеры.</li>
+                <li>Используйте <strong>Snap Camera To Key</strong>, чтобы перевести активную камеру или вьюпорт к выбранному кейфрейму.</li>
+                <li>Редактируйте позицию, ротацию и параметры объектива прямо во вьюпорте с помощью transform gizmo.</li>
+                <li>Просматривайте путь в реальном времени во вьюпорте.</li>
+                <li>Запекайте в Sequencer или экспортируйте в <code>.bvh</code> / <code>.cam</code>.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- Installation -->
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
             <span data-lang="en">Installation</span>
@@ -107,8 +261,9 @@
               <hr>
               <strong>Requirements:</strong>
               <ul>
-                <li>Unreal Engine 5.6 or newer</li>
+                <li>Unreal Engine 5.6, 5.7, or 5.8*</li>
               </ul>
+              <p class="footnote">* UE 5.8 support is preliminary.</p>
             </div>
             <div data-lang="ru">
               <ol>
@@ -121,66 +276,9 @@
               <hr>
               <strong>Требования:</strong>
               <ul>
-                <li>Unreal Engine 5.6 или новее</li>
+                <li>Unreal Engine 5.6, 5.7 или 5.8*</li>
               </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Core Features</span>
-            <span data-lang="ru">Основные возможности</span>
-            <span class="chevron">▶</span>
-          </button>
-          <div class="accordion-body">
-            <div data-lang="en">
-              <ul>
-                <li>Create and edit camera path keyframes directly in the viewport</li>
-                <li>Stable keyframe selection via FGuid-based KeyId — selection survives path edits</li>
-                <li>Click-based keyframe interaction via Unreal's hit proxy system</li>
-                <li>Dockable editor panel (Slate UI)</li>
-                <li>Keyframe position, rotation, and FOV control</li>
-                <li>Camera path preview in the viewport</li>
-              </ul>
-            </div>
-            <div data-lang="ru">
-              <ul>
-                <li>Создание и редактирование кейфреймов пути камеры прямо во вьюпорте</li>
-                <li>Устойчивая идентификация кейфреймов через FGuid-based KeyId — выбор сохраняется после правок пути</li>
-                <li>Кликовое взаимодействие с кейфреймами через систему hit proxy Unreal</li>
-                <li>Пристыковываемая панель редактора (Slate UI)</li>
-                <li>Управление позицией, ротацией и FOV кейфреймов</li>
-                <li>Предпросмотр пути камеры во вьюпорте</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span data-lang="en">Usage</span>
-            <span data-lang="ru">Использование</span>
-            <span class="chevron">▶</span>
-          </button>
-          <div class="accordion-body">
-            <div data-lang="en">
-              <ol>
-                <li>Open the AFXCameraPath panel from the toolbar.</li>
-                <li>Click <strong>Add Key</strong> to add a keyframe at the current camera position.</li>
-                <li>Click on any keyframe in the viewport to select it. Use the standard UE transform gizmo to reposition.</li>
-                <li>Adjust FOV and other per-key parameters in the panel.</li>
-                <li>The camera path spline is drawn in the viewport in real time.</li>
-              </ol>
-            </div>
-            <div data-lang="ru">
-              <ol>
-                <li>Откройте панель AFXCameraPath с тулбара.</li>
-                <li>Нажмите <strong>Add Key</strong>, чтобы добавить кейфрейм на текущей позиции камеры.</li>
-                <li>Кликните на любой кейфрейм во вьюпорте, чтобы выделить его. Используйте стандартный гизмо UE для перемещения.</li>
-                <li>Настройте FOV и другие параметры кейфрейма в панели.</li>
-                <li>Сплайн пути камеры отображается во вьюпорте в реальном времени.</li>
-              </ol>
+              <p class="footnote">* Поддержка UE 5.8 предварительная.</p>
             </div>
           </div>
         </div>

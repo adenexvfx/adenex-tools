@@ -18,7 +18,12 @@
     .release-version { font-size: 18px; font-weight: 600; color: #e6edf3; }
     .release-date { font-size: 13px; color: #484f58; }
     .release-body { color: #8b949e; font-size: 14px; line-height: 1.8; padding-left: 16px; border-left: 2px solid #30363d; }
-    .release-body li { margin-bottom: 4px; }
+    .release-body li { margin-bottom: 6px; list-style: none; position: relative; padding-left: 74px; }
+    .tag { position: absolute; left: 0; top: 4px; display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 0; border-radius: 4px; width: 64px; text-align: center; }
+    .tag-added   { background: #0d2b12; border: 1px solid #238636; color: #3fb950; }
+    .tag-fixed   { background: #0d1b36; border: 1px solid #1f6feb; color: #58a6ff; }
+    .tag-changed { background: #2b1d00; border: 1px solid #9e6a03; color: #d29922; }
+    .tag-removed { background: #2b0a0a; border: 1px solid #6e1a1a; color: #f85149; }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
   </style>
 </head>
@@ -32,15 +37,88 @@
   </header>
   <main>
     <h1>AFXCameraPath — Changelog</h1>
+
     <div class="release">
       <div class="release-header">
         <span class="release-version">v1.4</span>
-        <span class="release-date"></span>
+        <span class="release-date">2026-05-10</span>
       </div>
       <ul class="release-body">
-        <li>Initial public release</li>
+        <li><span class="tag tag-added">Added</span>Keyframe label display mode: <strong>Off</strong>, <strong>Selected Only</strong>, <strong>All</strong>, and <strong>Every N</strong> — controlled per-component from the editor panel.</li>
+        <li><span class="tag tag-added">Added</span>Label step control for Every N mode — draws label at index 0, N, 2N… plus always draws the selected key.</li>
+        <li><span class="tag tag-added">Added</span>After HLAE <code>.bvh</code> / <code>.cam</code> import, label mode auto-switches to Every N to keep dense imports readable.</li>
+        <li><span class="tag tag-added">Added</span>Shift-click multi-select in the timeline — toggle individual keys into the selection set.</li>
+        <li><span class="tag tag-added">Added</span>Group time drag — dragging any key in a multi-selection moves all selected keys by the same delta.</li>
+        <li><span class="tag tag-added">Added</span>Negative key time support — keys can now be placed before time 0 (useful for pre-roll). Timeline markers for negative-time keys pile at pixel 0; data is preserved.</li>
+        <li><span class="tag tag-changed">Changed</span>Preview playhead clamp still enforces <code>t ≥ 0</code>; data times are unclamped.</li>
       </ul>
     </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.3</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Bake to Sequencer now detects an already-open Level Sequence and bakes into it directly — no Save dialog shown.</li>
+        <li><span class="tag tag-added">Added</span><strong>Select Camera</strong> button in the active camera row — calls <code>GEditor→SelectActor</code> on the Cine Camera Actor.</li>
+        <li><span class="tag tag-changed">Changed</span>Preview is now enabled by default when the panel opens.</li>
+        <li><span class="tag tag-changed">Changed</span>Sequencer time and plugin preview time now sync bidirectionally — scrubbing Sequencer moves the plugin playhead and vice versa, guarded against feedback loops.</li>
+        <li><span class="tag tag-changed">Changed</span>Default bake sequence asset name set to <code>AFXCamera_Sequence</code>.</li>
+        <li><span class="tag tag-changed">Changed</span>Keyframe 20-second hard time cap removed — the spinner now uses a soft UI hint only.</li>
+        <li><span class="tag tag-changed">Changed</span>Timeline always starts at 0 and has a minimum displayed duration of 5 seconds.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Keyframe selection is now preserved after property edits (Focal Length, etc.) — previously any transaction cleared the selection. Selection is now tracked by stable <code>FGuid</code>, not array index.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Viewport transform gizmo is now restored after editing a Focal Length value in the details panel.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Sequencer bake absolute timing — the first baked key now maps to its correct Sequencer time instead of always landing on frame 0.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Camera Cuts track now appears at the top of the Sequencer outliner (uses <code>AddCameraCutTrack</code> instead of the generic track array).</li>
+        <li><span class="tag tag-fixed">Fixed</span>Re-baking no longer accumulates stale Camera Cuts entries in the Sequencer track list.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Duplicate camera and component bindings in Sequencer are now prevented on repeated bakes.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Transform and Focal Length tracks are cleared before each bake instead of appending new keys on top of old ones.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Build error caused by a reference to the non-existent <code>FOV</code> field — replaced throughout with <code>FocalLength</code>.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.2</span>
+        <span class="release-date">2026-05-02</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>Toolbar and Window menu registration rewritten using the <code>UToolMenus</code> API (PlayToolBar + Window menu). Resolves a crash on startup caused by the previous hook attaching to the wrong toolbar slot.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.1</span>
+        <span class="release-date">2026-05-02</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>Toolbar hook corrected — was incorrectly attached to the <code>Compile</code> slot instead of <code>Settings</code>, preventing the panel button from appearing.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.0</span>
+        <span class="release-date">2026-05-02</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Initial release.</li>
+        <li><span class="tag tag-added">Added</span><strong>AFX Camera Path Actor</strong> — place in the level to author a camera path.</li>
+        <li><span class="tag tag-added">Added</span>Per-keyframe control: Position, Rotation, Focal Length, Focus Distance, Aperture.</li>
+        <li><span class="tag tag-added">Added</span>Interactive timeline with playhead scrubbing and keyframe diamonds.</li>
+        <li><span class="tag tag-added">Added</span>Live viewport preview driven by <code>FTSTicker</code> — animates the active Cine Camera Actor along the path.</li>
+        <li><span class="tag tag-added">Added</span>Viewport drawing: spline curve, keyframe gizmos, camera frustum, direction arrows.</li>
+        <li><span class="tag tag-added">Added</span>Bake to Sequencer — writes transform and focal length tracks at display rate with a Camera Cuts entry.</li>
+        <li><span class="tag tag-added">Added</span>HLAE <code>.bvh</code> and <code>.cam</code> import and export.</li>
+        <li><span class="tag tag-added">Added</span>Position interpolation: Catmull-Rom (Uniform / Centripetal), Bezier, Hermite, Linear, B-Spline.</li>
+        <li><span class="tag tag-added">Added</span>Rotation interpolation: Slerp, Slerp Smootherstep, Squad, Squad Safe, Quaternion Bezier, Quaternion Moving Average, Cubic + Smooth Roll, Swing-Twist Smooth, Look Ahead Along Path.</li>
+        <li><span class="tag tag-added">Added</span>Time easing: Linear, Ease In, Ease Out, Ease In-Out, Cinematic Ease.</li>
+        <li><span class="tag tag-added">Added</span>Optional constant-speed motion mode.</li>
+        <li><span class="tag tag-added">Added</span>Dockable editor panel available under <strong>Window → Cinematics → AFX Camera Path</strong>.</li>
+      </ul>
+    </div>
+
   </main>
   <footer>adenexvfx &mdash; <a href="../" style="color:#484f58">adenexvfx.github.io/adenex-tools</a></footer>
 </body>

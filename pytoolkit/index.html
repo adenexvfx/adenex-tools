@@ -245,6 +245,27 @@
                 <li>LogTimedStats — output a summary report to the log</li>
                 <li>ResetTimedStats — clear all collected stats</li>
               </ul>
+              <hr>
+              <h6>4. PyToolkitUI — shared Slate UI</h6>
+              <ul>
+                <li><strong>FPyToolkitStyle</strong> — shared style set with PyToolkitUI brushes, text styles, input styles, margins, badges, tags, pills, cards, borders, and warning / info visuals.</li>
+                <li><strong>SPyButton</strong> — text button with configurable icon, tint, hover color, text color, padding, and style name.</li>
+                <li><strong>SPyIconButton</strong> — icon-only button with configurable icon, tint, color, padding, and fixed size.</li>
+                <li><strong>SPyTabButton</strong> — active / inactive tab button with label, icon, accent indicator, colors, and click callback.</li>
+                <li><strong>SPyWarningMessage</strong> — warning banner with themed icon and message.</li>
+                <li><strong>SPyComboBox</strong> — styled string combo box with runtime option replacement, selected-value control, and selection callback.</li>
+                <li><strong>SPyGradientCard</strong> — padded card container with caller-provided content.</li>
+                <li><strong>SPySectionLabel</strong> — uppercase section label using shared section-label style.</li>
+                <li><strong>FPyToolkitToolbar</strong> — shared toolbar and Tools-menu registration for plugin buttons, grouped by section and removable by ID.</li>
+                <li><strong>Update checker</strong> — startup version check with <strong>Open Page</strong> and <strong>Dismiss</strong>; metadata is fetched by plugin <code>slug</code> from GitHub Pages.</li>
+                <li><strong>Version helpers</strong> — <code>CheckPluginVersion</code> and <code>CheckWidgetVersion</code> Blueprint-callable checks.</li>
+              </ul>
+              <hr>
+              <h6>5. Bundled Python libraries</h6>
+              <ul>
+                <li><strong>adenexlib_core</strong> — shared Unreal Editor Python helpers, logging, diagnostics, protected execution, and update-aware error reporting.</li>
+                <li><strong>datamodel_core</strong> — Valve DMX data model parsing and serialization for binary, keyvalues2, and binary_proto formats.</li>
+              </ul>
             </div>
 
             <div data-lang="ru">
@@ -337,7 +358,27 @@
                 <li>LogTimedStats — вывести в лог общий отчёт по всем замерам</li>
                 <li>ResetTimedStats — очистить все собранные данные перед новым тестом</li>
               </ul>
-            </div>
+              <hr>
+              <h6>4. PyToolkitUI — общий Slate UI</h6>
+              <ul>
+                <li><strong>FPyToolkitStyle</strong> — общий набор стилей PyToolkitUI: кисти, текстовые и input-стили, отступы, badges, tags, pills, cards, borders и warning/info-панели.</li>
+                <li><strong>SPyButton</strong> — текстовая кнопка с настраиваемыми icon, tint, hover/text color, padding и style name.</li>
+                <li><strong>SPyIconButton</strong> — кнопка только с icon, с настраиваемыми tint, color, padding и размером.</li>
+                <li><strong>SPyTabButton</strong> — кнопка активной/неактивной вкладки с label, icon, accent indicator, цветами и callback.</li>
+                <li><strong>SPyWarningMessage</strong> — warning-баннер с тематической icon и сообщением.</li>
+                <li><strong>SPyComboBox</strong> — стилизованный combo box со строковыми значениями, заменой options на лету, управлением selected value и callback.</li>
+                <li><strong>SPyGradientCard</strong> — контейнер-карточка с padding и передаваемым content.</li>
+                <li><strong>SPySectionLabel</strong> — uppercase-заголовок секции на основе общего style.</li>
+                <li><strong>FPyToolkitToolbar</strong> — регистрация кнопок плагинов в toolbar и Tools menu, с группировкой и удалением по ID.</li>
+                <li><strong>Проверка обновлений</strong> — проверка при запуске с кнопками <strong>Open Page</strong> и <strong>Dismiss</strong>; метаданные читаются по <code>slug</code> с GitHub Pages.</li>
+                <li><strong>Версионные функции</strong> — <code>CheckPluginVersion</code> и <code>CheckWidgetVersion</code> доступны из Blueprint.</li>
+              </ul>
+              <hr>
+              <h6>5. Встроенные Python-библиотеки</h6>
+              <ul>
+                <li><strong>adenexlib_core</strong> — общие Python-инструменты Unreal Editor, логирование, диагностика, защищённый запуск и проверка обновлений при ошибках.</li>
+                <li><strong>datamodel_core</strong> — чтение и запись Valve DMX в форматах binary, keyvalues2 и binary_proto.</li>
+              </ul>
           </div>
         </div>
       </div>

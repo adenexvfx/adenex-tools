@@ -18,7 +18,12 @@
     .release-version { font-size: 18px; font-weight: 600; color: #e6edf3; }
     .release-date { font-size: 13px; color: #484f58; }
     .release-body { color: #8b949e; font-size: 14px; line-height: 1.8; padding-left: 16px; border-left: 2px solid #30363d; }
-    .release-body li { margin-bottom: 4px; }
+    .release-body li { margin-bottom: 6px; list-style: none; position: relative; padding-left: 74px; }
+    .tag { position: absolute; left: 0; top: 4px; display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 0; border-radius: 4px; width: 64px; text-align: center; }
+    .tag-added   { background: #0d2b12; border: 1px solid #238636; color: #3fb950; }
+    .tag-fixed   { background: #0d1b36; border: 1px solid #1f6feb; color: #58a6ff; }
+    .tag-changed { background: #2b1d00; border: 1px solid #9e6a03; color: #d29922; }
+    .tag-removed { background: #2b0a0a; border: 1px solid #6e1a1a; color: #f85149; }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
   </style>
 </head>
@@ -34,11 +39,54 @@
     <h1>Weapon System — Changelog</h1>
     <div class="release">
       <div class="release-header">
-        <span class="release-version">v1.6</span>
-        <span class="release-date"></span>
+        <span class="release-version">v1.61</span>
       </div>
       <ul class="release-body">
-        <li>Initial public release</li>
+        <li><span class="tag tag-fixed">Fixed</span>WeaponSystem Niagara: Changed the muzzle flash spawn pooling method from <code>Auto Release</code> to <code>None</code>. Fixes an issue where the muzzle flash sometimes wouldn't spawn (UE 5.8 bug).</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.6</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Added support for <strong>AFX Live Link plugin</strong>.</li>
+        <li><span class="tag tag-changed">Changed</span>The ricochet and penetration logic has been rewritten.</li>
+        <li><span class="tag tag-changed">Changed</span>The bool <code>Is 3rd Person</code> has been removed and replaced with the <code>Mode</code> dropdown (First Person / 3rd Person / AFX Plugin).</li>
+        <li><span class="tag tag-changed">Changed</span>The tracer and shell casing logic has been reworked.</li>
+        <li><span class="tag tag-changed">Changed</span><code>Tracers Every Shot</code> replaced with <code>Tracers Every N Shots</code> — set the exact number of shots after which a tracer appears.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Fixed a bug where the tracer would fly directly out of the camera in first-person mode.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.5</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Niagara version (particles + bake widget for Niagara included).</li>
+        <li><span class="tag tag-added">Added</span>Tracing offset — allows moving the target tracing point, useful for 3rd-person weapons.</li>
+        <li><span class="tag tag-changed">Changed</span>Tracing logic moved into its own group.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.4</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Wallbang support.</li>
+        <li><span class="tag tag-added">Added</span>Blood decal spawns on player models when hit by a shot.</li>
+        <li><span class="tag tag-added">Added</span>Each wall in the wallbang loop now spawns a particle effect, plays an impact sound, and generates an impact decal.</li>
+        <li><span class="tag tag-added">Added</span><code>Init System</code>, <code>Reset Bones</code>, <code>Reset Spray</code>, and <code>Reset System</code> buttons added directly to the Setup panel.</li>
+        <li><span class="tag tag-added">Added</span>Tooltips added to all variables (displayed on mouse hover).</li>
+        <li><span class="tag tag-added">Added</span>Socket/bone name fields exposed directly in the Blueprint for manual override.</li>
+        <li><span class="tag tag-changed">Changed</span>Removed the requirement to use <code>GetCurrentTime</code> node in Blueprint Director to initialize the system.</li>
+        <li><span class="tag tag-changed">Changed</span>Reworked the baking widget — consumes fewer resources and runs significantly faster.</li>
+        <li><span class="tag tag-changed">Changed</span>Renamed variables for improved clarity.</li>
+        <li><span class="tag tag-changed">Changed</span>Adjusted shell casing behavior.</li>
+        <li><span class="tag tag-changed">Changed</span>Updated the DemoLevel map — added WeaponSystem Blueprint and sequence with wallbang logic for demonstration.</li>
       </ul>
     </div>
   </main>

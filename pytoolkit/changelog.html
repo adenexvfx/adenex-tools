@@ -14,11 +14,19 @@
     main { max-width: 800px; margin: 48px auto; padding: 0 20px; }
     h1 { font-size: 24px; color: #e6edf3; margin-bottom: 32px; }
     .release { margin-bottom: 40px; }
-    .release-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+    .release-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
     .release-version { font-size: 18px; font-weight: 600; color: #e6edf3; }
     .release-date { font-size: 13px; color: #484f58; }
     .release-body { color: #8b949e; font-size: 14px; line-height: 1.8; padding-left: 16px; border-left: 2px solid #30363d; }
-    .release-body li { margin-bottom: 4px; }
+    .release-body li { margin-bottom: 6px; list-style: none; position: relative; padding-left: 74px; }
+    .tag { position: absolute; left: 0; top: 4px; display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 0; border-radius: 4px; width: 64px; text-align: center; }
+    .tag-added   { background: #0d2b12; border: 1px solid #238636; color: #3fb950; }
+    .tag-fixed   { background: #0d1b36; border: 1px solid #1f6feb; color: #58a6ff; }
+    .tag-changed { background: #2b1d00; border: 1px solid #9e6a03; color: #d29922; }
+    .tag-removed { background: #2b0a0a; border: 1px solid #6e1a1a; color: #f85149; }
+    .ue-badge { display: inline-block; font-size: 11px; font-weight: 600; background: #161b22; border: 1px solid #30363d; color: #6e7681; padding: 1px 8px; border-radius: 4px; font-family: monospace; }
+    .release-body a { color: #58a6ff; }
+    code { background: #161b22; border: 1px solid #30363d; padding: 1px 5px; border-radius: 4px; font-size: 12px; color: #79c0ff; font-family: monospace; }
     footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
   </style>
 </head>
@@ -32,15 +40,143 @@
   </header>
   <main>
     <h1>PyToolkit — Changelog</h1>
+
     <div class="release">
       <div class="release-header">
         <span class="release-version">v2.1</span>
-        <span class="release-date"></span>
+        <span class="ue-badge">UE 5.8</span>
+        <span class="release-date">2026-07-30</span>
       </div>
       <ul class="release-body">
-        <li>Initial public release</li>
+        <li><span class="tag tag-added">Added</span>Shared Slate style system (<code>PyToolkitStyle</code>) for consistent UI across PyToolkit-based panels.</li>
+        <li><span class="tag tag-added">Added</span>Bundled Python libraries: <code>adenexlib_core</code> for shared Unreal Editor helpers and diagnostics, and <code>datamodel_core</code> for Valve DMX data model parsing and serialization.</li>
+        <li><span class="tag tag-added">Added</span>Additional reusable Slate widgets: <code>PyComboBox</code>, <code>PyGradientCard</code>, and <code>PySectionLabel</code>.</li>
+        <li><span class="tag tag-changed">Changed</span>Update checker now uses a string <code>slug</code> to read release metadata from the <code>adenex-tools</code> repository on GitHub Pages; WordPress is no longer queried.</li>
       </ul>
     </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.0</span>
+        <span class="ue-badge">UE 5.8</span>
+        <span class="release-date">2026-06-29</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Editor toolbar button — PyToolkit icon registered in the main UE toolbar via <code>UToolMenus</code>, opens the panel instantly.</li>
+        <li><span class="tag tag-added">Added</span>Custom Slate widget library: <code>PyButton</code>, <code>PyIconButton</code>, <code>PyTabButton</code>, <code>PyWarningMessage</code> — available for plugins that build UI on top of PyToolkit.</li>
+        <li><span class="tag tag-added">Added</span>Unified style system (<code>PyToolkitStyle</code>) for consistent look-and-feel across PyToolkit-based panels.</li>
+        <li><span class="tag tag-added">Added</span>Update checker — on startup, fetches version JSON from GitHub Pages and shows an in-editor notification with <strong>Open Page</strong> and <strong>Dismiss</strong> buttons when a newer version is available.</li>
+        <li><span class="tag tag-added">Added</span><code>CheckPluginVersion</code> and <code>CheckWidgetVersion</code> as separate <code>BlueprintCallable</code> functions.</li>
+        <li><span class="tag tag-added">Added</span><code>GetAssetDependencies</code> — query all assets a given asset depends on, with Hard / Soft / Manage filter.</li>
+        <li><span class="tag tag-added">Added</span><code>GetAssetReferencers</code> — find all assets that reference a target asset.</li>
+        <li><span class="tag tag-added">Added</span><code>FixupRedirectors</code> — batch fix asset redirectors in a given content path.</li>
+        <li><span class="tag tag-added">Added</span><code>AddParticleActivateKey</code> and <code>AddParticleDeactivateKey</code> — separate Niagara activation / deactivation key insertion into Sequencer tracks.</li>
+        <li><span class="tag tag-changed">Changed</span><code>AddParticleTriggerKey</code> and <code>AddParticleKey</code> now accept <code>SubFrame</code> and <code>TimeUnit</code> parameters for sub-frame precision.</li>
+        <li><span class="tag tag-changed">Changed</span>Module loading phase changed to <code>PostEngineInit</code>.</li>
+        <li><span class="tag tag-changed">Changed</span>Update checker uses a string <code>slug</code> instead of a numeric <code>WordPressPostId</code> to identify plugins.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.9</span>
+        <span class="ue-badge">UE 5.6</span>
+        <span class="ue-badge">UE 5.7</span>
+        <span class="ue-badge">UE 5.8</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span><code>BlueprintVarMetaCustomization</code> — extends the metadata customization system to Blueprint-native variables, enabling metadata editing on Blueprint-defined pins in the Details panel.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Stability improvements and edge-case fixes in <code>AnyMetaCustomization</code> and <code>EditConditionEvaluator</code>.</li>
+        <li><span class="tag tag-changed">Changed</span>Module type changed to <code>UncookedOnly</code>.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.8</span>
+        <span class="ue-badge">UE 5.6</span>
+        <span class="ue-badge">UE 5.7</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span><code>AnyMetaCustomization</code> — set arbitrary metadata key-value pairs on UPROPERTY fields from Python or Blueprint.</li>
+        <li><span class="tag tag-added">Added</span><code>AnyMetaSettings</code> — configuration object for <code>AnyMetaCustomization</code> behavior.</li>
+        <li><span class="tag tag-added">Added</span><code>EditConditionEvaluator</code> — evaluates <code>EditCondition</code> expressions at runtime, enabling dynamic property visibility checks from Python.</li>
+        <li><span class="tag tag-added">Added</span><code>SetAnimationSectionWeight</code> — set the weight of an animation section in Sequencer.</li>
+        <li><span class="tag tag-added">Added</span><code>IsStaticSwitchOverridden</code>, <code>GetOverriddenStaticSwitches</code> — inspect which static switch parameters are overridden in a material instance.</li>
+        <li><span class="tag tag-added">Added</span><code>ResetStaticSwitchToDefault</code>, <code>ResetAllOverriddenStaticSwitches</code> — revert material instance static switch overrides.</li>
+        <li><span class="tag tag-added">Added</span>Additional skeleton bone query functions: <code>GetSkeletonBoneIndex</code>, <code>GetSkeletonBoneChildren</code>, <code>BoneExistInSkeletalMesh</code>, <code>GetAllSkeletalMeshBones</code>, <code>GetAllSkeletonBones</code>.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.7</span>
+        <span class="ue-badge">UE 5.6</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span><code>TimingBPLibrary</code> — performance profiling API: <code>StartTimedSection</code>, <code>FinishTimedSection</code>, <code>LogTimedStats</code>, <code>ResetTimedStats</code>. Supports named nested sections and aggregated reporting to the Output Log.</li>
+        <li><span class="tag tag-added">Added</span><code>VarByNameLite</code> — lightweight variable access by name without full reflection traversal.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.6</span>
+        <span class="ue-badge">UE 5.5</span>
+        <span class="ue-badge">UE 5.6</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Notification system redesign — new <code>EState</code> and <code>ESeverity</code> enums; <code>ShowNotification</code> accepts severity level and auto-dismiss timeout.</li>
+        <li><span class="tag tag-added">Added</span>Message log system: <code>RegisterWidgetMessageLog</code> and related functions for routing Python output to the UE Message Log window.</li>
+        <li><span class="tag tag-added">Added</span>Blueprint variable editor functions — query and modify Blueprint variable pin types and metadata from Python.</li>
+        <li><span class="tag tag-added">Added</span>Material static switch functions: get / set / reset static switch parameter values on material instances.</li>
+        <li><span class="tag tag-removed">Removed</span><code>PyCommandList</code> system (<code>PyCommandList.cpp</code> / <code>.h</code>).</li>
+        <li><span class="tag tag-changed">Changed</span>Module type changed to <code>Developer</code>, loading phase to <code>Default</code>.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.5</span>
+        <span class="ue-badge">UE 5.4</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Niagara / Particle key API: <code>AddParticleTriggerKey</code>, <code>AddParticleKey</code> — insert Niagara system keys into Sequencer tracks.</li>
+        <li><span class="tag tag-added">Added</span>Texture utilities: <code>TextureHasAlphaChannel</code>, <code>GetTextureSize</code>.</li>
+        <li><span class="tag tag-added">Added</span>Slow task API: <code>BeginSlowTask</code>, <code>EndSlowTask</code>, <code>StatusUpdate</code> — show a progress bar in the editor during long operations.</li>
+        <li><span class="tag tag-changed">Changed</span>Plugin whitelisted to <code>Win64</code> platform only.</li>
+        <li><span class="tag tag-changed">Changed</span>Header includes cleaned up and updated for UE 5.4 API changes.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.1 – v1.4</span>
+        <span class="ue-badge">UE 5.0</span>
+        <span class="ue-badge">UE 5.1</span>
+        <span class="ue-badge">UE 5.2</span>
+        <span class="ue-badge">UE 5.3</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-changed">Changed</span>Incremental UE5 compatibility updates — header include paths adjusted per engine release.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Compile fixes for deprecated or renamed engine symbols in UE 5.1 – 5.3.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v1.0</span>
+        <span class="ue-badge">UE 4.27</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-changed">Changed</span>Fork of <a href="https://github.com/FXTD-ODYSSEY/Unreal-PyToolkit">FXTD-ODYSSEY/Unreal-PyToolkit</a>. Changes relative to the original:</li>
+        <li><span class="tag tag-added">Added</span><code>SetMaterialInstanceComponentMaskParameter</code> — set RGBA channel mask and override flag on a material instance static parameter.</li>
+        <li><span class="tag tag-changed">Changed</span><code>SetMaterialInstanceStaticSwitchParameterValue</code> — added <code>bOverride</code> parameter; implementation rewritten to use <code>GetAllStaticSwitchParameterInfo</code> for correct lookup.</li>
+        <li><span class="tag tag-changed">Changed</span>Material function category renamed from <code>RedArtToolkit|Material</code> to <code>PyToolkit|Material</code>.</li>
+        <li><span class="tag tag-fixed">Fixed</span><code>GetCurrentContentPath</code> — was commented out in the original; re-enabled.</li>
+      </ul>
+    </div>
+
   </main>
   <footer>adenexvfx &mdash; <a href="../" style="color:#484f58">adenexvfx.github.io/adenex-tools</a></footer>
 </body>
