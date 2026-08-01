@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S2MapBridge Changelog — Adenex</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    header { background: #161b22; border-bottom: 1px solid #30363d; padding: 20px 40px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #58a6ff; text-decoration: none; font-size: 14px; }
+    header a:hover { text-decoration: underline; }
+    header span { color: #484f58; }
+    main { max-width: 800px; margin: 48px auto; padding: 0 20px; }
+    h1 { font-size: 24px; color: #e6edf3; margin-bottom: 32px; }
+    .release { margin-bottom: 40px; }
+    .release-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+    .release-version { font-size: 18px; font-weight: 600; color: #e6edf3; }
+    .release-date { font-size: 13px; color: #484f58; }
+    .release-body { color: #8b949e; font-size: 14px; line-height: 1.8; padding-left: 16px; border-left: 2px solid #30363d; }
+    .release-body li { margin-bottom: 6px; list-style: none; position: relative; padding-left: 74px; }
+    .tag { position: absolute; left: 0; top: 4px; display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 0; border-radius: 4px; width: 64px; text-align: center; }
+    .tag-added   { background: #0d2b12; border: 1px solid #238636; color: #3fb950; }
+    .tag-fixed   { background: #0d1b36; border: 1px solid #1f6feb; color: #58a6ff; }
+    .tag-changed { background: #2b1d00; border: 1px solid #9e6a03; color: #d29922; }
+    .tag-removed  { background: #2b0a0a; border: 1px solid #6e1a1a; color: #f85149; }
+    .tag-improved { background: #0d1f2b; border: 1px solid #1c7a6b; color: #39c5ab; }
+    footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../">Adenex</a>
+    <span>/</span>
+    <a href="./">S2MapBridge</a>
+    <span>/</span>
+    <span style="color:#e6edf3">Changelog</span>
+  </header>
+  <main>
+    <h1>S2MapBridge — Changelog</h1>
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.25</span>
+        <span class="release-date">2026-08-01</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-changed">Changed</span>Plugin renamed from <strong>S2MapsImporter</strong> to <strong>S2MapBridge</strong>.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Animated prop bone assignment was scrambled: <code>ParseANIM</code> used AGRP bone indices directly as skeleton bone indices. Fixed by building a name-to-index map from the skeleton and translating each AGRP bone via name lookup. Rotating props (e.g. crane wheels) now animate correctly.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Layout B multi-mesh props: incorrect <code>BaseVertex</code> offset caused geometry collision when multiple meshes shared one draw call buffer. Each sub-mesh now gets the correct vertex base offset.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Static meshes imported via plugin had <code>CollisionTraceFlag = CTF_UseSimpleAsComplex</code> (2) with zero simple shapes, resulting in no physics body. Physics sweep traces returned 0 hits. Fixed by removing the CTF override — meshes now use <code>CTF_UseDefault</code> (0), matching FBX-imported behavior.</li>
+        <li><span class="tag tag-fixed">Fixed</span><code>black_material_interface</code> key was missing from <code>load_material_assets()</code>, causing <code>material_assets.get()</code> to always return <code>None</code>. Reflectivity meshes now correctly receive the <code>M_BlackSimple</code> material.</li>
+        <li><span class="tag tag-fixed">Fixed</span>DirectionalLight intensity of 0 (common in imported scenes) is now clamped to 0.01 lux to avoid invisible sun light.</li>
+        <li><span class="tag tag-added">Added</span>Misc tab with two tool groups. <em>Fix Stucked Lights</em>: iterates all ALight actors in the scene, sweeps each light upward with a box trace loop (up to 20 iterations), and repositions lights embedded inside static mesh geometry to the nearest surface. Uses per-iteration push direction <code>(Start−End).GetSafeNormal()</code> to avoid Chaos EPA non-determinism on thin meshes. Debug box drawn for 10 s. Full undo transaction. <em>Convert Light</em>: three icon buttons to convert selected lights to Point / Spot / Rect, preserving all shared properties (intensity, color, attenuation radius, temperature, source radius/length, falloff, IES), actor label, and outliner folder.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.24</span>
+        <span class="release-date">2026-07-26</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>Map Name field in the import UI now displays with the correct read-only style (dark background <code>#292B2F</code>, muted text). Added <code>TextStyle.ColorAndOpacity</code> to <code>PyToolkitUI.Input.FieldReadOnly</code> — previously only <code>ForegroundColor</code> was set, which does not affect SEditableText rendering.</li>
+        <li><span class="tag tag-fixed">Fixed</span>MBUF secondary VB (split-format props where VB[0] = POSITION, VB[1] = TEXCOORD+NORMAL) with element count mismatch now applies secondary data to <code>min(VB.ElementCount, LastPosVBCount)</code> vertices instead of skipping entirely. Prevents UV=0 and wrong normals on partial count-mismatch cases.</li>
+        <li><span class="tag tag-improved">Improved</span>MBUF secondary VB skip warning messages now individually report the reason: no secondary attributes found / no prior POSITION VB / element count mismatch (with actual counts). Easier diagnosis in Output Log.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Phys Material assignment restored (<code>set_physicsurface</code> was accidentally commented out). Physical surface type is now assigned when placing static mesh actors.</li>
+        <li><span class="tag tag-fixed">Fixed</span>SkeletalMesh builder: added bounds checks for both <code>MeshData.Indices[IdxPos]</code> (IdxPos out of range) and <code>MeshData.Vertices[GVIdx]</code> (GVIdx out of range). Degenerate draw calls are now skipped with a warning instead of crashing.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Asset name sanitization: spaces in vmdl_c base filename (e.g. <code>willow branch</code>) replaced with underscores to satisfy UE PackageName requirements.</li>
+        <li><span class="tag tag-added">Added</span>Checkpoint save every 100 imported assets: <code>SaveDirtyPackages</code> + <code>_imported.json</code> write. Protects against crash data loss on large maps.</li>
+        <li><span class="tag tag-fixed">Fixed</span>AutoResolveMapName: added <code>LastResolvedVpkPath</code> dedup cache to prevent double-fire (file picker + text change both trigger OnTextChanged). Fixed pipe: child process no longer receives parent's stdout read handle as stdin.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Material pipeline: replaced <em>Fancy Blend Mode 0/1/2/3</em> static switches with scalar <code>Fancy Blending</code> parameter (<code>F_FANCY_BLENDING</code>), and <em>Detail Texture 1/2</em> bools with scalar <code>Detail Texture</code> (0–2). Matches CS2 shader enum semantics.</li>
+        <li><span class="tag tag-fixed">Fixed</span><code>set_param_checked</code> no longer raises on real param collision for <code>layer_name_1</code> and similar multi-layer keys — silently overwrites when previous value is empty string (KV3 last-wins semantics).</li>
+        <li><span class="tag tag-fixed">Fixed</span>Exploded geometry on MBUF meshes with non-consecutive VB indices (e.g. VB[0]/VB[2]/VB[4] in <code>n0_lr0_c2_s_cb_mesh</code>). Root cause: <code>VBVertOffsets[Sub.VBIndex]</code> used VBIndex as array ordinal — draw8 (VBIndex=2) got cumulative offset 763 instead of correct 627, producing OOB indices. Fixed by replacing <code>TArray&lt;int32&gt; VBVertOffsets</code> with <code>TMap&lt;int32,int32&gt; VBIndexToOffset</code> keyed by actual MBUF vi, built with new <code>OutPerVBVIIndices</code> output parameter tracking which MBUF VB array index each position VB corresponds to. Added IB pre-scan to derive authoritative per-VB vertex counts from max raw IB index when CS2 under-reports <code>m_nElementCount</code> for meshopt-compressed VBs.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.23</span>
+        <span class="release-date">2026-07-24</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>Workshop / community maps: resource references in <code>m_material</code> and <code>m_materialGroups</code> use a <code>HEXID&nbsp;&nbsp;path</code> format (16-char content hash + double space). The hash prefix is now stripped before storing material paths, so materials like <code>officewindowparallax</code> are correctly exported to <code>_materials.json</code>.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Paths with spaces (e.g. <code>office interior/officewindowparallax</code>) in decompiler output lines now parsed correctly using <code>split("] ", 1)</code> instead of <code>split(" ")[-1]</code>, which truncated to the last token.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Texture UE asset paths sanitized with <code>to_valid_filename()</code> at construction time — eliminates <em>"Can't convert path … too many spaces"</em> errors for workshop map textures.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Material dictionary lookup in Phase 3 now uses sanitized keys, matching the sanitized names produced by <code>find_material()</code>. Previously, space-in-path materials were found in <code>_materials.json</code> but silently missed in the UE lookup.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Per-drawcall actors with more materials than mesh slots (e.g. <code>painting_portrait01_draw0</code>) now pick the correct material using the stored <code>drawcall_index</code> instead of falling through to the wrong slot.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.22</span>
+        <span class="release-date">2026-07-23</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>Canvas / picture meshes (e.g. <code>picture_01</code>) displayed the frame material instead of the canvas image. Root cause: skin material matching used the current skin's index reference instead of the default skin. Fix: match slot name against the default skin's basename list to get a stable index, then apply that index into the current skin.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Community VPK decompile phase emitted a <code>SlowTask</code> overflow warning — <code>ScopedSlowTask</code> total was 1.0 but 7 progress frames (one per extension) were entered. Total corrected to 7.0.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Param collision exception when a settings key was set twice with the same effective value but an empty-string initial state. Empty string is now treated as "unset" and silently overwritten.</li>
+        <li><span class="tag tag-added">Added</span>VPK selection now warns when a non-<code>_dir.vpk</code> file is chosen and a <code>_dir.vpk</code> variant exists in the same folder.</li>
+        <li><span class="tag tag-added">Added</span>Progress spinner shown while the map name is resolved from the selected VPK (blocks main thread during CLI call).</li>
+        <li><span class="tag tag-changed">Changed</span>Map Name field made read-only — displays auto-detected name with a placeholder when empty.</li>
+        <li><span class="tag tag-changed">Changed</span><code>BoundsScale = 50</code> applied to all skeletal mesh components on spawn, eliminating LOD pop-in on animated props visible at range.</li>
+        <li><span class="tag tag-changed">Changed</span>Import log cleaned up: removed per-texture, per-material-param, per-entity-instance, and sky-mesh noise lines. Near-duplicate light skips now include the entity ID.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.21</span>
+
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Phase 2 now automatically saves all imported asset packages after the import loop finishes (<code>SaveDirtyPackages</code>).</li>
+        <li><span class="tag tag-added">Added</span>Overlay render order (<code>m_nOverlayRenderOrder</code>) propagated from worldnode data to <code>TranslucencySortPriority</code> on spawned overlay actors.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Cable slack mapping: cables with moderate slack values were sagging through the ground due to the cap threshold being too high. Cap lowered from 130 % to 102 % of chord distance.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Progress bar name no longer jumps when a filename exceeds 32 characters — truncated with <code>…</code> suffix.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Phase 2 progress bar label corrected from <em>Decompiling models</em> to <em>Importing models</em>.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Materials with <code>csgo_vertexlitgeneric</code> + <code>F_DECAL_TEXTURE: 1</code> were incorrectly routed to the decal material instance. They now use the standard <code>csgo_vertexlitgeneric</code> path.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.20</span>
+        
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>SkeletalMesh props with more than one material slot had all geometry assigned to slot 0. Root cause: <code>FSkeletalMeshImportData::Materials</code> was not populated, so UE reordered render sections freely. Fixed by populating <code>MaterialImportName</code> and <code>ImportedMaterialSlotName</code> for each section.</li>
+        <li><span class="tag tag-fixed">Fixed</span>MDAT draw-call parser rewritten to use brace-depth flushing instead of <code>m_nStartIndex</code>-triggered flushing. Fixes incorrect BaseVertex assignment on meshes where KV3 field order differs from the expected sequence.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Double-flush bug: after the brace-depth flush, the end-of-file safety net re-added the same draw call, producing a spurious third material slot. Fixed by clearing <code>Current</code> immediately after flushing inside the <code>}</code> handler.</li>
+        <li><span class="tag tag-fixed">Fixed</span>MVTX-at-vbib_block: stale blocks-cache entries with old decompiler format (MBUF block index) were misrouted to MVTX data, producing geometry garbage. Plugin now detects the mismatch, resets the index, and falls back to a fresh CLI run.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.17</span>
+        
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>CS2 omits blend weight / blend index data for props bound to a single bone. The plugin now synthesises implicit skinning (bone 0, weight 1.0) for these props so they import correctly as SkeletalMesh assets.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.16</span>
+        
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Full animated prop pipeline: CS2 animated props are imported as <code>USkeletalMesh</code> + <code>USkeleton</code> + <code>UAnimSequence</code> from embedded <code>ANIM</code> / <code>ASEQ</code> / <code>AGRP</code> blocks.</li>
+        <li><span class="tag tag-added">Added</span>ZSTD v1.5.6 vendored into <code>Source/ThirdParty/Zstd/</code>. Required for stride-4 secondary vertex buffers that store compressed vertex-color data.</li>
+        <li><span class="tag tag-fixed">Fixed</span>UV1 format 16 (<code>R32G32_FLOAT</code>) was decoded with the wrong branch constant (was 2, should be 16). Affected UVs on worldnode meshes with a secondary vertex buffer.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Primary MVTX decoder lacked handling for UV0 formats 37 (<code>R16G16_SNORM</code>) and 16 (<code>R32G32_FLOAT</code>). Both added, matching VRF reference decode (<code>shorts / 32767.0f</code>).</li>
+        <li><span class="tag tag-fixed">Fixed</span>Tangent decode added for vertex attribute format 42 (<code>R8G8B8A8_SNORM</code>). Eliminates "nearly-zero tangent" import warnings; <code>bRecomputeTangents</code> set to <code>false</code>.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Stride-4 secondary vertex buffer meshopt decode: CS2 sets <code>m_bMeshoptCompressed = true</code> but stores raw bytes. Plugin now checks for the 0xA0 magic byte before calling meshopt, falling back to <code>memcpy</code>.</li>
+        <li><span class="tag tag-fixed">Fixed</span><code>MoveTemp</code> bug on cached draw-call lists caused 26 import failures on de_cache. Fixed — all 933/933 imported.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.9</span>
+        
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>ZSTD false-positive warning: <code>m_bCompressedZSTD = true</code> in the VB section (not the IB section) incorrectly triggered an error log. Log now gated inside <code>if (bInIndexSection)</code>.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Spurious <code>m_nVertexCount</code> boundary warning removed — the count refers to unique vertices per draw call, not the cluster size; boundary-shared vertices caused false positives across every full-map import.</li>
+        <li><span class="tag tag-changed">Changed</span>Removed all investigation-era verbose diagnostic logs (position dumps, raw-index dumps, per-submesh KV3 logs). Kept summary logs and all Error/Warning guards.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.8</span>
+        
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>BaseVertex off-by-one: KV3 field order in MDAT places <code>m_nBaseVertex</code> / <code>m_nVertexCount</code> before <code>m_nStartIndex</code>. Old parser flushed on <code>m_nStartIndex</code>, so every draw call received the next cluster's BaseVertex — causing stretched / spiked polygons on all worldnode meshes. Fixed with a pending-buffer that defers BaseVertex until the next draw call boundary.</li>
+        <li><span class="tag tag-fixed">Fixed</span>IB→VB mapping now derived from parsed draw call fields (<code>m_indexBuffer.m_hBuffer</code>, <code>m_vertexBuffers[0].m_hBuffer</code>) instead of a heuristic group-detection algorithm.</li>
+        <li><span class="tag tag-fixed">Fixed</span>Multiple IBs in <code>m_indexBuffers = [{…},{…}]</code> (multi-material): only the last IB was flushed. Added flush-on-new-brace inside the IB section of <code>ParseCTRL</code>.</li>
+        <li><span class="tag tag-fixed">Fixed</span>MBUF multi-material VertOffset: when <code>IBCount &gt; VBCount</code>, extra IBs used a wrong cumulative vertex offset. Fixed by clamping the VB index to <code>min(ii, VBCount-1)</code>.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.6</span>
+        
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Batch CLI mode (<code>RunCLIBatch</code>): runs the S2V decompiler once with <code>-i &lt;tempdir&gt; -a</code> instead of once per file. 3.2× faster — de_overpass 939 meshes: 94 s vs 297 s.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.5</span>
+        
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>Multi-embedded-mesh worldnode support: all vertex buffers are now concatenated, index buffers supplemented from binary data, and <code>startIndex</code> fixup applied via draw-call group detection. Eliminates missing geometry on complex worldnodes.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
+        <span class="release-version">v2.2</span>
+        
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-added">Added</span>Full binary parsing pipeline for CS2 <code>.vmdl_c</code> files — vertex layout decode, MVTX / MBUF path, tint colour grouping, and multi-material section support.</li>
+        <li><span class="tag tag-added">Added</span>Static mesh import (<code>UStaticMesh</code>) via <code>FMeshDescription</code> + <code>FPolygonGroupID</code> — preserves material section order inherently.</li>
+        <li><span class="tag tag-added">Added</span>Tint colour per-submesh grouping: worldnode meshes with per-instance tint are split into separate UE assets by colour group.</li>
+      </ul>
+    </div>
+  </main>
+  <footer>adenexvfx &mdash; <a href="../" style="color:#484f58">adenexvfx.github.io/adenex-tools</a></footer>
+</body>
+</html>

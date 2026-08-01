@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S2MapBridge &#8212; Adenex</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
+    .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+    .breadcrumb a { color: #58a6ff; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: #484f58; }
+    .lang-switcher { display: flex; gap: 4px; }
+    .lang-btn { background: none; border: 1px solid #30363d; color: #8b949e; padding: 4px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.15s; }
+    .lang-btn.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+    .lang-btn:hover:not(.active) { border-color: #58a6ff; color: #58a6ff; }
+    main { max-width: 860px; margin: 0 auto; padding: 48px 20px 80px; }
+    .hero-name { font-size: 32px; font-weight: 700; color: #e6edf3; }
+    .hero-meta { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
+    .badge { font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 500; }
+    .badge-type { background: #1f2937; border: 1px solid #374151; color: #9ca3af; }
+    .badge-version { background: #0d2b12; border: 1px solid #238636; color: #3fb950; font-family: monospace; }
+    .hero-desc { margin-top: 20px; color: #8b949e; font-size: 15px; line-height: 1.75; max-width: 640px; }
+    .hero-desc a { color: #58a6ff; }
+    .actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+    .btn { padding: 9px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-block; transition: all 0.15s; }
+    .btn-primary { background: #238636; color: #fff; border: 1px solid #2ea043; }
+    .btn-primary:hover { background: #2ea043; }
+    .btn-secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
+    .btn-secondary:hover { border-color: #58a6ff; color: #58a6ff; }
+    .hero-img { margin-top: 28px; border-radius: 8px; overflow: hidden; border: 1px solid #21262d; }
+    .hero-img img { width: 100%; display: block; }
+    .section { margin-top: 48px; }
+    .group-label { font-size: 11px; font-weight: 600; color: #484f58; text-transform: uppercase; letter-spacing: 0.12em; padding: 28px 0 10px; }
+    .accordion { border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
+    .accordion + .group-label { padding-top: 32px; }
+    .accordion-item { border-bottom: 1px solid #30363d; }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-header { width: 100%; background: #161b22; border: none; color: #e6edf3; text-align: left; padding: 16px 20px; font-size: 15px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.15s; }
+    .accordion-header:hover { background: #1c2128; }
+    .accordion-header .chevron { color: #484f58; font-size: 12px; transition: transform 0.2s; }
+    .accordion-header.open .chevron { transform: rotate(90deg); }
+    .accordion-body { display: none; padding: 20px 24px; background: #0d1117; font-size: 15px; line-height: 1.8; color: #8b949e; }
+    .accordion-body.open { display: block; }
+    .accordion-body ol, .accordion-body ul { padding-left: 20px; }
+    .accordion-body li { margin-bottom: 6px; }
+    .accordion-body ul ul, .accordion-body ol ol { margin-top: 4px; }
+    .accordion-body p { margin-bottom: 12px; }
+    .accordion-body p:last-child { margin-bottom: 0; }
+    .accordion-body strong { color: #c9d1d9; }
+    .accordion-body a { color: #58a6ff; }
+    .accordion-body code { background: #161b22; border: 1px solid #30363d; padding: 1px 6px; border-radius: 4px; font-size: 13px; color: #79c0ff; font-family: monospace; }
+    .accordion-body pre { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 16px; font-size: 13px; color: #79c0ff; font-family: monospace; overflow-x: auto; margin-bottom: 12px; white-space: pre-wrap; }
+    .accordion-body hr { border: none; border-top: 1px solid #30363d; margin: 20px 0; }
+    .accordion-body h6 { font-size: 12px; font-weight: 600; color: #c9d1d9; text-transform: uppercase; letter-spacing: 0.07em; margin: 22px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #21262d; }
+    .accordion-body h6:first-child { margin-top: 0; }
+    .accordion-body h6 strong { font-weight: 600; color: #c9d1d9; }
+    .section-img { margin: 0 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid #21262d; }
+    .section-img img { width: 100%; display: block; }
+    body.lang-en .lang-ru { display: none; }
+    body.lang-ru .lang-en { display: none; }
+    .badge-size { background: #161b22; border: 1px solid #30363d; color: #6e7681; }
+    .section-img img { cursor: zoom-in; }
+    .section-img.vertical { max-width: 450px; margin-left: auto; margin-right: auto; }
+    .section-img.vertical img { width: 100%; }
+    .hero-img.vertical { max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero-img.vertical img { width: 100%; }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 6px; object-fit: contain; box-shadow: 0 8px 48px rgba(0,0,0,0.7); }
+    footer { text-align: center; color: #484f58; font-size: 13px; padding: 40px 20px; }
+    footer a { color: #484f58; }
+  </style>
+</head>
+<body class="lang-ru">
+  <header>
+    <div class="breadcrumb">
+      <a href="../">Adenex</a>
+      <span>/</span>
+      <span style="color:#e6edf3">S2MapBridge</span>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+    </div>
+  </header>
+  <main>
+    <div class="hero-name">S2MapBridge</div>
+    <div class="hero-meta">
+      <span class="badge badge-type">Unreal Engine Plugin</span>
+      <span class="badge badge-version">v2.21.2</span>
+      <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
+    </div>
+    <div class="hero-desc">
+      <span class="lang-ru">Нативный C++ плагин для Unreal Engine, импортирующий карты CS2 напрямую из файлов Source 2 без использования сторонних конвертеров.</span>
+      <span class="lang-en">A native C++ Unreal Engine plugin that imports CS2 maps directly from Source 2 files — no third-party converters required.</span>
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" id="download-btn" href=""><span class="lang-ru" id="dl-label-ru">Скачать</span><span class="lang-en" id="dl-label-en">Download</span></a>
+      <a class="btn btn-secondary" href="changelog.html">Changelog</a>
+    </div>
+    <div class="hero-img">
+      <img src="img/hero.png" alt="S2MapBridge">
+    </div>
+    <div class="section">
+      <div class="accordion">
+
+        <!-- ── Основные возможности ─────────────────────────────────────── -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="lang-ru">Основные возможности</span>
+            <span class="lang-en">Features</span>
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <ul>
+              <li>
+                <span class="lang-ru"><p>Декомпиляция уровней вместе со всеми связанными ассетами: мешами, текстурами, материалами и вспомогательными данными.</p></span>
+                <span class="lang-en"><p>Decompiles levels with all linked assets: meshes, textures, materials and auxiliary data.</p></span>
+              </li>
+              <li>
+                <span class="lang-ru"><p>Нативный C++ импорт мешей напрямую из файлов <code>.vmesh_c</code> / <code>.vmdl_c</code> — Blender не требуется.</p></span>
+                <span class="lang-en"><p>Native C++ mesh import directly from <code>.vmesh_c</code> / <code>.vmdl_c</code> files — no Blender required.</p></span>
+              </li>
+              <li>
+                <span class="lang-ru"><p>Импорт необходимых ассетов в Unreal Engine с автоматическим созданием материалов на основе данных исходной игры.</p></span>
+                <span class="lang-en"><p>Imports assets into Unreal Engine and auto-creates materials based on Source 2 shader data.</p></span>
+              </li>
+              <li>
+                <span class="lang-ru"><p>Слияние draw call-ов с одинаковым материалом и цветом тинта в единый Static Mesh для оптимизации сцены.</p></span>
+                <span class="lang-en"><p>Merges draw calls sharing the same material and tint color into a single Static Mesh to reduce actor count.</p></span>
+              </li>
+              <li>
+                <span class="lang-ru"><p>Импорт карт из игр на движке Source 2: Counter-Strike 2, Half-Life: Alyx и Dota 2.</p></span>
+                <span class="lang-en"><p>Imports maps from Source 2 games: Counter-Strike 2, Half-Life: Alyx and Dota 2.</p></span>
+              </li>
+              <li>
+                <span class="lang-ru"><p>Автоматическая расстановка источников света, проводов и анимированных объектов на уровне.</p></span>
+                <span class="lang-en"><p>Automatic placement of light entities, cables and animated objects in the level.</p></span>
+              </li>
+              <li>
+                <span class="lang-ru"><p>Нативный Slate UI с тремя вкладками: <strong>Map</strong>, <strong>Misc</strong> и <strong>Settings</strong>. Открывается прямо из тулбара PyToolkit.</p></span>
+                <span class="lang-en"><p>Native Slate UI with three tabs: <strong>Map</strong>, <strong>Misc</strong> and <strong>Settings</strong>. Opens directly from the PyToolkit toolbar.</p></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ── Требования ───────────────────────────────────────────────── -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="lang-ru">Требования</span>
+            <span class="lang-en">Requirements</span>
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <ul>
+              <li><span class="lang-ru">Unreal Engine <strong>5.6</strong> или новее</span><span class="lang-en">Unreal Engine <strong>5.6</strong> or later</span></li>
+              <li><span class="lang-ru"><strong>PyToolkit</strong> плагин версии <strong>1.8</strong> и выше (включает adenexlib_core 16+)</span><span class="lang-en"><strong>PyToolkit</strong> plugin version <strong>1.8</strong> or later (includes adenexlib_core 16+)</span></li>
+              <li><span class="lang-ru">Установленная игра (<strong>Counter-Strike 2</strong>, <strong>Half-Life: Alyx</strong> или <strong>Dota 2</strong>)</span><span class="lang-en">The game installed (<strong>Counter-Strike 2</strong>, <strong>Half-Life: Alyx</strong> or <strong>Dota 2</strong>)</span></li>
+              <li><span class="lang-ru">Утилита <strong>Source2Viewer CLI</strong> для декомпиляции файлов карты</span><span class="lang-en"><strong>Source2Viewer CLI</strong> utility for decompiling map files</span></li>
+              <li><span class="lang-ru">Свободное место на диске (первый запуск может импортировать несколько тысяч текстур)</span><span class="lang-en">Free disk space (the first run may import thousands of textures)</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ── Установка ─────────────────────────────────────────────────── -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="lang-ru">Установка</span>
+            <span class="lang-en">Installation</span>
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/install.png" alt=""></div>
+
+            <h6><span class="lang-ru">1. Установка PyToolkit</span><span class="lang-en">1. Install PyToolkit</span></h6>
+            <p>
+              <span class="lang-ru"><a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Скачайте</strong></a> и распакуйте плагин <strong>PyToolkit</strong> (версия 1.8 и выше) в папку <code>Plugins</code> движка или вашего проекта.</span>
+              <span class="lang-en"><a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Download</strong></a> and unzip <strong>PyToolkit</strong> (version 1.8 or later) into the <code>Plugins</code> folder of your engine or project.</span>
+            </p>
+
+            <h6><span class="lang-ru">2. Установка S2MapBridge</span><span class="lang-en">2. Install S2MapBridge</span></h6>
+            <p>
+              <span class="lang-ru">Распакуйте архив <strong>S2MapBridge</strong> в папку <code>Plugins</code> вашего Unreal Engine проекта (например, <code>D:\YourProject\Plugins\S2MapBridge</code>).</span>
+              <span class="lang-en">Unzip <strong>S2MapBridge</strong> into the <code>Plugins</code> folder of your Unreal Engine project (e.g. <code>D:\YourProject\Plugins\S2MapBridge</code>).</span>
+            </p>
+
+            <h6><span class="lang-ru">3. Включение плагинов</span><span class="lang-en">3. Enable plugins</span></h6>
+            <p>
+              <span class="lang-ru">Запустите Unreal Engine и включите следующие плагины (<strong>Edit → Plugins</strong>):</span>
+              <span class="lang-en">Launch Unreal Engine and enable the following plugins (<strong>Edit → Plugins</strong>):</span>
+            </p>
+            <ul>
+              <li>Editor Scripting Utilities</li>
+              <li>Python Editor Script Plugin</li>
+              <li>Sequencer Scripting</li>
+              <li>Http Blueprint</li>
+              <li>PyToolkit</li>
+              <li>S2MapBridge</li>
+            </ul>
+            <p><span class="lang-ru">Перезапустите движок.</span><span class="lang-en">Restart the engine.</span></p>
+
+            <h6><span class="lang-ru">4. Установка Source2Viewer CLI</span><span class="lang-en">4. Install Source2Viewer CLI</span></h6>
+            <p>
+              <span class="lang-ru"><a href="https://github.com/ValveResourceFormat/ValveResourceFormat/releases"><strong>Скачайте</strong></a> <code>cli-windows-x64.zip</code>, распакуйте в любое удобное место и укажите путь к <code>.exe</code> в настройках плагина.</span>
+              <span class="lang-en"><a href="https://github.com/ValveResourceFormat/ValveResourceFormat/releases"><strong>Download</strong></a> <code>cli-windows-x64.zip</code>, unzip it anywhere and point the plugin Settings to the <code>.exe</code>.</span>
+            </p>
+
+            <h6><span class="lang-ru">5. Открытие интерфейса</span><span class="lang-en">5. Opening the UI</span></h6>
+            <p>
+              <span class="lang-ru">После перезапуска движка в тулбаре <strong>PyToolkit</strong> появится кнопка <strong>S2MapBridge</strong>. Нажмите её, чтобы открыть панель импорта.</span>
+              <span class="lang-en">After restarting the engine a <strong>S2MapBridge</strong> button will appear in the <strong>PyToolkit</strong> toolbar. Click it to open the importer panel.</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- ── Настройка ─────────────────────────────────────────────────── -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="lang-ru">Настройка</span>
+            <span class="lang-en">Settings</span>
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/settings.png" alt=""></div>
+            <p><span class="lang-ru">Все настройки доступны на вкладке <strong>Settings</strong>.</span><span class="lang-en">All settings are available on the <strong>Settings</strong> tab.</span></p>
+            <ul>
+              <li><strong>Game</strong> — <span class="lang-ru">выбор игры Source 2 (CS2, HL: Alyx, Dota 2).</span><span class="lang-en">select the Source 2 game to import from (CS2, HL: Alyx, Dota 2).</span></li>
+              <li><strong>Decompiler Executable</strong> — <span class="lang-ru">путь к <code>Source2Viewer-CLI.exe</code>.</span><span class="lang-en">path to <code>Source2Viewer-CLI.exe</code>.</span></li>
+              <li><strong>Game Folder</strong> — <span class="lang-ru">корневая папка установленной игры (например <code>D:\Steam\steamapps\common\Counter-Strike Global Offensive</code>).</span><span class="lang-en">root installation folder of the game (e.g. <code>D:\Steam\steamapps\common\Counter-Strike Global Offensive</code>).</span></li>
+              <li><strong>Game Decompiled Folder</strong> — <span class="lang-ru">папка, куда будут сохраняться декомпилированные файлы.</span><span class="lang-en">folder where decompiled files will be stored.</span></li>
+              <li><strong>Extended Log</strong> — <span class="lang-ru">включить расширенный вывод логов (полезно при отладке).</span><span class="lang-en">enable verbose per-asset logging (useful for troubleshooting).</span></li>
+              <li><strong>Developer</strong> — <span class="lang-ru">показывает кнопки запуска фаз по отдельности (Phase 1 / Phase 2 / Phase 3).</span><span class="lang-en">shows individual phase buttons (Phase 1 / Phase 2 / Phase 3).</span></li>
+              <li><strong>Fallback Output Content Path</strong> — <span class="lang-ru">путь в Content Browser, куда попадают ассеты, которые не удалось сопоставить с картой.</span><span class="lang-en">content path used for assets that cannot be matched to the map JSON.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ── Импорт карты ───────────────────────────────────────────────── -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="lang-ru">Импорт карты</span>
+            <span class="lang-en">Importing a map</span>
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/import-map.png" alt=""></div>
+
+            <h6><span class="lang-ru">Параметры вкладки Map</span><span class="lang-en">Map tab parameters</span></h6>
+            <ul>
+              <li><strong>Map VPK File</strong> — <span class="lang-ru">путь к VPK-файлу карты (например, <code>.../csgo/maps/de_dust2.vpk</code>). Нажмите <code>...</code> чтобы выбрать файл.</span><span class="lang-en">path to the map VPK file (e.g. <code>.../csgo/maps/de_dust2.vpk</code>). Click <code>...</code> to browse.</span></li>
+              <li><strong>Map Name</strong> — <span class="lang-ru">внутреннее имя карты. Подставляется автоматически из VPK.</span><span class="lang-en">internal map name. Filled in automatically from the VPK.</span></li>
+              <li><strong>Map Scale</strong> — <span class="lang-ru">масштаб импортируемой карты (по умолчанию 2.3 для перевода юнитов Source 2 в сантиметры UE).</span><span class="lang-en">import scale (default 2.3 converts Source 2 units to Unreal centimetres).</span></li>
+              <li><strong>Spawn Cables</strong> — <span class="lang-ru">создавать кабели/провода на карте.</span><span class="lang-en">spawn cable/rope entities in the level.</span></li>
+              <li><strong>Spawn Environment Light</strong> — <span class="lang-ru">создавать Sky Light и Directional Light из данных карты.</span><span class="lang-en">create Sky Light and Directional Light from map data.</span></li>
+              <li><strong>Spawn Light Entities</strong> — <span class="lang-ru">создавать точечные и прожекторные источники света.</span><span class="lang-en">spawn point lights and spot lights from the map.</span></li>
+              <li><strong>Save During Import</strong> — <span class="lang-ru">автоматически сохранять ассеты в процессе импорта.</span><span class="lang-en">automatically save assets to disk during import.</span></li>
+              <li><strong>Merge Meshes By Color</strong> — <span class="lang-ru">объединять draw call-ы с одинаковым материалом и тинтом в один меш. Уменьшает число акторов на уровне.</span><span class="lang-en">merge draw calls sharing the same material and tint into one mesh. Reduces actor count.</span></li>
+              <li><strong>Force Redecompile Textures</strong> — <span class="lang-ru">принудительно перекомпилировать текстуры, даже если они уже существуют.</span><span class="lang-en">force redecompile all textures even if they already exist.</span></li>
+              <li><strong>Max Texture Size</strong> — <span class="lang-ru">максимальное разрешение импортируемых текстур (512 / 1024 / 2048 / 4096).</span><span class="lang-en">maximum resolution for imported textures (512 / 1024 / 2048 / 4096).</span></li>
+            </ul>
+
+            <hr>
+
+            <h6><span class="lang-ru">Процесс импорта</span><span class="lang-en">Import process</span></h6>
+            <p>
+              <span class="lang-ru">Нажмите кнопку <strong>Import</strong> — плагин последовательно выполнит три фазы:</span>
+              <span class="lang-en">Click the <strong>Import</strong> button — the plugin will run three phases in sequence:</span>
+            </p>
+            <ol>
+              <li>
+                <span class="lang-ru"><strong>Phase 1 — Decompile:</strong> декомпиляция VPK-файла карты с помощью Source2Viewer CLI. Извлекаются геометрия и все связанные ассеты.</span>
+                <span class="lang-en"><strong>Phase 1 — Decompile:</strong> decompiles the map VPK using Source2Viewer CLI. Extracts geometry and all linked assets.</span>
+              </li>
+              <li>
+                <span class="lang-ru"><strong>Phase 2 — Import Meshes:</strong> нативный C++ импорт мешей напрямую из <code>.vmesh_c</code> файлов в Static Mesh ассеты UE.</span>
+                <span class="lang-en"><strong>Phase 2 — Import Meshes:</strong> native C++ import of meshes directly from <code>.vmesh_c</code> files into UE Static Mesh assets.</span>
+              </li>
+              <li>
+                <span class="lang-ru"><strong>Phase 3 — Place Actors:</strong> импорт текстур и материалов, расстановка акторов, источников света, кабелей и анимированных объектов на уровне.</span>
+                <span class="lang-en"><strong>Phase 3 — Place Actors:</strong> imports textures and materials, places actors, lights, cables and animated objects in the level.</span>
+              </li>
+            </ol>
+            <p>
+              <span class="lang-ru">Чтобы запускать фазы по отдельности, включите <strong>Developer</strong> в настройках — под кнопкой Import появятся кнопки <strong>Phase 1</strong>, <strong>Phase 2</strong>, <strong>Phase 3</strong>.</span>
+              <span class="lang-en">To run phases individually, enable <strong>Developer</strong> in Settings — <strong>Phase 1</strong>, <strong>Phase 2</strong>, <strong>Phase 3</strong> buttons will appear below the Import button.</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- ── Редактирование карт ────────────────────────────────────────── -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="lang-ru">Редактирование карт</span>
+            <span class="lang-en">Editing maps</span>
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <div class="section-img"><img src="img/edit-maps-1.png" alt=""></div>
+            <div class="section-img"><img src="img/edit-maps-2.png" alt=""></div>
+            <p>
+              <span class="lang-ru">В движке Source 2 большинство мешей сгруппированы для оптимизации. Например, несколько ящиков на de_vertigo могут быть объединены в один меш. Чтобы подвинуть только один объект, включите режим <strong>Modeling</strong>, перейдите на вкладку <strong>Model → PolyGroup Edit</strong>. Выберите режим вертексов, выделите нужные точки и переместите объект с помощью пивота. После редактирования нажмите <strong>Accept</strong> по центру экрана.</span>
+              <span class="lang-en">In Source 2 most meshes are grouped for optimisation. For example, several crates on de_vertigo may be merged into one mesh. To move a single object enable <strong>Modeling</strong> mode, go to the <strong>Model → PolyGroup Edit</strong> tab. Switch to vertex mode, select the relevant vertices and move the object using the pivot. After editing click <strong>Accept</strong> at the centre of the screen.</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- ── Распространённые проблемы ─────────────────────────────────── -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="lang-ru">Распространённые проблемы</span>
+            <span class="lang-en">Troubleshooting</span>
+            <span class="chevron">&#9654;</span>
+          </button>
+          <div class="accordion-body">
+            <span class="lang-ru">Если возникают ошибки, проверьте следующее:</span>
+            <span class="lang-en">If you encounter errors, check the following:</span>
+            <ul>
+              <li>
+                <span class="lang-ru">Все необходимые плагины включены в <strong>Edit → Plugins</strong> и проект перезапущен.</span>
+                <span class="lang-en">All required plugins are enabled in <strong>Edit → Plugins</strong> and the project has been restarted.</span>
+              </li>
+              <li>
+                <span class="lang-ru">Используется Unreal Engine версии 5.6 или новее.</span>
+                <span class="lang-en">You are using Unreal Engine 5.6 or later.</span>
+              </li>
+              <li>
+                <span class="lang-ru">PyToolkit версии 1.8+ установлен и включён (содержит adenexlib_core версии 16+).</span>
+                <span class="lang-en">PyToolkit 1.8+ is installed and enabled (it includes adenexlib_core 16+).</span>
+              </li>
+              <li>
+                <span class="lang-ru">Путь к <code>Source2Viewer-CLI.exe</code> указан верно в настройках плагина (вкладка <strong>Settings</strong>).</span>
+                <span class="lang-en">The path to <code>Source2Viewer-CLI.exe</code> is set correctly in the plugin Settings tab.</span>
+              </li>
+              <li>
+                <span class="lang-ru">Декомпилер обновлён до последней версии. Если стандартная версия не работает, попробуйте DEV-сборку.</span>
+                <span class="lang-en">The decompiler is updated to the latest release. If the stable build fails, try the DEV build.</span>
+              </li>
+              <li>
+                <span class="lang-ru">Если источники света перекрываются геометрией, перейдите на вкладку <strong>Misc → Light</strong> и нажмите <strong>Fix stuck light</strong>.</span>
+                <span class="lang-en">If lights are clipping through geometry, go to the <strong>Misc → Light</strong> tab and click <strong>Fix stuck light</strong>.</span>
+              </li>
+              <li>
+                <span class="lang-ru">Для детальной диагностики включите <strong>Extended Log</strong> в настройках и проверьте <strong>Output Log</strong>.</span>
+                <span class="lang-en">For detailed diagnostics enable <strong>Extended Log</strong> in Settings and check the <strong>Output Log</strong>.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+  <footer>adenexvfx &mdash; <a href="../">adenexvfx.github.io/adenex-tools</a></footer>
+  <script>
+    fetch('../updates/s2mapbridge.json')
+      .then(r => r.json())
+      .then(data => {
+        const btn = document.getElementById('download-btn');
+        if (data.download_url) btn.href = data.download_url;
+        if (data.download_source) {
+          document.getElementById('dl-label-ru').textContent = 'Скачать (' + data.download_source + ')';
+          document.getElementById('dl-label-en').textContent = 'Download (' + data.download_source + ')';
+        }
+        if (data.file_size) {
+          const badge = document.getElementById('file-size-badge');
+          badge.textContent = data.file_size;
+          badge.style.display = '';
+        }
+      })
+      .catch(() => {});
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.hero-img img').forEach(img => {
+      const check = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          const container = img.closest('.hero-img');
+          container.classList.add('vertical');
+          if (img.naturalWidth < 600) container.style.maxWidth = img.naturalWidth + 'px';
+        }
+      };
+      if (img.complete) check();
+      else img.addEventListener('load', check);
+    });
+    document.querySelectorAll('.section-img img').forEach(img => {
+      const check = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          img.closest('.section-img').classList.add('vertical');
+        }
+      };
+      if (img.complete) check();
+      else img.addEventListener('load', check);
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('open');
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('open'); }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    function setLang(lang) {
+      document.body.className = 'lang-' + lang;
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+      });
+    }
+    function toggleAccordion(btn) {
+      const body = btn.nextElementSibling;
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      btn.classList.toggle('open', !isOpen);
+    }
+  </script>
+</body>
+</html>
