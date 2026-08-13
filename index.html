@@ -37,27 +37,27 @@
   <main>
     <h2>Unreal Engine Plugins</h2>
     <div class="grid">
-      <a class="card" href="pytoolkit/">
+      <a class="card" href="pytoolkit/" data-slug="pytoolkit">
         <div class="card-media">
           <div class="card-media-fallback"><span>PyToolkit</span></div>
         </div>
         <div class="card-body">
           <div class="card-name">PyToolkit</div>
           <div class="card-type">Unreal Engine Plugin</div>
-          <div class="card-version">v2.1</div>
+          <div class="card-version">v2.2</div>
         </div>
       </a>
-      <a class="card" href="s2mapbridge/">
+      <a class="card" href="s2mapbridge/" data-slug="s2mapbridge">
         <div class="card-media">
           <img src="s2mapbridge/img/main.png" alt="S2MapBridge">
         </div>
         <div class="card-body">
           <div class="card-name">S2MapBridge</div>
           <div class="card-type">Unreal Engine Plugin</div>
-          <div class="card-version">v2.25.8</div>
+          <div class="card-version">v2.25.9</div>
         </div>
       </a>
-      <a class="card" href="afxcamerapath/">
+      <a class="card" href="afxcamerapath/" data-slug="afxcamerapath">
         <div class="card-media">
           <div class="card-media-fallback"><span>AFXCameraPath</span></div>
         </div>
@@ -71,7 +71,7 @@
 
     <h2>Blueprints</h2>
     <div class="grid">
-      <a class="card" href="weaponsystem/">
+      <a class="card" href="weaponsystem/" data-slug="weaponsystem">
         <div class="card-media">
           <img src="weaponsystem/img/main.png" alt="Weapon System">
         </div>
@@ -85,7 +85,7 @@
 
     <h2>Widgets</h2>
     <div class="grid">
-      <a class="card" href="s2stickersmanager/">
+      <a class="card" href="s2stickersmanager/" data-slug="s2stickersmanager">
         <div class="card-media">
           <img src="s2stickersmanager/img/hero.png" alt="S2 Stickers Manager">
         </div>
@@ -95,7 +95,7 @@
           <div class="card-version">v2.1</div>
         </div>
       </a>
-      <a class="card" href="s2skinsmanager/">
+      <a class="card" href="s2skinsmanager/" data-slug="s2skinsmanager">
         <div class="card-media">
           <img src="s2skinsmanager/img/hero.png" alt="S2 Skins Manager">
         </div>
@@ -105,7 +105,7 @@
           <div class="card-version">v3.21</div>
         </div>
       </a>
-      <a class="card" href="ueditingtools-source2/">
+      <a class="card" href="ueditingtools-source2/" data-slug="ueditingtools-source2">
         <div class="card-media">
           <img src="ueditingtools-source2/img/main.png" alt="UEditingTools for Source2">
         </div>
@@ -115,7 +115,7 @@
           <div class="card-version">v4.5</div>
         </div>
       </a>
-      <a class="card" href="hammuerhelper/">
+      <a class="card" href="hammuerhelper/" data-slug="hammuerhelper">
         <div class="card-media">
           <div class="card-media-fallback"><span>Hammuer Helper</span></div>
         </div>
@@ -129,5 +129,16 @@
 
   </main>
   <footer>adenexvfx &mdash; adenexvfx.github.io/adenex-tools</footer>
+  <script>
+    document.querySelectorAll('.card[data-slug]').forEach(card => {
+      const slug = card.dataset.slug;
+      fetch('updates/' + slug + '.json')
+        .then(r => r.json())
+        .then(data => {
+          if (data.version) card.querySelector('.card-version').textContent = 'v' + data.version;
+        })
+        .catch(() => {});
+    });
+  </script>
 </body>
 </html>
