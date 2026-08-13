@@ -90,7 +90,7 @@
     <div class="hero-name">S2MapBridge</div>
     <div class="hero-meta">
       <span class="badge badge-type">Unreal Engine Plugin</span>
-      <span class="badge badge-version">v2.25.8</span>
+      <span class="badge badge-version" id="version-badge">v2.25.9</span>
       <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
     </div>
     <div class="hero-desc">
@@ -364,6 +364,7 @@
       .then(data => {
         const btn = document.getElementById('download-btn');
         if (data.download_url) btn.href = data.download_url;
+        if (data.version) document.getElementById('version-badge').textContent = 'v' + data.version;
         if (data.download_source) {
           document.getElementById('dl-label-ru').textContent = 'Скачать (' + data.download_source + ')';
           document.getElementById('dl-label-en').textContent = 'Download (' + data.download_source + ')';
