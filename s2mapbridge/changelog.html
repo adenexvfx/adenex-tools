@@ -40,6 +40,16 @@
     <h1>S2MapBridge — Changelog</h1>
     <div class="release">
       <div class="release-header">
+        <span class="release-version">v2.25.9</span>
+        <span class="release-date">2026-08-13</span>
+      </div>
+      <ul class="release-body">
+        <li><span class="tag tag-fixed">Fixed</span>Subprocess launch errors that were previously unhandled exceptions (WinError 2 — file not found, 3 — path not found, 5 — access denied, 193 — invalid executable, 216 — architecture mismatch) now show a user-facing dialog instead of crashing the import pipeline. Requires PyToolkit 2.2.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="release-header">
         <span class="release-version">v2.25</span>
         <span class="release-date">2026-08-01</span>
       </div>

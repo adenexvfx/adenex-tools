@@ -654,7 +654,13 @@
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
       });
+      try { localStorage.setItem('lang', lang); } catch(e) {}
     }
+    (function() {
+      var lang = 'ru';
+      try { lang = localStorage.getItem('lang') || 'ru'; } catch(e) {}
+      setLang(lang);
+    })();
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     document.querySelectorAll('.hero-img img').forEach(img => {
