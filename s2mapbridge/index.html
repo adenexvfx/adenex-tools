@@ -90,7 +90,7 @@
     <div class="hero-name">S2MapBridge</div>
     <div class="hero-meta">
       <span class="badge badge-type">Unreal Engine Plugin</span>
-      <span class="badge badge-version" id="version-badge">v2.25.9</span>
+      <span class="badge badge-version" id="version-badge">v2.25.10</span>
       <span class="badge badge-size" id="file-size-badge" style="display:none"></span>
     </div>
     <div class="hero-desc">
@@ -141,8 +141,8 @@
                 <span class="lang-en"><p>Automatic placement of light entities, cables and animated objects in the level.</p></span>
               </li>
               <li>
-                <span class="lang-ru"><p>Нативный Slate UI с тремя вкладками: <strong>Map</strong>, <strong>Misc</strong> и <strong>Settings</strong>. Открывается прямо из тулбара PyToolkit.</p></span>
-                <span class="lang-en"><p>Native Slate UI with three tabs: <strong>Map</strong>, <strong>Misc</strong> and <strong>Settings</strong>. Opens directly from the PyToolkit toolbar.</p></span>
+                <span class="lang-ru"><p>Нативный Slate UI с тремя вкладками: <strong>Map</strong>, <strong>Misc</strong> и <strong>Settings</strong>. Открывается через меню <strong>Tools → S2MapBridge</strong>.</p></span>
+                <span class="lang-en"><p>Native Slate UI with three tabs: <strong>Map</strong>, <strong>Misc</strong> and <strong>Settings</strong>. Opens from <strong>Tools → S2MapBridge</strong>.</p></span>
               </li>
             </ul>
           </div>
@@ -157,8 +157,8 @@
           </button>
           <div class="accordion-body">
             <ul>
-              <li><span class="lang-ru">Unreal Engine <strong>5.6</strong> или новее</span><span class="lang-en">Unreal Engine <strong>5.6</strong> or later</span></li>
-              <li><span class="lang-ru"><strong>PyToolkit</strong> плагин версии <strong>1.8</strong> и выше (включает adenexlib_core 16+)</span><span class="lang-en"><strong>PyToolkit</strong> plugin version <strong>1.8</strong> or later (includes adenexlib_core 16+)</span></li>
+              <li><span class="lang-ru">Unreal Engine <strong>5.8</strong> или новее</span><span class="lang-en">Unreal Engine <strong>5.8</strong> or later</span></li>
+              <li><span class="lang-ru"><strong>PyToolkit</strong> плагин версии <strong>2.2</strong> и выше (включает adenexlib_core 16+)</span><span class="lang-en"><strong>PyToolkit</strong> plugin version <strong>2.2</strong> or later (includes adenexlib_core 16+)</span></li>
               <li><span class="lang-ru">Установленная игра (<strong>Counter-Strike 2</strong>, <strong>Half-Life: Alyx</strong> или <strong>Dota 2</strong>)</span><span class="lang-en">The game installed (<strong>Counter-Strike 2</strong>, <strong>Half-Life: Alyx</strong> or <strong>Dota 2</strong>)</span></li>
               <li><span class="lang-ru">Утилита <strong>Source2Viewer CLI</strong> для декомпиляции файлов карты</span><span class="lang-en"><strong>Source2Viewer CLI</strong> utility for decompiling map files</span></li>
               <li><span class="lang-ru">Свободное место на диске (первый запуск может импортировать несколько тысяч текстур)</span><span class="lang-en">Free disk space (the first run may import thousands of textures)</span></li>
@@ -178,8 +178,8 @@
 
             <h6><span class="lang-ru">1. Установка PyToolkit</span><span class="lang-en">1. Install PyToolkit</span></h6>
             <p>
-              <span class="lang-ru"><a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Скачайте</strong></a> и распакуйте плагин <strong>PyToolkit</strong> (версия 1.8 и выше) в папку <code>Plugins</code> движка или вашего проекта.</span>
-              <span class="lang-en"><a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Download</strong></a> and unzip <strong>PyToolkit</strong> (version 1.8 or later) into the <code>Plugins</code> folder of your engine or project.</span>
+              <span class="lang-ru"><a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Скачайте</strong></a> и распакуйте плагин <strong>PyToolkit</strong> (версия 2.2 и выше) в папку <code>Plugins</code> движка или вашего проекта.</span>
+              <span class="lang-en"><a href="https://disk.yandex.ru/d/pvyVziqBe9yCIw"><strong>Download</strong></a> and unzip <strong>PyToolkit</strong> (version 2.2 or later) into the <code>Plugins</code> folder of your engine or project.</span>
             </p>
 
             <h6><span class="lang-ru">2. Установка S2MapBridge</span><span class="lang-en">2. Install S2MapBridge</span></h6>
@@ -211,9 +211,10 @@
 
             <h6><span class="lang-ru">5. Открытие интерфейса</span><span class="lang-en">5. Opening the UI</span></h6>
             <p>
-              <span class="lang-ru">После перезапуска движка в тулбаре <strong>PyToolkit</strong> появится кнопка <strong>S2MapBridge</strong>. Нажмите её, чтобы открыть панель импорта.</span>
-              <span class="lang-en">After restarting the engine a <strong>S2MapBridge</strong> button will appear in the <strong>PyToolkit</strong> toolbar. Click it to open the importer panel.</span>
+              <span class="lang-ru">После перезапуска редактора откройте меню <strong>Tools</strong> на верхней панели и выберите <strong>S2MapBridge</strong> в разделе <strong>Source 2 Tools</strong>. Откроется панель импорта.</span>
+              <span class="lang-en">After restarting the editor, open the <strong>Tools</strong> menu in the main menu bar and select <strong>S2MapBridge</strong> under <strong>Source 2 Tools</strong>. This opens the importer panel.</span>
             </p>
+            <div class="section-img"><img src="img/open-s2mapbridge.png" alt="Open S2MapBridge from the Unreal Engine Tools menu"></div>
           </div>
         </div>
 
@@ -324,8 +325,8 @@
                 <span class="lang-en">All required plugins are enabled in <strong>Edit → Plugins</strong> and the project has been restarted.</span>
               </li>
               <li>
-                <span class="lang-ru">Используется Unreal Engine версии 5.6 или новее.</span>
-                <span class="lang-en">You are using Unreal Engine 5.6 or later.</span>
+                <span class="lang-ru">Используется Unreal Engine версии 5.8 или новее.</span>
+                <span class="lang-en">You are using Unreal Engine 5.8 or later.</span>
               </li>
               <li>
                 <span class="lang-ru">PyToolkit версии 1.8+ установлен и включён (содержит adenexlib_core версии 16+).</span>
